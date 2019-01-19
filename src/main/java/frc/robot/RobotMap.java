@@ -25,7 +25,7 @@ public class RobotMap {
   // public static int rangefinderModule = 1;
 
   // The following deal with the Limelight vision processing camera:
-  public static String limelightTableKey = "limelight";
+  public static String limelightTableKey = "limelight-johnrk";
   public static String limelightXPositionKey = "tx";
   public static String limelightYPositionKey = "ty";
   public static String limelightAreaKey = "ta";
