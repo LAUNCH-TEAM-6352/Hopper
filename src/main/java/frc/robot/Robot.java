@@ -86,7 +86,7 @@ public class Robot extends TimedRobot {
     limelightTable = NetworkTableInstance.getDefault().getTable(RobotMap.limelightTableKey);
     limelightXPositionEntry = limelightTable.getEntry(RobotMap.limelightXPositionKey);
     limelightYPositionEntry = limelightTable.getEntry(RobotMap.limelightYPositionKey);
-    limelightAreaEntry = limelightTable.getEntry(RobotMap.limelightXPositionKey);
+    limelightAreaEntry = limelightTable.getEntry(RobotMap.limelightAreaKey);
 
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
