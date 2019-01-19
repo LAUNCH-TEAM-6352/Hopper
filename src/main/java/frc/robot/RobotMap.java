@@ -23,4 +23,10 @@ public class RobotMap {
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
+
+  // The following deal with the Limelight vision processing camera:
+  public static String limelightTableKey = "limelight";
+  public static String limelightXPositionKey = "tx";
+  public static String limelightYPositionKey = "ty";
+  public static String limelightAreaKey = "ta";
 }

@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -27,31 +30,42 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
 
-  	/**
-     * The following deal with the REV Digit Board:
-     */
-	// The board itself:
-	private REVDigitBoard digitBoard;
+  // The following deal with the Limelight vision processing camera:
+  private static NetworkTable limelightTable;
+  private static NetworkTableEntry limelightXPositionEntry;
+  private static NetworkTableEntry limelightYPositionEntry;
+  private static NetworkTableEntry limelightAreaEntry;
 
-	// Keeps track on when to refresh the voltage display:
-	private int voltageRefreshCounter = 0;
-	private static final int voltageRefreshCount = 10;
+  public static double limelightXPosition;
+  public static double limelightYPosition;
+  public static double limelightArea;
 
-	// Keeps track on when to refresh the POT display:
-	private int potRefreshCounter = 0;
-	private static final int potRefreshCount = 10;
+  /**
+   * The following deal with the REV Digit Board:
+   */
+  // The board itself:
+  private REVDigitBoard digitBoard;
 
-	// REV digit board button states:
-	private boolean buttonA = false;
-	private boolean buttonB = false;
+  // Keeps track on when to refresh the voltage display:
+  private int voltageRefreshCounter = 0;
+  private static final int voltageRefreshCount = 10;
 
-	// User options selected via the REV digit board:
-	private static final String[] options = { "STAY", "SMPL", "LEFT", "RGHT" };
-	private int optionIndex = 0;
-	
-	// Keeps track of game controller back button:
-	private boolean backButton = false;
+  // Keeps track on when to refresh the POT display:
+  private int potRefreshCounter = 0;
+  private static final int potRefreshCount = 10;
 
+  // REV digit board button states:
+  private boolean buttonA = false;
+  private boolean buttonB = false;
+
+  // User options selected via the REV digit board:
+  private static final String[] options = { "STAY", "SMPL", "LEFT", "RGHT" };
+  private int optionIndex = 0;
+
+  // Keeps track of game controller back button:
+  private boolean backButton = false;
+
+  // Te following deal with the Limelight vision processing camera:
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -61,10 +75,18 @@ public class Robot extends TimedRobot {
    * for any initialization code.
    */
   @Override
-  public void robotInit() {
+  public void robotInit()
+  {
     m_oi = new OI();
 
+    // Set up digit board:
     digitBoard = new REVDigitBoard();
+
+    // Set up Limelight network table access:
+    limelightTable = NetworkTableInstance.getDefault().getTable(RobotMap.limelightTableKey);
+    limelightXPositionEntry = limelightTable.getEntry(RobotMap.limelightXPositionKey);
+    limelightYPositionEntry = limelightTable.getEntry(RobotMap.limelightYPositionKey);
+    limelightAreaEntry = limelightTable.getEntry(RobotMap.limelightXPositionKey);
 
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -82,42 +104,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    /**
-     * The following code interacts with the REV Digit Board. By default, the
-     * current battery voltage is displayed on the digit board. Pushing the A button
-     * cycles through the autonomous options.
-     */
-    if (digitBoard.getButtonA() != buttonA) {
-      buttonA = !buttonA;
-      if (buttonA) {
-        if (++optionIndex >= options.length) {
-          optionIndex = 0;
-        }
-        SmartDashboard.putString("Autonomous", options[optionIndex]);
-      }
-    }
-
-    if (digitBoard.getButtonB() != buttonB) {
-      buttonB = !buttonB;
-    }
-
-    if (buttonA) {
-      digitBoard.display(options[optionIndex]);
-    } else if (buttonB) {
-      if (++potRefreshCounter > potRefreshCount) {
-        potRefreshCounter = 0;
-      }
-      if (potRefreshCounter == 0) {
-        digitBoard.display(digitBoard.getPot());
-      }
-    } else {
-      if (++voltageRefreshCounter > voltageRefreshCount) {
-        voltageRefreshCounter = 0;
-      }
-      if (voltageRefreshCounter == 0) {
-        digitBoard.display(RobotController.getBatteryVoltage());
-      }
-    }
+    pollDigitBoard();
+    pollLimelight();
   }
 
   /**
@@ -195,5 +183,64 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+  }
+
+  /**
+   * Polls the digit board.
+   */
+  private void pollDigitBoard()
+  {
+        /**
+     * The following code interacts with the REV Digit Board. By default, the
+     * current battery voltage is displayed on the digit board. Pushing the A button
+     * cycles through the autonomous options.
+     */
+    if (digitBoard.getButtonA() != buttonA) {
+      buttonA = !buttonA;
+      if (buttonA) {
+        if (++optionIndex >= options.length) {
+          optionIndex = 0;
+        }
+        SmartDashboard.putString("Autonomous", options[optionIndex]);
+      }
+    }
+
+    if (digitBoard.getButtonB() != buttonB) {
+      buttonB = !buttonB;
+    }
+
+    if (buttonA) {
+      digitBoard.display(options[optionIndex]);
+    } else if (buttonB) {
+      if (++potRefreshCounter > potRefreshCount) {
+        potRefreshCounter = 0;
+      }
+      if (potRefreshCounter == 0) {
+        digitBoard.display(digitBoard.getPot());
+      }
+    } else {
+      if (++voltageRefreshCounter > voltageRefreshCount) {
+        voltageRefreshCounter = 0;
+      }
+      if (voltageRefreshCounter == 0) {
+        digitBoard.display(RobotController.getBatteryVoltage());
+      }
+    }
+  }
+
+  /**
+   * Polls the Limelight vision processing camera.
+   */
+  private void pollLimelight()
+  {
+    //read values periodically
+    limelightXPosition = limelightXPositionEntry.getDouble(0.0);
+    limelightYPosition = limelightYPositionEntry.getDouble(0.0);
+    limelightArea = limelightAreaEntry.getDouble(0.0);
+
+    //post to smart dashboard periodically
+    SmartDashboard.putNumber("LimelightX", limelightXPosition);
+    SmartDashboard.putNumber("LimelightY", limelightYPosition);
+    SmartDashboard.putNumber("LimelightArea", limelightArea);
   }
 }
