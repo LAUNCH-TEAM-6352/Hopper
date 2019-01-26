@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -19,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ToggleLimelight;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.TestMotor;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,7 +33,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 public class Robot extends TimedRobot
 {
 	public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-	public static OI m_oi;
+	public static OI oi;
 
 	// The following deal with the Limelight vision processing camera:
 	public static NetworkTable limelightTable;
@@ -43,6 +46,9 @@ public class Robot extends TimedRobot
 	public static double limelightXPosition;
 	public static double limelightYPosition;
 	public static double limelightArea;
+
+	// Create some subsystems:
+	public static TestMotor testMotor = new TestMotor();
 
 	/**
 	 * The following deal with the REV Digit Board:
@@ -82,7 +88,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void robotInit()
 	{
-		m_oi = new OI();
+		oi = new OI();
 
 		// Set up digit board:
 		digitBoard = new REVDigitBoard();
