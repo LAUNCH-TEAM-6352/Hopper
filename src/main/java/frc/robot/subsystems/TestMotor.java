@@ -30,7 +30,7 @@ public class TestMotor extends Subsystem
 	{
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
-		setDefaultCommand(new RunTestMotor());
+		// setDefaultCommand(new RunTestMotor());
 	}
 
 	public void setSpeed(double speed)

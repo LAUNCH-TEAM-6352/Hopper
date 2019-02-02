@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ToggleLimelight;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.LinearActuator;
 import frc.robot.subsystems.TestMotor;
 
 /**
@@ -49,6 +50,7 @@ public class Robot extends TimedRobot
 
 	// Create some subsystems:
 	public static TestMotor testMotor = new TestMotor();
+	public static LinearActuator linearActuator = new LinearActuator();
 
 	/**
 	 * The following deal with the REV Digit Board:
@@ -76,8 +78,7 @@ public class Robot extends TimedRobot
 	// Keeps track of game controller back button:
 	private boolean backButton = false;
 
-	// Te following deal with the Limelight vision processing camera:
-
+	// The following deal with the Limelight vision processing camera:
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
