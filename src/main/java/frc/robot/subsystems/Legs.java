@@ -7,19 +7,27 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
-public class TestMotor extends Subsystem
+public class Legs extends Subsystem
 {
-	private TalonSRX motor = new TalonSRX(RobotMap.testTalonSrxDeviceId);
+	private SpeedController motor;
+
+	public Legs()
+	{
+		motor = RobotMap.isCompetitionRobot
+			? new WPI_TalonSRX(RobotMap.legsMotorCanDeviceId)
+			: new Spark(RobotMap.legsMotorPwmChannel);
+	}
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -29,17 +37,20 @@ public class TestMotor extends Subsystem
 	{
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
-		// setDefaultCommand(new RunTestMotor());
-	}
-
-	public void setSpeed(double speed)
-	{
-		SmartDashboard.putNumber("Test Motor Speed", speed);
-		motor.set(ControlMode.PercentOutput, speed);
 	}
 
 	public void stop()
 	{
 		setSpeed(0);
+	}
+
+	public void move(double speed)
+	{
+		setSpeed(speed);
+	}
+
+	public void setSpeed(double speed)
+	{
+		motor.set(speed);
 	}
 }

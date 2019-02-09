@@ -16,11 +16,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.ToggleLimelight;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Legs;
+import frc.robot.subsystems.LegsEncoder;
 import frc.robot.subsystems.LinearActuator;
-import frc.robot.subsystems.TestMotor;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,7 +30,6 @@ import frc.robot.subsystems.TestMotor;
  */
 public class Robot extends TimedRobot
 {
-	public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static OI oi;
 
 	// The following deal with the Limelight vision processing camera:
@@ -47,8 +45,10 @@ public class Robot extends TimedRobot
 	public static double limelightArea;
 
 	// Create some subsystems:
-	public static TestMotor testMotor = new TestMotor();
-	public static LinearActuator linearActuator = new LinearActuator();
+	public static final DriveTrain driveTrain = new DriveTrain();
+	public static final LinearActuator linearActuator = new LinearActuator();
+	public static final Legs legs = new Legs();
+	public static final LegsEncoder legsEncoder = new LegsEncoder();
 
 	/**
 	 * The following deal with the REV Digit Board:
@@ -96,10 +96,8 @@ public class Robot extends TimedRobot
 		limelightCamModeEntry = limelightTable.getEntry(RobotMap.limelightCamModeKey);
 		limelightLedModeEntry = limelightTable.getEntry(RobotMap.limelightLedModeKey);
 
-		m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
 		// chooser.addOption("My Auto", new MyAutoCommand());
 		// SmartDashboard.putData("Auto mode", m_chooser);
-		SmartDashboard.putData("Toggle Limelight", new ToggleLimelight());
 	}
 
 	/**

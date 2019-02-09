@@ -7,10 +7,11 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
@@ -19,38 +20,46 @@ import frc.robot.commands.RunLinearActuator;
 /**
  * Add your docs here.
  */
-public class LinearActuator extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+public class LinearActuator extends Subsystem
+{
+	// Put methods for controlling this subsystem
+	// here. Call these from Commands.
 
-  private TalonSRX motor = new TalonSRX(RobotMap.testTalonSrxDeviceId);
-  private DigitalInput extendLimit = new DigitalInput(RobotMap.linearActuatorExtendLimitSwitchChannel);
-  private DigitalInput retractLimit = new DigitalInput(RobotMap.linearActuatorRetractLimitSwitchChannel);
+	private SpeedController motor;
+	private DigitalInput extendLimit = new DigitalInput(RobotMap.linearActuatorExtendLimitSwitchChannel);
+	private DigitalInput retractLimit = new DigitalInput(RobotMap.linearActuatorRetractLimitSwitchChannel);
 
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+	// Put methods for controlling this subsystem
+	// here. Call these from Commands.
 
-  @Override
-  public void initDefaultCommand()
-  {
-	  // Set the default command for a subsystem here.
-	  // setDefaultCommand(new MySpecialCommand());
-	  setDefaultCommand(new RunLinearActuator());
-  }
+	public LinearActuator()
+	{
+		motor = RobotMap.isCompetitionRobot
+			? new WPI_TalonSRX(RobotMap.linearActuatorMotorCanDeviceId)
+			: new Spark(RobotMap.linearActuatorMotorPwmChannel);
+	}
 
-  public void setSpeed(double speed)
-  {
-	  // Check for being at limit:
-	  if ((!extendLimit.get() && speed > 0) || (!retractLimit.get() && speed < 0))
-	  {
-		  speed = 0;
-	  }
-	  motor.set(ControlMode.PercentOutput, speed);
-	  SmartDashboard.putNumber("LA Speed", speed);
-  }
+	@Override
+	public void initDefaultCommand()
+	{
+		// Set the default command for a subsystem here.
+		// setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new RunLinearActuator());
+	}
 
-  public void stop()
-  {
-	  setSpeed(0);
-  }
+	public void setSpeed(double speed)
+	{
+		// Check for being at limit:
+		if ((!extendLimit.get() && speed > 0) || (!retractLimit.get() && speed < 0))
+		{
+			speed = 0;
+		}
+		motor.set(speed);
+		SmartDashboard.putNumber("LA Speed", speed);
+	}
+
+	public void stop()
+	{
+		setSpeed(0);
+	}
 }
