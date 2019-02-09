@@ -32,4 +32,11 @@ public class RobotMap
 	public static String limelightAreaKey = "ta";
 	public static String limelightCamModeKey = "camMode";
 	public static String limelightLedModeKey = "ledMode";
+
+	// The following deal with CAN devices:
+	public static int testTalonSrxDeviceId = 9;
+
+	// The following define Digital IO channels:
+	public static int linearActuatorExtendLimitSwitchChannel = 9;
+	public static int linearActuatorRetractLimitSwitchChannel = 8;
 }

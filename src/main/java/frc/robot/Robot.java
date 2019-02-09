@@ -19,6 +19,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ToggleLimelight;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.LinearActuator;
+import frc.robot.subsystems.TestMotor;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,7 +32,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 public class Robot extends TimedRobot
 {
 	public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-	public static OI m_oi;
+	public static OI oi;
 
 	// The following deal with the Limelight vision processing camera:
 	public static NetworkTable limelightTable;
@@ -43,6 +45,10 @@ public class Robot extends TimedRobot
 	public static double limelightXPosition;
 	public static double limelightYPosition;
 	public static double limelightArea;
+
+	// Create some subsystems:
+	public static TestMotor testMotor = new TestMotor();
+	public static LinearActuator linearActuator = new LinearActuator();
 
 	/**
 	 * The following deal with the REV Digit Board:
@@ -63,15 +69,10 @@ public class Robot extends TimedRobot
 	private boolean buttonB = false;
 
 	// User options selected via the REV digit board:
-	private static final String[] options =
-	{ "STAY", "SMPL", "LEFT", "RGHT" };
+	private static final String[] options = { "STAY", "LVL1", "LVL2" };
 	private int optionIndex = 0;
 
-	// Keeps track of game controller back button:
-	private boolean backButton = false;
-
-	// Te following deal with the Limelight vision processing camera:
-
+	// The following deal with the Limelight vision processing camera:
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -82,7 +83,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void robotInit()
 	{
-		m_oi = new OI();
+		oi = new OI();
 
 		// Set up digit board:
 		digitBoard = new REVDigitBoard();
