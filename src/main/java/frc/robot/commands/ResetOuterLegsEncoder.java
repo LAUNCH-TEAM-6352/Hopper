@@ -7,19 +7,11 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class RunLinearActuator extends Command
+public class ResetOuterLegsEncoder extends Command
 {
-	public RunLinearActuator()
-	{
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
-		requires(Robot.linearActuator);
-	}
-
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize()
@@ -30,21 +22,20 @@ public class RunLinearActuator extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.linearActuator.setSpeed(Robot.oi.gameController.getTriggerAxis(Hand.kLeft) - Robot.oi.gameController.getTriggerAxis(Hand.kRight));
+		Robot.outerLegsEncoder.reset();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished()
 	{
-		return false;
+		return true;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end()
 	{
-		Robot.linearActuator.stop();
 	}
 
 	// Called when another command which requires one or more of the same
@@ -54,4 +45,5 @@ public class RunLinearActuator extends Command
 	{
 		end();
 	}
+
 }

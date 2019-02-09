@@ -37,24 +37,24 @@ public class RobotMap
 	public static final String limelightLedModeKey = "ledMode";
 
 	// The following define Digital IO channels:
-	public static final int linearActuatorExtendLimitSwitchChannel = 9;
-	public static final int linearActuatorRetractLimitSwitchChannel = 8;
+	public static final int centerLegExtendLimitSwitchChannel = 9;
+	public static final int centerLegRetractLimitSwitchChannel = 8;
 
-	public static final int legsEncoderChannelA = 0;
-	public static final int legsEncoderChannelB = 1;
-	public static final int legsEncoderChannelX = 2;
-	public static final int legsEncoderPulsesPerRev = 512;
-	public static final boolean legsEncoderIsReversed = true;
+	public static final int outerLegsEncoderChannelA = 0;
+	public static final int outerLegsEncoderChannelB = 1;
+	public static final int outerLegsEncoderChannelX = 2;
+	public static final int outerLegsEncoderPulsesPerRev = 512;
+	public static final boolean outerLegsEncoderIsReversed = true;
 
 	// The following are PWM channels:
 	public static final int leftDriveMotorPwmChannel = 2;
 	public static final int rightDriveMotorPwmChannel = 3;
-	public static final int linearActuatorMotorPwmChannel = 0;
-	public static final int legsMotorPwmChannel = 1;
+	public static final int centerLegMotorPwmChannel = 0;
+	public static final int outerLegsMotorPwmChannel = 1;
 
 	// The following are CAN channels:
 	public static final int leftDriveMotorCanDeviceId = 1;
 	public static final int rightDriveMotorCanDeviceId = 2;
-	public static final int linearActuatorMotorCanDeviceId = 3;
-	public static final int legsMotorCanDeviceId = 4;
+	public static final int centerLegMotorCanDeviceId = 3;
+	public static final int outerLegsMotorCanDeviceId = 4;
 }

@@ -9,48 +9,57 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
+import frc.robot.commands.RunCenterLeg;
 
 /**
  * Add your docs here.
  */
-public class Legs extends Subsystem
+public class CenterLeg extends Subsystem
 {
-	private SpeedController motor;
+	// Put methods for controlling this subsystem
+	// here. Call these from Commands.
 
-	public Legs()
-	{
-		motor = RobotMap.isCompetitionRobot
-			? new WPI_TalonSRX(RobotMap.legsMotorCanDeviceId)
-			: new Spark(RobotMap.legsMotorPwmChannel);
-	}
+	private SpeedController motor;
+	private DigitalInput extendLimit = new DigitalInput(RobotMap.centerLegExtendLimitSwitchChannel);
+	private DigitalInput retractLimit = new DigitalInput(RobotMap.centerLegRetractLimitSwitchChannel);
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
+
+	public CenterLeg()
+	{
+		motor = RobotMap.isCompetitionRobot
+			? new WPI_TalonSRX(RobotMap.centerLegMotorCanDeviceId)
+			: new Spark(RobotMap.centerLegMotorPwmChannel);
+	}
 
 	@Override
 	public void initDefaultCommand()
 	{
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new RunCenterLeg());
+	}
+
+	public void setSpeed(double speed)
+	{
+		// Check for being at limit:
+		if ((!extendLimit.get() && speed > 0) || (!retractLimit.get() && speed < 0))
+		{
+			speed = 0;
+		}
+		motor.set(speed);
+		SmartDashboard.putNumber("LA Speed", speed);
 	}
 
 	public void stop()
 	{
 		setSpeed(0);
-	}
-
-	public void move(double speed)
-	{
-		setSpeed(speed);
-	}
-
-	public void setSpeed(double speed)
-	{
-		motor.set(speed);
 	}
 }

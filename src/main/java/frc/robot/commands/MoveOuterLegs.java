@@ -8,34 +8,59 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class ResetLegsEncoder extends Command
+public class MoveOuterLegs extends Command
 {
+	private String speedKey;
+	private double speed;
+
+	public MoveOuterLegs()
+	{
+		requires(Robot.outerLegs);
+	}
+
+	public MoveOuterLegs(String speedKey)
+	{
+		this();
+		this.speedKey = speedKey;
+	}
+
+	public MoveOuterLegs(double speed)
+	{
+		this.speed = speed;
+	}
+
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize()
 	{
+		if (speedKey != null)
+		{
+			speed = SmartDashboard.getNumber(speedKey, .75);
+		}
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute()
 	{
-		Robot.legsEncoder.reset();
+		Robot.outerLegs.move(speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished()
 	{
-		return true;
+		return isCanceled();
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end()
 	{
+		Robot.outerLegs.stop();
 	}
 
 	// Called when another command which requires one or more of the same
@@ -45,5 +70,4 @@ public class ResetLegsEncoder extends Command
 	{
 		end();
 	}
-
 }

@@ -7,60 +7,44 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class MoveLegs extends Command
+public class RunCenterLeg extends Command
 {
-	private String speedKey;
-	private double speed;
-
-	public MoveLegs()
+	public RunCenterLeg()
 	{
-		requires(Robot.legs);
-	}
-
-	public MoveLegs(String speedKey)
-	{
-		this();
-		this.speedKey = speedKey;
-	}
-
-	public MoveLegs(double speed)
-	{
-		this.speed = speed;
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+		requires(Robot.centerLeg);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize()
 	{
-		if (speedKey != null)
-		{
-			speed = SmartDashboard.getNumber(speedKey, .75);
-		}
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute()
 	{
-		Robot.legs.move(speed);
+		Robot.centerLeg.setSpeed(Robot.oi.gameController.getTriggerAxis(Hand.kLeft) - Robot.oi.gameController.getTriggerAxis(Hand.kRight));
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished()
 	{
-		return isCanceled();
+		return false;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end()
 	{
-		Robot.legs.stop();
+		Robot.centerLeg.stop();
 	}
 
 	// Called when another command which requires one or more of the same

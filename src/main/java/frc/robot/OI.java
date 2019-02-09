@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.MoveLegs;
-import frc.robot.commands.ResetLegsEncoder;
+import frc.robot.commands.MoveOuterLegs;
+import frc.robot.commands.ResetOuterLegsEncoder;
 import frc.robot.commands.ToggleLimelight;
 
 /**
@@ -67,29 +67,29 @@ public class OI
 	public final static int gameControllerButtonStickLeft = 9;
 	public final static int gameControllerButtonStickRight = 10;
 
-	private Button legsForwardButton = new JoystickButton(gameController, gameControllerButtonY);
-	private Button legsReverseButton = new JoystickButton(gameController, gameControllerButtonA);
+	private Button outerLegsForwardButton = new JoystickButton(gameController, gameControllerButtonY);
+	private Button outerLegsReverseButton = new JoystickButton(gameController, gameControllerButtonA);
 
-	private Button resetEncoderButton = new JoystickButton(gameController, gameControllerButtonStart);
+	private Button resetOuterLegsEncoderButton = new JoystickButton(gameController, gameControllerButtonStart);
 
 	// SmartDashboard keys:
-	public final static String legsForwardSpeed = "Legs Forward Speed";
-	public final static String legsReverseSpeed = "Legs Reverse Speed";
+	public final static String outerLegsForwardSpeed = "Outer Legs Fwd Speed";
+	public final static String outerLegsReverseSpeed = "Outer Legs Rev Speed";
 
 	// Constructor:
 	public OI()
 	{
 		// Bind buttons to commands:
-		legsForwardButton.whileHeld(new MoveLegs(legsForwardSpeed));
-		legsReverseButton.whileHeld(new MoveLegs(legsReverseSpeed));
+		outerLegsForwardButton.whileHeld(new MoveOuterLegs(outerLegsForwardSpeed));
+		outerLegsReverseButton.whileHeld(new MoveOuterLegs(outerLegsReverseSpeed));
 
-		resetEncoderButton.whenPressed(new ResetLegsEncoder());
+		resetOuterLegsEncoderButton.whenPressed(new ResetOuterLegsEncoder());
 
 		// Put default values on SmartDashboard:
-		SmartDashboard.putNumber(legsForwardSpeed, 0.75);
-		SmartDashboard.putNumber(legsReverseSpeed, -0.5);
+		SmartDashboard.putNumber(outerLegsForwardSpeed, 0.75);
+		SmartDashboard.putNumber(outerLegsReverseSpeed, -0.5);
 
-		SmartDashboard.putData(new ResetLegsEncoder());
+		SmartDashboard.putData(new ResetOuterLegsEncoder());
 		SmartDashboard.putData("Toggle Limelight", new ToggleLimelight());
 	}
 }

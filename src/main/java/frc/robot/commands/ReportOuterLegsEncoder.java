@@ -13,11 +13,11 @@ import frc.robot.Robot;
 /**
  * Reports the status of the power cube lift encoder.
  */
-public class ReportLegsEncoder extends Command
+public class ReportOuterLegsEncoder extends Command
 {
-	public ReportLegsEncoder()
+	public ReportOuterLegsEncoder()
 	{
-		requires(Robot.legsEncoder);
+		requires(Robot.outerLegsEncoder);
 	}
 
 	// Called just before this Command runs the first time
@@ -30,7 +30,7 @@ public class ReportLegsEncoder extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.legsEncoder.report();
+		Robot.outerLegsEncoder.report();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
