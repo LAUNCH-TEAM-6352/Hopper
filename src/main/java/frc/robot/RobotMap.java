@@ -35,4 +35,8 @@ public class RobotMap
 
 	// The following deal with CAN devices:
 	public static int testTalonSrxDeviceId = 9;
+
+	// The following define Digital IO channels:
+	public static int linearActuatorExtendLimitSwitchChannel = 9;
+	public static int linearActuatorRetractLimitSwitchChannel = 8;
 }

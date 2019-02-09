@@ -24,8 +24,8 @@ public class LinearActuator extends Subsystem {
   // here. Call these from Commands.
 
   private TalonSRX motor = new TalonSRX(RobotMap.testTalonSrxDeviceId);
-  private DigitalInput extendLimit = new DigitalInput(9);
-  private DigitalInput retractLimit = new DigitalInput(8);
+  private DigitalInput extendLimit = new DigitalInput(RobotMap.linearActuatorExtendLimitSwitchChannel);
+  private DigitalInput retractLimit = new DigitalInput(RobotMap.linearActuatorRetractLimitSwitchChannel);
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.

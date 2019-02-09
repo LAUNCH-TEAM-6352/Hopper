@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -71,12 +69,8 @@ public class Robot extends TimedRobot
 	private boolean buttonB = false;
 
 	// User options selected via the REV digit board:
-	private static final String[] options =
-	{ "STAY", "SMPL", "LEFT", "RGHT" };
+	private static final String[] options = { "STAY", "LVL1", "LVL2" };
 	private int optionIndex = 0;
-
-	// Keeps track of game controller back button:
-	private boolean backButton = false;
 
 	// The following deal with the Limelight vision processing camera:
 	Command m_autonomousCommand;
