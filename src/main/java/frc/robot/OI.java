@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.MoveCargo;
 import frc.robot.commands.MoveOuterLegs;
 import frc.robot.commands.ResetOuterLegsEncoder;
 import frc.robot.commands.ToggleLimelight;
@@ -70,6 +71,9 @@ public class OI
 	private Button outerLegsForwardButton = new JoystickButton(gameController, gameControllerButtonY);
 	private Button outerLegsReverseButton = new JoystickButton(gameController, gameControllerButtonA);
 
+	private Button cargoInButton = new JoystickButton(gameController, gameControllerButtonBumperLeft);
+	private Button cargoOutButton = new JoystickButton(gameController, gameControllerButtonBumperRight);
+
 	private Button resetOuterLegsEncoderButton = new JoystickButton(gameController, gameControllerButtonStart);
 
 	// SmartDashboard keys:
@@ -82,6 +86,8 @@ public class OI
 		// Bind buttons to commands:
 		//outerLegsForwardButton.whileHeld(new MoveOuterLegs(outerLegsForwardSpeed));
 		//outerLegsReverseButton.whileHeld(new MoveOuterLegs(outerLegsReverseSpeed));
+		cargoInButton.whileHeld(new MoveCargo(1));
+		cargoOutButton.whileHeld(new MoveCargo(-1));
 
 		resetOuterLegsEncoderButton.whenPressed(new ResetOuterLegsEncoder());
 

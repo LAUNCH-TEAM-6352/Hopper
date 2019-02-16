@@ -53,10 +53,10 @@ public class RobotMap
 	public static final int outerLegsMotorPwmChannel = 1;
 
 	// The following are CAN channels:
-	public static final int leftDriveMotorCanDeviceId = 1;
+	public static final int leftDriveMotorCanDeviceId = 6;
 	public static final int rightDriveMotorCanDeviceId = 2;
 	public static final int centerLegMotorCanDeviceId = 3;
 	public static final int outerLegsMotorCanDeviceId = 4;
 	public static final int liftMotorCanDeviceId = 5;
-	public static final int cargoMotorCanDeviceId = 6;
+	public static final int cargoMotorCanDeviceId = 1;
 }

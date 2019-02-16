@@ -20,6 +20,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.OuterLegs;
 import frc.robot.subsystems.OuterLegsEncoder;
+import frc.robot.subsystems.CargoMover;
 import frc.robot.subsystems.CenterLeg;
 
 /**
@@ -52,8 +53,10 @@ public class Robot extends TimedRobot
 	public static final CenterLeg centerLeg = null;
 	//public static final CenterLeg centerLeg = new CenterLeg();
 	public static final OuterLegs outerLegs = null;
-	// public static final OuterLegs outerLegs = new OuterLegs();
+	//public static final OuterLegs outerLegs = new OuterLegs();
 	public static final OuterLegsEncoder outerLegsEncoder = new OuterLegsEncoder();
+	public static final CargoMover cargoMover = new CargoMover();
+
 
 	/**
 	 * The following deal with the REV Digit Board:
