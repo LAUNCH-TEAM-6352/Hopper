@@ -46,7 +46,7 @@ public class MoveCargo extends Command
 	@Override
 	protected void execute()
 	{
-		//Robot.outerLegs.move(speed);
+		Robot.cargoMover.move(speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -60,7 +60,7 @@ public class MoveCargo extends Command
 	@Override
 	protected void end()
 	{
-		Robot.outerLegs.stop();
+		Robot.cargoMover.stop();
 	}
 
 	// Called when another command which requires one or more of the same
