@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.OuterLegs;
 import frc.robot.subsystems.OuterLegsEncoder;
 import frc.robot.subsystems.CenterLeg;
@@ -45,9 +46,13 @@ public class Robot extends TimedRobot
 	public static double limelightArea;
 
 	// Create some subsystems:
-	public static final DriveTrain driveTrain = new DriveTrain();
-	public static final CenterLeg centerLeg = new CenterLeg();
-	public static final OuterLegs outerLegs = new OuterLegs();
+	//public static final DriveTrain driveTrain = new DriveTrain();
+	public static final DriveTrain driveTrain = null;
+	public static final Lift lift = new Lift();
+	public static final CenterLeg centerLeg = null;
+	//public static final CenterLeg centerLeg = new CenterLeg();
+	public static final OuterLegs outerLegs = null;
+	// public static final OuterLegs outerLegs = new OuterLegs();
 	public static final OuterLegsEncoder outerLegsEncoder = new OuterLegsEncoder();
 
 	/**

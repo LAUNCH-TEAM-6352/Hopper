@@ -24,9 +24,12 @@ public class OuterLegs extends Subsystem
 
 	public OuterLegs()
 	{
+		motor = null;
+		/***
 		motor = RobotMap.isCompetitionRobot
 			? new WPI_TalonSRX(RobotMap.outerLegsMotorCanDeviceId)
 			: new Spark(RobotMap.outerLegsMotorPwmChannel);
+			***/
 	}
 
 	// Put methods for controlling this subsystem

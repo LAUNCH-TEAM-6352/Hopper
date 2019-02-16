@@ -30,7 +30,7 @@ public class RunCenterLeg extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.centerLeg.setSpeed(Robot.oi.gameController.getTriggerAxis(Hand.kLeft) - Robot.oi.gameController.getTriggerAxis(Hand.kRight));
+		//Robot.centerLeg.setSpeed(Robot.oi.gameController.getTriggerAxis(Hand.kLeft) - Robot.oi.gameController.getTriggerAxis(Hand.kRight));
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

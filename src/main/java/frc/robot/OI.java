@@ -80,8 +80,8 @@ public class OI
 	public OI()
 	{
 		// Bind buttons to commands:
-		outerLegsForwardButton.whileHeld(new MoveOuterLegs(outerLegsForwardSpeed));
-		outerLegsReverseButton.whileHeld(new MoveOuterLegs(outerLegsReverseSpeed));
+		//outerLegsForwardButton.whileHeld(new MoveOuterLegs(outerLegsForwardSpeed));
+		//outerLegsReverseButton.whileHeld(new MoveOuterLegs(outerLegsReverseSpeed));
 
 		resetOuterLegsEncoderButton.whenPressed(new ResetOuterLegsEncoder());
 
