@@ -25,18 +25,38 @@ public class RobotMap
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 
-	// The following deal with the Limelight vision processing camera:
-	public static String limelightTableKey = "limelight-johnrk";
-	public static String limelightXPositionKey = "tx";
-	public static String limelightYPositionKey = "ty";
-	public static String limelightAreaKey = "ta";
-	public static String limelightCamModeKey = "camMode";
-	public static String limelightLedModeKey = "ledMode";
+	// The following indicates if we are running the competition robot:
+	public static final boolean isCompetitionRobot = false;
 
-	// The following deal with CAN devices:
-	public static int testTalonSrxDeviceId = 9;
+	// The following deal with the Limelight vision processing camera:
+	public static final String limelightTableKey = "limelight-johnrk";
+	public static final String limelightXPositionKey = "tx";
+	public static final String limelightYPositionKey = "ty";
+	public static final String limelightAreaKey = "ta";
+	public static final String limelightCamModeKey = "camMode";
+	public static final String limelightLedModeKey = "ledMode";
 
 	// The following define Digital IO channels:
-	public static int linearActuatorExtendLimitSwitchChannel = 9;
-	public static int linearActuatorRetractLimitSwitchChannel = 8;
+	public static final int centerLegExtendLimitSwitchChannel = 9;
+	public static final int centerLegRetractLimitSwitchChannel = 8;
+
+	public static final int outerLegsEncoderChannelA = 0;
+	public static final int outerLegsEncoderChannelB = 1;
+	public static final int outerLegsEncoderChannelX = 2;
+	public static final int outerLegsEncoderPulsesPerRev = 512;
+	public static final boolean outerLegsEncoderIsReversed = true;
+
+	// The following are PWM channels:
+	public static final int leftDriveMotorPwmChannel = 2;
+	public static final int rightDriveMotorPwmChannel = 3;
+	public static final int centerLegMotorPwmChannel = 0;
+	public static final int outerLegsMotorPwmChannel = 1;
+
+	// The following are CAN channels:
+	public static final int leftDriveMotorCanDeviceId = 6;
+	public static final int rightDriveMotorCanDeviceId = 2;
+	public static final int centerLegMotorCanDeviceId = 3;
+	public static final int outerLegsMotorCanDeviceId = 4;
+	public static final int liftMotorCanDeviceId = 5;
+	public static final int cargoMotorCanDeviceId = 1;
 }

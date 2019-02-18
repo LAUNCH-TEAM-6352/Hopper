@@ -7,17 +7,18 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class RunLinearActuator extends Command
+/**
+ * Drives the robot using a gamepad controller.
+ */
+public class DriveWithJoysticks extends Command
 {
-	public RunLinearActuator()
+	public DriveWithJoysticks()
 	{
 		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
-		requires(Robot.linearActuator);
+		requires(Robot.driveTrain);
 	}
 
 	// Called just before this Command runs the first time
@@ -30,7 +31,7 @@ public class RunLinearActuator extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.linearActuator.setSpeed(-Robot.oi.gameController.getY(Hand.kRight));
+		Robot.driveTrain.driveCaution(Robot.oi.joystickLeft, Robot.oi.joystickRight);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -44,7 +45,7 @@ public class RunLinearActuator extends Command
 	@Override
 	protected void end()
 	{
-		Robot.linearActuator.stop();
+		Robot.driveTrain.stop();
 	}
 
 	// Called when another command which requires one or more of the same
