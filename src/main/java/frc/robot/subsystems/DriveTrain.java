@@ -66,14 +66,7 @@ public class DriveTrain extends Subsystem
 	public void initDefaultCommand()
 	{
 		// Set the default command for a subsystem here.
-		if (RobotMap.isCompetitionRobot)
-		{
-			setDefaultCommand(new DriveWithJoysticks());
-		}
-		else
-		{
-			setDefaultCommand(new DriveWithGamepadController());
-		}
+		setDefaultCommand(new DriveWithJoysticks());
 	}
 	
 	/**

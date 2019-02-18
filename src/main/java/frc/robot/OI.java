@@ -86,10 +86,13 @@ public class OI
 		// Bind buttons to commands:
 		//outerLegsForwardButton.whileHeld(new MoveOuterLegs(outerLegsForwardSpeed));
 		//outerLegsReverseButton.whileHeld(new MoveOuterLegs(outerLegsReverseSpeed));
-		cargoInButton.whileHeld(new MoveCargo(1));
-		cargoOutButton.whileHeld(new MoveCargo(-1));
+		if (RobotMap.isCompetitionRobot)
+		{
+			cargoInButton.whileHeld(new MoveCargo(1));
+			cargoOutButton.whileHeld(new MoveCargo(-1));
 
-		resetOuterLegsEncoderButton.whenPressed(new ResetOuterLegsEncoder());
+			resetOuterLegsEncoderButton.whenPressed(new ResetOuterLegsEncoder());
+		}
 
 		// Put default values on SmartDashboard:
 		SmartDashboard.putNumber(outerLegsForwardSpeed, 0.75);

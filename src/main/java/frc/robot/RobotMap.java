@@ -26,7 +26,7 @@ public class RobotMap
 	// public static int rangefinderModule = 1;
 
 	// The following indicates if we are running the competition robot:
-	public static final boolean isCompetitionRobot = true;
+	public static final boolean isCompetitionRobot = false;
 
 	// The following deal with the Limelight vision processing camera:
 	public static final String limelightTableKey = "limelight-johnrk";

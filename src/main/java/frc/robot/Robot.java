@@ -47,15 +47,29 @@ public class Robot extends TimedRobot
 	public static double limelightArea;
 
 	// Create some subsystems:
-	//public static final DriveTrain driveTrain = new DriveTrain();
-	public static final DriveTrain driveTrain = null;
-	public static final Lift lift = new Lift();
-	public static final CenterLeg centerLeg = null;
-	//public static final CenterLeg centerLeg = new CenterLeg();
-	public static final OuterLegs outerLegs = null;
-	//public static final OuterLegs outerLegs = new OuterLegs();
-	public static final OuterLegsEncoder outerLegsEncoder = new OuterLegsEncoder();
-	public static final CargoMover cargoMover = new CargoMover();
+	public static DriveTrain driveTrain = null;
+	public static Lift lift = null;
+	public static CenterLeg centerLeg = null;
+	public static OuterLegs outerLegs = null;
+	public static OuterLegsEncoder outerLegsEncoder = null;
+	public static CargoMover cargoMover = null;
+
+	// Static initialization
+	static
+	{
+		if (RobotMap.isCompetitionRobot)
+		{
+			lift = new Lift();
+			cargoMover = new CargoMover();
+			centerLeg = new CenterLeg();
+			outerLegs = new OuterLegs();
+		}
+		else
+		{
+			driveTrain = new DriveTrain();
+		}
+
+	}
 
 
 	/**
