@@ -38,7 +38,7 @@ public class MoveCargo extends Command
 	{
 		if (speedKey != null)
 		{
-			speed = SmartDashboard.getNumber(speedKey, .75);
+			speed = SmartDashboard.getNumber(speedKey, 0.0);
 		}
 	}
 

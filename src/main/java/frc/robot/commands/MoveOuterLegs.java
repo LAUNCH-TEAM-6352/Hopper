@@ -46,7 +46,7 @@ public class MoveOuterLegs extends Command
 	@Override
 	protected void execute()
 	{
-		//Robot.outerLegs.move(speed);
+		Robot.outerLegs.move(speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

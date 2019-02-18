@@ -7,9 +7,8 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -25,7 +24,7 @@ public class CargoMover extends Subsystem
 	public CargoMover()
 	{
 		motor = RobotMap.isCompetitionRobot
-			? new WPI_TalonSRX(RobotMap.cargoMotorCanDeviceId)
+			? new WPI_VictorSPX(RobotMap.cargoMotorCanDeviceId)
 			: null;
 	}
 

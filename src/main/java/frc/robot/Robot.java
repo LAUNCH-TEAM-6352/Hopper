@@ -61,8 +61,9 @@ public class Robot extends TimedRobot
 		{
 			lift = new Lift();
 			cargoMover = new CargoMover();
-			centerLeg = new CenterLeg();
-			outerLegs = new OuterLegs();
+			//centerLeg = new CenterLeg();
+			//outerLegs = new OuterLegs();
+			driveTrain = new DriveTrain();
 		}
 		else
 		{

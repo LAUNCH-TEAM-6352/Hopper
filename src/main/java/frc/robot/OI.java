@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.MoveCargo;
-import frc.robot.commands.MoveOuterLegs;
 import frc.robot.commands.ResetOuterLegsEncoder;
 import frc.robot.commands.ToggleLimelight;
 
@@ -68,35 +67,26 @@ public class OI
 	public final static int gameControllerButtonStickLeft = 9;
 	public final static int gameControllerButtonStickRight = 10;
 
-	private Button outerLegsForwardButton = new JoystickButton(gameController, gameControllerButtonY);
-	private Button outerLegsReverseButton = new JoystickButton(gameController, gameControllerButtonA);
-
 	private Button cargoInButton = new JoystickButton(gameController, gameControllerButtonBumperLeft);
 	private Button cargoOutButton = new JoystickButton(gameController, gameControllerButtonBumperRight);
 
-	private Button resetOuterLegsEncoderButton = new JoystickButton(gameController, gameControllerButtonStart);
-
 	// SmartDashboard keys:
-	public final static String outerLegsForwardSpeed = "Outer Legs Fwd Speed";
-	public final static String outerLegsReverseSpeed = "Outer Legs Rev Speed";
+	public final static String cargoMoverInSpeed = "Cargo In Speed";
+	public final static String cargoMoverOutSpeed = "Cargo Out Speed";
 
 	// Constructor:
 	public OI()
 	{
 		// Bind buttons to commands:
-		//outerLegsForwardButton.whileHeld(new MoveOuterLegs(outerLegsForwardSpeed));
-		//outerLegsReverseButton.whileHeld(new MoveOuterLegs(outerLegsReverseSpeed));
 		if (RobotMap.isCompetitionRobot)
 		{
-			cargoInButton.whileHeld(new MoveCargo(1));
-			cargoOutButton.whileHeld(new MoveCargo(-1));
-
-			resetOuterLegsEncoderButton.whenPressed(new ResetOuterLegsEncoder());
+			cargoInButton.whileHeld(new MoveCargo(cargoMoverInSpeed));
+			cargoOutButton.whileHeld(new MoveCargo(cargoMoverOutSpeed));
 		}
 
 		// Put default values on SmartDashboard:
-		SmartDashboard.putNumber(outerLegsForwardSpeed, 0.75);
-		SmartDashboard.putNumber(outerLegsReverseSpeed, -0.5);
+		SmartDashboard.putNumber(cargoMoverInSpeed, 1.0);
+		SmartDashboard.putNumber(cargoMoverOutSpeed, -1.0);
 
 		SmartDashboard.putData(new ResetOuterLegsEncoder());
 		SmartDashboard.putData("Toggle Limelight", new ToggleLimelight());
