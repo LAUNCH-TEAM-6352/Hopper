@@ -117,6 +117,7 @@ public class DriveTrain extends Subsystem
 	{
 		if (!RobotMap.isCompetitionRobot)
 		{
+			// This code limits drive speed:
 			double s = Math.signum(left);
 			left = s * Math.min(0.8, Math.abs(left));
 			s = Math.signum(right);
