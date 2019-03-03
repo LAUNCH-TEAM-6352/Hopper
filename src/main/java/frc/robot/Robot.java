@@ -67,7 +67,9 @@ public class Robot extends TimedRobot
 		}
 		else
 		{
+			//lift = new Lift();
 			driveTrain = new DriveTrain();
+			centerLeg = new CenterLeg();
 		}
 
 	}

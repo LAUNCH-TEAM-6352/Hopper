@@ -36,7 +36,7 @@ public class Lift extends Subsystem
 	{
 		motor = RobotMap.isCompetitionRobot
 			? new WPI_TalonSRX(RobotMap.liftMotorCanDeviceId)
-			: new Spark(RobotMap.centerLegMotorPwmChannel);
+			: new Spark(RobotMap.liftMotorPwmChannel);
 	}
 
 	@Override

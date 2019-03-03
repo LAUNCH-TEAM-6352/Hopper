@@ -8,10 +8,12 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
+import frc.robot.commands.RunCenterLeg;
 
 /**
  * Add your docs here.
@@ -30,12 +32,10 @@ public class CenterLeg extends Subsystem
 
 	public CenterLeg()
 	{
-		motor = null;
-		/***
-		motor = RobotMap.isCompetitionRobot
-			? new WPI_TalonSRX(RobotMap.centerLegMotorCanDeviceId)
-			: new Spark(RobotMap.centerLegMotorPwmChannel);
-			***/
+		if (!RobotMap.isCompetitionRobot)
+		{
+			motor = new Spark(RobotMap.centerLegMotorPwmChannel);
+		}
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class CenterLeg extends Subsystem
 	{
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
-		//setDefaultCommand(new RunCenterLeg());
+		setDefaultCommand(new RunCenterLeg());
 	}
 
 	public void setSpeed(double speed)
