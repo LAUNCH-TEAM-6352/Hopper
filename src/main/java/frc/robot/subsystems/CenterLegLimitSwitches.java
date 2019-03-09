@@ -36,8 +36,8 @@ public class CenterLegLimitSwitches extends Subsystem
 	 */
 	public void report()
 	{
-		SmartDashboard.putBoolean(OI.labelExtendLimit, !isAtExtendLimit());
-		SmartDashboard.putBoolean(OI.labelRetractLimit, !isAtRetractLimit());
+		SmartDashboard.putBoolean(OI.dashboardExtendLimit, !isAtExtendLimit());
+		SmartDashboard.putBoolean(OI.dashboardRetractLimit, !isAtRetractLimit());
 	}
 	
 	/**

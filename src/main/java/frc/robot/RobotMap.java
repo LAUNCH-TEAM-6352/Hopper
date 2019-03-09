@@ -28,6 +28,9 @@ public class RobotMap
 	// The following indicates if we are running the competition robot:
 	public static final boolean isCompetitionRobot = false;
 
+	// Indicates if we should support USB  cameras:
+	public static final boolean isUseUsbCameras = true;
+
 	// The following deal with the Limelight vision processing camera:
 	public static final String limelightTableKey = "limelight";
 	public static final String limelightXPositionKey = "tx";
@@ -61,4 +64,30 @@ public class RobotMap
 	public static final int outerLegsMotorCanDeviceId = 3;
 	public static final int liftMotorCanDeviceId = 5;
 	public static final int cargoMotorCanDeviceId = 6;
+
+	// The following are for configuring the USB cameras.
+	// Network bandwidth from the robot to the driver station is limited by the FMS.
+	// When using multiple USB cameras, the image size and frame rate may
+	// need to be adjusted to stay within the allowed bandwidth.
+	// Information about bandwidth limitations can be found at
+	// http://wpilib.screenstepslive.com/s/4485/m/24193/l/705152-fms-whitepaper.
+	// According to the white paper, approximately 6.9 Mbps of bandwidth
+	// is available for transmitting video images from the robot to the DS.
+	//
+	// The following resolutions are potentially supported by the
+	// Microsoft LifeCam HD 3000:
+	//  1280 x 720
+	//  960 x 544
+	//  800 x 600
+	//  800 x 448
+	//  640 x 480
+	//  640 x 360
+	//  424 x 140
+	//  352 x 288
+	//  320 x 240
+	//  176 x 144
+	//  160 x 120
+	public final static int usbCameraImageWidth = 320;
+	public final static int usbCameraImageHeight = 240;
+	public final static int usbCameraFrameRate = 15;
 }

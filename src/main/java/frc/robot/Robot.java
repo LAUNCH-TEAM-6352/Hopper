@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.UsbCameraInfo;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -34,6 +37,8 @@ import frc.robot.subsystems.CenterLegLimitSwitches;
 public class Robot extends TimedRobot
 {
 	public static OI oi;
+
+	private UsbCamera usbCameras[];
 
 	// The following deal with the Limelight vision processing camera:
 	public static NetworkTable limelightTable;
@@ -121,6 +126,14 @@ public class Robot extends TimedRobot
 		limelightAreaEntry = limelightTable.getEntry(RobotMap.limelightAreaKey);
 		limelightCamModeEntry = limelightTable.getEntry(RobotMap.limelightCamModeKey);
 		limelightLedModeEntry = limelightTable.getEntry(RobotMap.limelightLedModeKey);
+
+		if (RobotMap.isUseUsbCameras)
+		{
+			// Set up USB cameras.
+			// Do not delete the following line!
+			CameraServer.getInstance();
+			initializeUsbCameras();
+		}
 
 		// chooser.addOption("My Auto", new MyAutoCommand());
 		// SmartDashboard.putData("Auto mode", m_chooser);
@@ -296,5 +309,22 @@ public class Robot extends TimedRobot
 		SmartDashboard.putNumber("LimelightX", limelightXPosition);
 		SmartDashboard.putNumber("LimelightY", limelightYPosition);
 		SmartDashboard.putNumber("LimelightArea", limelightArea);
+	}
+	
+	/**
+	 * Starts up USB cameras, starting capture on each one.
+	 */
+	private void initializeUsbCameras()
+	{
+		UsbCameraInfo infos[] = UsbCamera.enumerateUsbCameras();
+		usbCameras = new UsbCamera[infos.length];
+		for (int i = 0; i < usbCameras.length; i++)
+		{
+			usbCameras[i] = new UsbCamera("USB" + i, infos[i].path);
+			boolean setRes = usbCameras[i].setResolution(RobotMap.usbCameraImageWidth, RobotMap.usbCameraImageHeight);
+			boolean setFps = usbCameras[i].setFPS((int) SmartDashboard.getNumber(OI.dashboardUsbCameraFps, RobotMap.usbCameraFrameRate));
+			System.out.println("Created USB camera " + i + ": " + usbCameras[i].getPath() + ", setRes=" + setRes + ", setFps=" + setFps);
+			CameraServer.getInstance().startAutomaticCapture(usbCameras[i]);
+		}
 	}
 }

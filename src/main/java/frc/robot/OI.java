@@ -80,42 +80,46 @@ public class OI
 
 
 	// SmartDashboard keys:
-	public final static String labelCargoMoverInSpeed = "Cargo In Speed";
-	public final static String labelCargoMoverOutSpeed = "Cargo Out Speed";
+	public final static String dashboardCargoMoverInSpeed = "Cargo In Speed";
+	public final static String dashboardCargoMoverOutSpeed = "Cargo Out Speed";
 
-	public final static String labelLiftUpSpeed = "Lift Up Speed";
-	public final static String labelLiftDownSpeed = "Lift Down Speed";
+	public final static String dashboardLiftUpSpeed = "Lift Up Speed";
+	public final static String dasboardLiftDownSpeed = "Lift Down Speed";
 
-	public final static String labelCenterLegRetractSpeed = "Center Leg Retract Speed";
-	public final static String labelCenterLegExtendSpeed = "Center Leg Extend Speed";
+	public final static String dashboardCenterLegRetractSpeed = "Center Leg Retract Speed";
+	public final static String dashboardCenterLegExtendSpeed = "Center Leg Extend Speed";
 
-	public final static String labelExtendLimit = "Extend Limit";
-	public final static String labelRetractLimit = "Retract Limit";
+	public final static String dashboardExtendLimit = "Extend Limit";
+	public final static String dashboardRetractLimit = "Retract Limit";
+
+	public final static String dashboardUsbCameraFps = "USB Camera FPS";
 
 	// Constructor:
 	public OI()
 	{
 		// Bind buttons to commands:
-		cargoInButton.whileHeld(new MoveCargo(labelCargoMoverInSpeed));
-		cargoOutButton.whileHeld(new MoveCargo(labelCargoMoverOutSpeed));
+		cargoInButton.whileHeld(new MoveCargo(dashboardCargoMoverInSpeed));
+		cargoOutButton.whileHeld(new MoveCargo(dashboardCargoMoverOutSpeed));
 
-		liftUpButton.whileHeld(new MoveLift(labelLiftUpSpeed));
-		liftDownButton.whileHeld(new MoveLift(labelLiftDownSpeed));
+		liftUpButton.whileHeld(new MoveLift(dashboardLiftUpSpeed));
+		liftDownButton.whileHeld(new MoveLift(dasboardLiftDownSpeed));
 
-		centerLegExtendButton.whileHeld(new MoveCenterLeg(labelCenterLegExtendSpeed));
-		centerLegRetractButton.whileHeld(new MoveCenterLeg(labelCenterLegRetractSpeed));
+		centerLegExtendButton.whileHeld(new MoveCenterLeg(dashboardCenterLegExtendSpeed));
+		centerLegRetractButton.whileHeld(new MoveCenterLeg(dashboardCenterLegRetractSpeed));
 
 		// Put default values on SmartDashboard:
-		SmartDashboard.putNumber(labelCargoMoverInSpeed, 0.5);
-		SmartDashboard.putNumber(labelCargoMoverOutSpeed, -0.5);
+		SmartDashboard.putNumber(dashboardCargoMoverInSpeed, 0.5);
+		SmartDashboard.putNumber(dashboardCargoMoverOutSpeed, -0.5);
 
-		SmartDashboard.putNumber(labelLiftUpSpeed, 0.5);
-		SmartDashboard.putNumber(labelLiftDownSpeed, -0.5);
+		SmartDashboard.putNumber(dashboardLiftUpSpeed, 0.5);
+		SmartDashboard.putNumber(dasboardLiftDownSpeed, -0.5);
 
-		SmartDashboard.putNumber(labelCenterLegExtendSpeed, 0.5);
-		SmartDashboard.putNumber(labelCenterLegRetractSpeed, -0.5);
+		SmartDashboard.putNumber(dashboardCenterLegExtendSpeed, 0.5);
+		SmartDashboard.putNumber(dashboardCenterLegRetractSpeed, -0.5);
 
 		SmartDashboard.putData(new ResetOuterLegsEncoder());
 		SmartDashboard.putData("Toggle Limelight", new ToggleLimelight());
+
+		SmartDashboard.putNumber(dashboardUsbCameraFps, RobotMap.usbCameraFrameRate);
 	}
 }
