@@ -7,8 +7,13 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
+import frc.robot.commands.RunOuterLegs;
 
 /**
  * Add your docs here.
@@ -19,12 +24,9 @@ public class OuterLegs extends Subsystem
 
 	public OuterLegs()
 	{
-		motor = null;
-		/***
 		motor = RobotMap.isCompetitionRobot
 			? new WPI_TalonSRX(RobotMap.outerLegsMotorCanDeviceId)
 			: new Spark(RobotMap.outerLegsMotorPwmChannel);
-			***/
 	}
 
 	// Put methods for controlling this subsystem
@@ -34,7 +36,7 @@ public class OuterLegs extends Subsystem
 	public void initDefaultCommand()
 	{
 		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new RunOuterLegs());
 	}
 
 	public void stop()

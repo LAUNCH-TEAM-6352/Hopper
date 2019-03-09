@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -25,7 +26,7 @@ public class CargoMover extends Subsystem
 	{
 		motor = RobotMap.isCompetitionRobot
 			? new WPI_VictorSPX(RobotMap.cargoMotorCanDeviceId)
-			: null;
+			: new Spark(RobotMap.cargoMotorPwmChannel);
 	}
 
 	// Put methods for controlling this subsystem

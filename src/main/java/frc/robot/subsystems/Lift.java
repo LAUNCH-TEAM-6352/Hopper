@@ -9,13 +9,11 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.RunLift;
 
 /**
  * Add your docs here.
@@ -26,8 +24,6 @@ public class Lift extends Subsystem
 	// here. Call these from Commands.
 
 	private SpeedController motor;
-	private DigitalInput extendLimit = new DigitalInput(RobotMap.centerLegExtendLimitSwitchChannel);
-	private DigitalInput retractLimit = new DigitalInput(RobotMap.centerLegRetractLimitSwitchChannel);
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -44,18 +40,13 @@ public class Lift extends Subsystem
 	{
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
-		setDefaultCommand(new RunLift());
+		//setDefaultCommand(new RunLift());
 	}
 
 	public void setSpeed(double speed)
 	{
-		// Check for being at limit:
-		if ((!extendLimit.get() && speed > 0) || (!retractLimit.get() && speed < 0))
-		{
-			speed = 0;
-		}
 		motor.set(speed);
-		SmartDashboard.putNumber("LA Speed", speed);
+		SmartDashboard.putNumber("Lift Speed", speed);
 	}
 
 	public void stop()

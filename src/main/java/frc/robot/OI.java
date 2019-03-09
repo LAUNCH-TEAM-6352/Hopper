@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.MoveCargo;
+import frc.robot.commands.MoveCenterLeg;
+import frc.robot.commands.MoveLift;
 import frc.robot.commands.ResetOuterLegsEncoder;
 import frc.robot.commands.ToggleLimelight;
 
@@ -67,26 +69,51 @@ public class OI
 	public final static int gameControllerButtonStickLeft = 9;
 	public final static int gameControllerButtonStickRight = 10;
 
-	private Button cargoInButton = new JoystickButton(gameController, gameControllerButtonBumperLeft);
-	private Button cargoOutButton = new JoystickButton(gameController, gameControllerButtonBumperRight);
+	private Button cargoInButton = new JoystickButton(gameController, gameControllerButtonX);
+	private Button cargoOutButton = new JoystickButton(gameController, gameControllerButtonB);
+
+	private Button liftUpButton = new JoystickButton(gameController, gameControllerButtonBumperLeft);
+	private Button liftDownButton = new JoystickButton(gameController, gameControllerButtonBumperRight);
+
+	private Button centerLegExtendButton = new JoystickButton(gameController, gameControllerButtonBack);
+	private Button centerLegRetractButton = new JoystickButton(gameController, gameControllerButtonStart);
+
 
 	// SmartDashboard keys:
-	public final static String cargoMoverInSpeed = "Cargo In Speed";
-	public final static String cargoMoverOutSpeed = "Cargo Out Speed";
+	public final static String labelCargoMoverInSpeed = "Cargo In Speed";
+	public final static String labelCargoMoverOutSpeed = "Cargo Out Speed";
+
+	public final static String labelLiftUpSpeed = "Lift Up Speed";
+	public final static String labelLiftDownSpeed = "Lift Down Speed";
+
+	public final static String labelCenterLegRetractSpeed = "Center Leg Retract Speed";
+	public final static String labelCenterLegExtendSpeed = "Center Leg Extend Speed";
+
+	public final static String labelExtendLimit = "Extend Limit";
+	public final static String labelRetractLimit = "Retract Limit";
 
 	// Constructor:
 	public OI()
 	{
 		// Bind buttons to commands:
-		if (RobotMap.isCompetitionRobot)
-		{
-			cargoInButton.whileHeld(new MoveCargo(cargoMoverInSpeed));
-			cargoOutButton.whileHeld(new MoveCargo(cargoMoverOutSpeed));
-		}
+		cargoInButton.whileHeld(new MoveCargo(labelCargoMoverInSpeed));
+		cargoOutButton.whileHeld(new MoveCargo(labelCargoMoverOutSpeed));
+
+		liftUpButton.whileHeld(new MoveLift(labelLiftUpSpeed));
+		liftDownButton.whileHeld(new MoveLift(labelLiftDownSpeed));
+
+		centerLegExtendButton.whileHeld(new MoveCenterLeg(labelCenterLegExtendSpeed));
+		centerLegRetractButton.whileHeld(new MoveCenterLeg(labelCenterLegRetractSpeed));
 
 		// Put default values on SmartDashboard:
-		SmartDashboard.putNumber(cargoMoverInSpeed, 1.0);
-		SmartDashboard.putNumber(cargoMoverOutSpeed, -1.0);
+		SmartDashboard.putNumber(labelCargoMoverInSpeed, 0.5);
+		SmartDashboard.putNumber(labelCargoMoverOutSpeed, -0.5);
+
+		SmartDashboard.putNumber(labelLiftUpSpeed, 0.5);
+		SmartDashboard.putNumber(labelLiftDownSpeed, -0.5);
+
+		SmartDashboard.putNumber(labelCenterLegExtendSpeed, 0.5);
+		SmartDashboard.putNumber(labelCenterLegRetractSpeed, -0.5);
 
 		SmartDashboard.putData(new ResetOuterLegsEncoder());
 		SmartDashboard.putData("Toggle Limelight", new ToggleLimelight());

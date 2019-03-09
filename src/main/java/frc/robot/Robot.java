@@ -22,6 +22,7 @@ import frc.robot.subsystems.OuterLegs;
 import frc.robot.subsystems.OuterLegsEncoder;
 import frc.robot.subsystems.CargoMover;
 import frc.robot.subsystems.CenterLeg;
+import frc.robot.subsystems.CenterLegLimitSwitches;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -50,6 +51,7 @@ public class Robot extends TimedRobot
 	public static DriveTrain driveTrain = null;
 	public static Lift lift = null;
 	public static CenterLeg centerLeg = null;
+	public static CenterLegLimitSwitches centerLegLimitSwitches = null;
 	public static OuterLegs outerLegs = null;
 	public static OuterLegsEncoder outerLegsEncoder = null;
 	public static CargoMover cargoMover = null;
@@ -67,11 +69,14 @@ public class Robot extends TimedRobot
 		}
 		else
 		{
-			//lift = new Lift();
+			lift = new Lift();
 			driveTrain = new DriveTrain();
 			centerLeg = new CenterLeg();
+			centerLegLimitSwitches = new CenterLegLimitSwitches();
+			cargoMover = new CargoMover();
+			outerLegs = new OuterLegs();
+			outerLegsEncoder = new OuterLegsEncoder();
 		}
-
 	}
 
 
@@ -96,10 +101,6 @@ public class Robot extends TimedRobot
 	// User options selected via the REV digit board:
 	private static final String[] options = { "STAY", "LVL1", "LVL2" };
 	private int optionIndex = 0;
-
-	// The following deal with the Limelight vision processing camera:
-	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -172,7 +173,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void autonomousInit()
 	{
-		m_autonomousCommand = m_chooser.getSelected();
+		//m_autonomousCommand = m_chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -182,10 +183,10 @@ public class Robot extends TimedRobot
 		 */
 
 		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null)
-		{
-			m_autonomousCommand.start();
-		}
+		// if (m_autonomousCommand != null)
+		// {
+		// 	m_autonomousCommand.start();
+		// }
 	}
 
 	/**
@@ -204,10 +205,10 @@ public class Robot extends TimedRobot
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (m_autonomousCommand != null)
-		{
-			m_autonomousCommand.cancel();
-		}
+		// if (m_autonomousCommand != null)
+		// {
+		// 	m_autonomousCommand.cancel();
+		// }
 	}
 
 	/**
