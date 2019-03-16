@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.ReportOuterLegsEncoder;
+import frc.robot.commands.ReportRearLegsEncoder;
 
 /**
  * Wraps up the power cube lift encoder as a subsystem.
@@ -24,12 +24,12 @@ public class OuterLegsEncoder extends Subsystem
 	{
 		// Create the encoder:
 		encoder = new Encoder(
-				RobotMap.outerLegsEncoderChannelA,
-				RobotMap.outerLegsEncoderChannelB,
-				RobotMap.outerLegsEncoderIsReversed);
+				RobotMap.rearLegsEncoderChannelA,
+				RobotMap.rearLegsEncoderChannelB,
+				RobotMap.rearLegsEncoderIsReversed);
 		
 		// This sets each unit of distance to one revolution:
-		encoder.setDistancePerPulse(1.0 / RobotMap.outerLegsEncoderPulsesPerRev);
+		encoder.setDistancePerPulse(1.0 / RobotMap.rearLegsEncoderPulsesPerRev);
 		
 		// Reset the encoder:
 		reset();
@@ -37,7 +37,7 @@ public class OuterLegsEncoder extends Subsystem
 	
 	public void initDefaultCommand()
 	{
-		setDefaultCommand(new ReportOuterLegsEncoder());
+		setDefaultCommand(new ReportRearLegsEncoder());
 	}
 	
 	/**

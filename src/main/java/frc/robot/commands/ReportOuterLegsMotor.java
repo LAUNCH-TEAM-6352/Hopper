@@ -10,14 +10,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/**
- * Reports the status of the power cube lift encoder.
- */
-public class ReportOuterLegsEncoder extends Command
+public class ReportOuterLegsMotor extends Command
 {
-	public ReportOuterLegsEncoder()
+	public ReportOuterLegsMotor()
 	{
-		requires(Robot.outerLegsEncoder);
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+		requires(Robot.outerLegsMotorReporter);
 	}
 
 	// Called just before this Command runs the first time
@@ -30,7 +29,7 @@ public class ReportOuterLegsEncoder extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.outerLegsEncoder.report();
+		Robot.outerLegsMotorReporter.report();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -51,6 +50,5 @@ public class ReportOuterLegsEncoder extends Command
 	@Override
 	protected void interrupted()
 	{
-		end();
 	}
 }

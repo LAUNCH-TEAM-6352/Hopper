@@ -16,6 +16,7 @@ import frc.robot.commands.MoveCargo;
 import frc.robot.commands.MoveCenterLeg;
 import frc.robot.commands.MoveLift;
 import frc.robot.commands.ResetOuterLegsEncoder;
+import frc.robot.commands.ResetRearLegsCounter;
 import frc.robot.commands.ToggleLimelight;
 
 /**
@@ -78,6 +79,8 @@ public class OI
 	private Button centerLegExtendButton = new JoystickButton(gameController, gameControllerButtonBack);
 	private Button centerLegRetractButton = new JoystickButton(gameController, gameControllerButtonStart);
 
+	private Button rearLegsCounterResetButton = new JoystickButton(gameController, gameControllerButtonStickRight);
+
 
 	// SmartDashboard keys:
 	public final static String dashboardCargoMoverInSpeed = "Cargo In Speed";
@@ -89,10 +92,24 @@ public class OI
 	public final static String dashboardCenterLegRetractSpeed = "Center Leg Retract Speed";
 	public final static String dashboardCenterLegExtendSpeed = "Center Leg Extend Speed";
 
-	public final static String dashboardExtendLimit = "Extend Limit";
-	public final static String dashboardRetractLimit = "Retract Limit";
+	public final static String dashboardLeftLegRetractSpeed = "Left Leg Retract Speed";
+	public final static String dashboardLeftLegExtendSpeed = "Left Leg Extend Speed";
+
+	public final static String dashboardRightLegRetractSpeed = "Right Leg Retract Speed";
+	public final static String dashboardRightLegExtendSpeed = "Right Leg Extend Speed";
+
+	public final static String dashboardExtendLimitLeft = "Extend Limit Left";
+	public final static String dashboardRetractLimitLeft = "Retract Limit Left";
+
+	public final static String dashboardExtendLimitRight = "Extend Limit Right";
+	public final static String dashboardRetractLimitRight = "Retract Limit Right";
 
 	public final static String dashboardUsbCameraFps = "USB Camera FPS";
+
+	public static final String dashboardRearLegsMotorDirection = "Rear Legs dir";
+	public static final String dashboardRearLegsMotorRpm = "Rear Legs rpm";
+	public static final String dashboardRearLegsMotorCount = "Rear Legs cnt";
+	public static final String dashboardRearLegsMotorDistance = "Rear Legs dst";
 
 	// Constructor:
 	public OI()
@@ -104,8 +121,10 @@ public class OI
 		liftUpButton.whileHeld(new MoveLift(dashboardLiftUpSpeed));
 		liftDownButton.whileHeld(new MoveLift(dasboardLiftDownSpeed));
 
-		centerLegExtendButton.whileHeld(new MoveCenterLeg(dashboardCenterLegExtendSpeed));
-		centerLegRetractButton.whileHeld(new MoveCenterLeg(dashboardCenterLegRetractSpeed));
+		centerLegExtendButton.whileHeld(new MoveCenterLeg(dashboardLeftLegExtendSpeed, dashboardRightLegExtendSpeed));
+		centerLegRetractButton.whileHeld(new MoveCenterLeg(dashboardRightLegRetractSpeed, dashboardRightLegRetractSpeed));
+
+		rearLegsCounterResetButton.whenPressed(new ResetRearLegsCounter());
 
 		// Put default values on SmartDashboard:
 		SmartDashboard.putNumber(dashboardCargoMoverInSpeed, 0.5);
@@ -116,6 +135,12 @@ public class OI
 
 		SmartDashboard.putNumber(dashboardCenterLegExtendSpeed, 0.5);
 		SmartDashboard.putNumber(dashboardCenterLegRetractSpeed, -0.5);
+
+		SmartDashboard.putNumber(dashboardLeftLegExtendSpeed, 0.5);
+		SmartDashboard.putNumber(dashboardLeftLegRetractSpeed, -0.5);
+
+		SmartDashboard.putNumber(dashboardRightLegExtendSpeed, 0.5);
+		SmartDashboard.putNumber(dashboardRightLegRetractSpeed, -0.5);
 
 		SmartDashboard.putData(new ResetOuterLegsEncoder());
 		SmartDashboard.putData("Toggle Limelight", new ToggleLimelight());

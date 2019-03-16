@@ -13,32 +13,40 @@ import frc.robot.Robot;
 
 public class MoveCenterLeg extends Command
 {
-	private String speedKey;
-	private double speed;
+	private String speedKeyLeft;
+	private String speedKeyRight;
+	private double speedLeft;
+	private double speedRight;
 
 	public MoveCenterLeg()
 	{
 		requires(Robot.centerLeg);
 	}
 
-	public MoveCenterLeg(String speedKey)
+	public MoveCenterLeg(String speedKeyLeft, String speedKeyRight)
 	{
 		this();
-		this.speedKey = speedKey;
+		this.speedKeyLeft = speedKeyLeft;
+		this.speedKeyRight = speedKeyRight;
 	}
 
-	public MoveCenterLeg(double speed)
+	public MoveCenterLeg(double speedLeft, double speedRight)
 	{
-		this.speed = speed;
+		this.speedLeft = speedLeft;
+		this.speedRight = speedRight;
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize()
 	{
-		if (speedKey != null)
+		if (speedKeyLeft != null)
 		{
-			speed = SmartDashboard.getNumber(speedKey, 0.0);
+			speedLeft = SmartDashboard.getNumber(speedKeyLeft, 0.0);
+		}
+		if (speedKeyRight != null)
+		{
+			speedRight = SmartDashboard.getNumber(speedKeyRight, 0.0);
 		}
 	}
 
@@ -46,7 +54,7 @@ public class MoveCenterLeg extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.centerLeg.setSpeed(speed);
+		Robot.centerLeg.setSpeed(speedLeft, speedRight);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -22,7 +22,8 @@ public class CenterLeg extends Subsystem
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	private SpeedController motor;
+	private SpeedController motorLeft;
+	private SpeedController motorRight;
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -31,7 +32,8 @@ public class CenterLeg extends Subsystem
 	{
 		if (!RobotMap.isCompetitionRobot)
 		{
-			motor = new Spark(RobotMap.centerLegMotorPwmChannel);
+			motorLeft = new Spark(RobotMap.centerLeg1MotorPwmChannel);
+			motorRight = new Spark(RobotMap.centerLeg2MotorPwmChannel);
 		}
 	}
 
@@ -43,20 +45,30 @@ public class CenterLeg extends Subsystem
 		//setDefaultCommand(new RunCenterLeg());
 	}
 
-	public void setSpeed(double speed)
+	public void setSpeed(double speedLeft, double speedRight)
 	{
 		// Check for being at limit:
-		if ((Robot.centerLegLimitSwitches.isAtExtendLimit() && speed > 0) ||
-			(Robot.centerLegLimitSwitches.isAtRetractLimit() && speed < 0))
+		if ((Robot.centerLegLimitSwitches.isAtExtendLimitLeft() && speedLeft > 0) ||
+			(Robot.centerLegLimitSwitches.isAtRetractLimitLeft() && speedLeft < 0))
 		{
-			speed = 0;
+			speedLeft = 0;
 		}
-		motor.set(speed);
-		SmartDashboard.putNumber("Ceter Leg Speed", speed);
+		motorLeft.set(speedLeft);
+
+		// Check for being at limit:
+		if ((Robot.centerLegLimitSwitches.isAtExtendLimitRight() && speedRight > 0) ||
+			(Robot.centerLegLimitSwitches.isAtRetractLimitRight() && speedRight < 0))
+		{
+			speedRight = 0;
+		}
+		motorRight.set(speedRight);
+
+		SmartDashboard.putNumber(" Left Leg Speed", speedLeft);
+		SmartDashboard.putNumber("Right Leg Speed", speedRight);
 	}
 
 	public void stop()
 	{
-		setSpeed(0);
+		setSpeed(0, 0);
 	}
 }

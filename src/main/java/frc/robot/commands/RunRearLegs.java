@@ -10,14 +10,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class RunCenterLeg extends Command
+public class RunRearLegs extends Command
 {
-	public RunCenterLeg()
+	public RunRearLegs()
 	{
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(Robot.centerLeg);
+		requires(Robot.rearLegs);
 	}
 
 	// Called just before this Command runs the first time
@@ -30,7 +31,17 @@ public class RunCenterLeg extends Command
 	@Override
 	protected void execute()
 	{
-		//Robot.centerLeg.setSpeed(Robot.oi.gameController.getTriggerAxis(Hand.kLeft) - Robot.oi.gameController.getTriggerAxis(Hand.kRight));
+		Robot.rearLegs.setWinchSpeed(
+			RobotMap.isMichaelMode
+				? Robot.oi.gameController.getY(Hand.kRight)
+				: Robot.oi.gameController.getTriggerAxis(Hand.kRight) - Robot.oi.gameController.getTriggerAxis(Hand.kLeft)
+		);
+
+		Robot.rearLegs.setDriveSpeed(
+			RobotMap.isMichaelMode
+				? Robot.oi.gameController.getX(Hand.kRight)
+				: Robot.oi.gameController.getX(Hand.kRight)
+		);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -44,7 +55,8 @@ public class RunCenterLeg extends Command
 	@Override
 	protected void end()
 	{
-		Robot.centerLeg.stop();
+		Robot.rearLegs.stopWinch();
+		Robot.rearLegs.stopDrive();
 	}
 
 	// Called when another command which requires one or more of the same

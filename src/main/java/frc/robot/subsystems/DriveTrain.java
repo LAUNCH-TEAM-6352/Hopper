@@ -110,7 +110,15 @@ public class DriveTrain extends Subsystem
 	
 	public void driveCaution(XboxController gameController)
 	{
-		setLeftRightMotorOutputs(gameController.getY(Hand.kLeft) - gameController.getX(Hand.kRight), gameController.getY(Hand.kLeft) + gameController.getX(Hand.kRight));
+		double forewardComponent = RobotMap.isMichaelMode
+			? gameController.getTriggerAxis(Hand.kRight) - gameController.getTriggerAxis(Hand.kLeft)
+			: gameController.getY(Hand.kLeft);
+
+		double turnComponent = RobotMap.isMichaelMode
+			? gameController.getX(Hand.kLeft)
+			: gameController.getX(Hand.kRight);
+
+		setLeftRightMotorOutputs(forewardComponent - turnComponent, forewardComponent + turnComponent);
 	}
 	
 	public void setLeftRightMotorOutputs(double left, double right)

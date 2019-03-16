@@ -7,17 +7,15 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class RunOuterLegs extends Command
+public class ResetRearLegsCounter extends Command
 {
-	public RunOuterLegs()
+	public ResetRearLegsCounter()
 	{
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(Robot.outerLegs);
 	}
 
 	// Called just before this Command runs the first time
@@ -30,21 +28,20 @@ public class RunOuterLegs extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.outerLegs.setSpeed(Robot.oi.gameController.getTriggerAxis(Hand.kRight) - Robot.oi.gameController.getTriggerAxis(Hand.kLeft));
+		Robot.outerLegsMotorReporter.reset();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished()
 	{
-		return false;
+		return true;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end()
 	{
-		Robot.outerLegs.stop();
 	}
 
 	// Called when another command which requires one or more of the same
@@ -52,6 +49,5 @@ public class RunOuterLegs extends Command
 	@Override
 	protected void interrupted()
 	{
-		end();
 	}
 }

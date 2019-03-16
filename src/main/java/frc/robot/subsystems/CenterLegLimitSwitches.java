@@ -19,8 +19,10 @@ import frc.robot.commands.ReportCenterLegLimitSwitches;
  */
 public class CenterLegLimitSwitches extends Subsystem
 {
-	private DigitalInput extendLimit = new DigitalInput(RobotMap.centerLegExtendLimitSwitchChannel);
-	private DigitalInput retractLimit = new DigitalInput(RobotMap.centerLegRetractLimitSwitchChannel);
+	private DigitalInput extendLimitLeft = new DigitalInput(RobotMap.centerLeg1ExtendLimitSwitchChannel);
+	private DigitalInput retractLimitLeft = new DigitalInput(RobotMap.centerLeg1RetractLimitSwitchChannel);
+	private DigitalInput extendLimitRight = new DigitalInput(RobotMap.centerLeg2ExtendLimitSwitchChannel);
+	private DigitalInput retractLimitRight = new DigitalInput(RobotMap.centerLeg2RetractLimitSwitchChannel);
 
 	public CenterLegLimitSwitches()
 	{
@@ -36,23 +38,40 @@ public class CenterLegLimitSwitches extends Subsystem
 	 */
 	public void report()
 	{
-		SmartDashboard.putBoolean(OI.dashboardExtendLimit, !isAtExtendLimit());
-		SmartDashboard.putBoolean(OI.dashboardRetractLimit, !isAtRetractLimit());
+		SmartDashboard.putBoolean(OI.dashboardExtendLimitLeft, !isAtExtendLimitLeft());
+		SmartDashboard.putBoolean(OI.dashboardRetractLimitLeft, !isAtRetractLimitLeft());
+		SmartDashboard.putBoolean(OI.dashboardExtendLimitRight, !isAtExtendLimitRight());
+		SmartDashboard.putBoolean(OI.dashboardRetractLimitRight, !isAtRetractLimitRight());
 	}
 	
 	/**
 	 * Returns an indication of if we are at the extend limit.
 	 */
-	public boolean isAtExtendLimit()
+	public boolean isAtExtendLimitLeft()
 	{
-		return !extendLimit.get();
+		return !extendLimitLeft.get();
 	}
 	
 	/**
 	 * Returns an indication of if we are at the retract limit.
 	 */
-	public boolean isAtRetractLimit()
+	public boolean isAtRetractLimitLeft()
 	{
-		return !retractLimit.get();
+		return !retractLimitLeft.get();
+	}
+	/**
+	 * Returns an indication of if we are at the extend limit.
+	 */
+	public boolean isAtExtendLimitRight()
+	{
+		return !extendLimitRight.get();
+	}
+	
+	/**
+	 * Returns an indication of if we are at the retract limit.
+	 */
+	public boolean isAtRetractLimitRight()
+	{
+		return !retractLimitRight.get();
 	}
 }

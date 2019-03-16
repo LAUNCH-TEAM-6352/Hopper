@@ -15,17 +15,16 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Lift;
-import frc.robot.subsystems.OuterLegs;
-import frc.robot.subsystems.OuterLegsEncoder;
 import frc.robot.subsystems.CargoMover;
 import frc.robot.subsystems.CenterLeg;
 import frc.robot.subsystems.CenterLegLimitSwitches;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Lift;
+import frc.robot.subsystems.OuterLegsEncoder;
+import frc.robot.subsystems.OuterLegsMotorReporter;
+import frc.robot.subsystems.RearLegs;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -52,13 +51,14 @@ public class Robot extends TimedRobot
 	public static double limelightYPosition;
 	public static double limelightArea;
 
-	// Create some subsystems:
+	// Define some subsystems:
 	public static DriveTrain driveTrain = null;
 	public static Lift lift = null;
 	public static CenterLeg centerLeg = null;
 	public static CenterLegLimitSwitches centerLegLimitSwitches = null;
-	public static OuterLegs outerLegs = null;
+	public static RearLegs rearLegs = null;
 	public static OuterLegsEncoder outerLegsEncoder = null;
+	public static OuterLegsMotorReporter outerLegsMotorReporter = null;
 	public static CargoMover cargoMover = null;
 
 	// Static initialization
@@ -79,8 +79,9 @@ public class Robot extends TimedRobot
 			centerLeg = new CenterLeg();
 			centerLegLimitSwitches = new CenterLegLimitSwitches();
 			cargoMover = new CargoMover();
-			outerLegs = new OuterLegs();
+			rearLegs = new RearLegs();
 			outerLegsEncoder = new OuterLegsEncoder();
+			outerLegsMotorReporter = new OuterLegsMotorReporter();
 		}
 	}
 

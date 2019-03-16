@@ -18,7 +18,7 @@ public class MoveOuterLegs extends Command
 
 	public MoveOuterLegs()
 	{
-		requires(Robot.outerLegs);
+		requires(Robot.rearLegs);
 	}
 
 	public MoveOuterLegs(String speedKey)
@@ -46,7 +46,7 @@ public class MoveOuterLegs extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.outerLegs.move(speed);
+		Robot.rearLegs.setWinchSpeed(speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -60,7 +60,7 @@ public class MoveOuterLegs extends Command
 	@Override
 	protected void end()
 	{
-		Robot.outerLegs.stop();
+		Robot.rearLegs.stopWinch();
 	}
 
 	// Called when another command which requires one or more of the same

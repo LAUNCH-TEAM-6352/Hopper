@@ -31,6 +31,12 @@ public class RobotMap
 	// Indicates if we should support USB  cameras:
 	public static final boolean isUseUsbCameras = true;
 
+	// Indicatres if driving in Michael mode:
+	public static final boolean isMichaelMode = true;
+
+	// Miscellaneous constants:
+	public static final int rearLegsMotorTachPulsesPerRevolution = 15;
+
 	// The following deal with the Limelight vision processing camera:
 	public static final String limelightTableKey = "limelight";
 	public static final String limelightXPositionKey = "tx";
@@ -40,28 +46,36 @@ public class RobotMap
 	public static final String limelightLedModeKey = "ledMode";
 
 	// The following define Digital IO channels:
-	public static final int centerLegExtendLimitSwitchChannel = 9;
-	public static final int centerLegRetractLimitSwitchChannel = 8;
+	public static final int centerLeg1ExtendLimitSwitchChannel = 9;
+	public static final int centerLeg1RetractLimitSwitchChannel = 8;
+	public static final int centerLeg2ExtendLimitSwitchChannel = 7;
+	public static final int centerLeg2RetractLimitSwitchChannel = 6;
 
-	public static final int outerLegsEncoderChannelA = 0;
-	public static final int outerLegsEncoderChannelB = 1;
-	public static final int outerLegsEncoderChannelX = 2;
-	public static final int outerLegsEncoderPulsesPerRev = 512;
-	public static final boolean outerLegsEncoderIsReversed = true;
+	public static final int rearLegsEncoderChannelA = 0;
+	public static final int rearLegsEncoderChannelB = 1;
+	public static final int rearLegsEncoderChannelX = 2;
+	public static final int rearLegsEncoderPulsesPerRev = 512;
+	public static final boolean rearLegsEncoderIsReversed = true;
+
+	public static final int rearLegsMotorDioChannel = 3;
+	public static final int rearLegsMotorTachDioChannel = 4;
+	public static final int rearLegsMotorDirDioChannel = 5;
 
 	// The following are PWM channels:
 	public static final int leftDriveMotorPwmChannel = 2;
 	public static final int rightDriveMotorPwmChannel = 3;
-	public static final int centerLegMotorPwmChannel = 6;
-	public static final int outerLegsMotorPwmChannel = 8;
+	public static final int centerLeg1MotorPwmChannel = 6;
+	public static final int centerLeg2MotorPwmChannel = 9;
+	public static final int rearLegsMotorPwmChannel = 8;
 	public static final int liftMotorPwmChannel = 7;
 	public static final int cargoMotorPwmChannel = 5;
+	public static final int rearLegsDriveMotorPwmChannel = 4;
 	
 	// The following are CAN channels:
 	public static final int leftDriveMotorCanDeviceId = 1;
 	public static final int rightDriveMotorCanDeviceId = 2;
 	public static final int centerLegMotorCanDeviceId = 4;
-	public static final int outerLegsMotorCanDeviceId = 3;
+	public static final int rearLegsMotorCanDeviceId = 3;
 	public static final int liftMotorCanDeviceId = 5;
 	public static final int cargoMotorCanDeviceId = 6;
 

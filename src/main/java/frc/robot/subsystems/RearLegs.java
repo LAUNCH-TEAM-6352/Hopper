@@ -9,24 +9,32 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.NidecBrushless;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.RunOuterLegs;
+import frc.robot.commands.RunRearLegs;
 
 /**
  * Add your docs here.
  */
-public class OuterLegs extends Subsystem
+public class RearLegs extends Subsystem
 {
-	private SpeedController motor;
+	private SpeedController winchMotor;
+	private SpeedController driveMotor;
 
-	public OuterLegs()
+	public RearLegs()
 	{
-		motor = RobotMap.isCompetitionRobot
-			? new WPI_TalonSRX(RobotMap.outerLegsMotorCanDeviceId)
-			: new Spark(RobotMap.outerLegsMotorPwmChannel);
+		winchMotor = RobotMap.isCompetitionRobot
+			? new WPI_TalonSRX(RobotMap.rearLegsMotorCanDeviceId)
+			: new NidecBrushless(RobotMap.rearLegsMotorPwmChannel, RobotMap.rearLegsMotorDioChannel);
+			//: new Spark(RobotMap.outerLegsMotorPwmChannel);
+
+		driveMotor = RobotMap.isCompetitionRobot
+			? new Spark(RobotMap.rearLegsDriveMotorPwmChannel)
+			: new Victor(RobotMap.rearLegsDriveMotorPwmChannel);
 	}
 
 	// Put methods for controlling this subsystem
@@ -36,21 +44,26 @@ public class OuterLegs extends Subsystem
 	public void initDefaultCommand()
 	{
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new RunOuterLegs());
+		setDefaultCommand(new RunRearLegs());
 	}
 
-	public void stop()
+	public void stopWinch()
 	{
-		setSpeed(0);
+		setWinchSpeed(0);
 	}
 
-	public void move(double speed)
+	public void setWinchSpeed(double speed)
 	{
-		setSpeed(speed);
+		winchMotor.set(speed);
 	}
 
-	public void setSpeed(double speed)
+	public void stopDrive()
 	{
-		motor.set(speed);
+		setDriveSpeed(0);
+	}
+
+	public void setDriveSpeed(double speed)
+	{
+		driveMotor.set(speed);
 	}
 }
