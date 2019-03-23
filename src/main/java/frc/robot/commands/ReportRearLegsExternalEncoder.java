@@ -10,12 +10,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ResetRearLegsCounter extends Command
+/**
+ * Reports the status of the power cube lift encoder.
+ */
+public class ReportRearLegsExternalEncoder extends Command
 {
-	public ResetRearLegsCounter()
+	public ReportRearLegsExternalEncoder()
 	{
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
+		requires(Robot.rearLegsExternalEncoder);
 	}
 
 	// Called just before this Command runs the first time
@@ -28,14 +30,14 @@ public class ResetRearLegsCounter extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.rearLegsMotorReporter.reset();
+		Robot.rearLegsExternalEncoder.report();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished()
 	{
-		return true;
+		return false;
 	}
 
 	// Called once after isFinished returns true
@@ -49,5 +51,6 @@ public class ResetRearLegsCounter extends Command
 	@Override
 	protected void interrupted()
 	{
+		end();
 	}
 }

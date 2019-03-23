@@ -10,17 +10,19 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.OI;
 import frc.robot.RobotMap;
-import frc.robot.commands.ReportRearLegsEncoder;
+import frc.robot.commands.ReportRearLegsExternalEncoder;
 
 /**
  * Wraps up the rear legs lift encoders as a subsystem.
+ * This talks to an external encoder.
  */
-public class RearLegsEncoder extends Subsystem
+public class RearLegsExternalEncoder extends Subsystem
 {
 	private Encoder encoder;
 
-	public RearLegsEncoder()
+	public RearLegsExternalEncoder()
 	{
 		// Create the encoder:
 		encoder = new Encoder(
@@ -37,7 +39,7 @@ public class RearLegsEncoder extends Subsystem
 	
 	public void initDefaultCommand()
 	{
-		setDefaultCommand(new ReportRearLegsEncoder());
+		setDefaultCommand(new ReportRearLegsExternalEncoder());
 	}
 	
 	/**
@@ -45,10 +47,9 @@ public class RearLegsEncoder extends Subsystem
 	 */
 	public void report()
 	{
-		SmartDashboard.putNumber("Legs scale:", encoder.getEncodingScale());
-		SmartDashboard.putNumber("Legs count:", get());
-		SmartDashboard.putNumber(" Legs dist:", getDistance());
-
+		SmartDashboard.putNumber(OI.dashboardRearLegsExtScale, encoder.getEncodingScale());
+		SmartDashboard.putNumber(OI.dashboardRearLegsExtCount, get());
+		SmartDashboard.putNumber(OI.dashboardRearLegsExtDistance, getDistance());
 	}
 	
 	/**

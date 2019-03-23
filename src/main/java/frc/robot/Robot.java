@@ -23,8 +23,8 @@ import frc.robot.subsystems.FrontLegLimitSwitches;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.MotorControllerCalibrator;
-import frc.robot.subsystems.RearLegsEncoder;
-import frc.robot.subsystems.RearLegsMotorReporter;
+import frc.robot.subsystems.RearLegsExternalEncoder;
+import frc.robot.subsystems.RearLegsInternalEncoder;
 import frc.robot.subsystems.RearLegs;
 
 /**
@@ -58,8 +58,8 @@ public class Robot extends TimedRobot
 	public static FrontLegs frontLegs = null;
 	public static FrontLegLimitSwitches frontLegLimitSwitches = null;
 	public static RearLegs rearLegs = null;
-	public static RearLegsEncoder rearLegsEncoder = null;
-	public static RearLegsMotorReporter rearLegsMotorReporter = null;
+	public static RearLegsExternalEncoder rearLegsExternalEncoder = null;
+	public static RearLegsInternalEncoder rearLegsInternalEncoder = null;
 	public static CargoMover cargoMover = null;
 	public static MotorControllerCalibrator motorControllerCalibrator = null;
 
@@ -82,8 +82,8 @@ public class Robot extends TimedRobot
 			frontLegLimitSwitches = new FrontLegLimitSwitches();
 			cargoMover = new CargoMover();
 			rearLegs = new RearLegs();
-			rearLegsEncoder = new RearLegsEncoder();
-			rearLegsMotorReporter = new RearLegsMotorReporter();
+			rearLegsExternalEncoder = new RearLegsExternalEncoder();
+			rearLegsInternalEncoder = new RearLegsInternalEncoder();
 			motorControllerCalibrator = new MotorControllerCalibrator();
 		}
 	}

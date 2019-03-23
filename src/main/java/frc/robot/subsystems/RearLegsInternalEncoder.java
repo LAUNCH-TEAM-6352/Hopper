@@ -13,17 +13,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
 import frc.robot.RobotMap;
-import frc.robot.commands.ReportRearLegsMotor;
+import frc.robot.commands.ReportRearLegsInternalEncoder;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * Wraps up the Nidec motor interla "encoder" circutry.
  */
-public class RearLegsMotorReporter extends Subsystem
+public class RearLegsInternalEncoder extends Subsystem
 {
 	DigitalInput direction = new DigitalInput(RobotMap.rearLegsMotorDirDioChannel);
 	Counter counter = null;
 			
-	public RearLegsMotorReporter()
+	public RearLegsInternalEncoder()
 	{
 		counter = new Counter();
 		counter.setUpSource(new DigitalInput(RobotMap.rearLegsMotorTachDioChannel));
@@ -38,7 +38,7 @@ public class RearLegsMotorReporter extends Subsystem
 	public void initDefaultCommand()
 	{
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new ReportRearLegsMotor());
+		setDefaultCommand(new ReportRearLegsInternalEncoder());
 	}
 
 	/**
