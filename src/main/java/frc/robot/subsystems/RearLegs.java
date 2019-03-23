@@ -30,8 +30,8 @@ public class RearLegs extends Subsystem
 	public RearLegs()
 	{
 		winchMotor = RobotMap.isCompetitionRobot
-			? new WPI_TalonSRX(RobotMap.rearLegsLiftMotorCanDeviceId)
-			: new NidecBrushless(RobotMap.rearLegsLiftMotorPwmChannel, RobotMap.rearLegsMotorDioChannel);
+			? new WPI_TalonSRX(RobotMap.rearLegsWinchMotorCanDeviceId)
+			: new NidecBrushless(RobotMap.rearLegsWinchMotorPwmChannel, RobotMap.rearLegsWinchMotorDioChannel);
 
 		driveMotor = RobotMap.isCompetitionRobot
 			? new Spark(RobotMap.rearLegsDriveMotorPwmChannel)
@@ -56,7 +56,7 @@ public class RearLegs extends Subsystem
 	public void setWinchSpeed(double speed)
 	{
 		winchMotor.set(speed);
-		SmartDashboard.putNumber(OI.dashbaordRearLegsLiftMotorSpeed, speed);
+		SmartDashboard.putNumber(OI.dashbaordRearLegsWinchMotorSpeed, speed);
 	}
 
 	public void stopDrive()

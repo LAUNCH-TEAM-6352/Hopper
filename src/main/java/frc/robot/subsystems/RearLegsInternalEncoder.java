@@ -20,13 +20,13 @@ import frc.robot.commands.ReportRearLegsInternalEncoder;
  */
 public class RearLegsInternalEncoder extends Subsystem
 {
-	DigitalInput direction = new DigitalInput(RobotMap.rearLegsMotorDirDioChannel);
+	DigitalInput direction = new DigitalInput(RobotMap.rearLegsWinchMotorDirDioChannel);
 	Counter counter = null;
 			
 	public RearLegsInternalEncoder()
 	{
 		counter = new Counter();
-		counter.setUpSource(new DigitalInput(RobotMap.rearLegsMotorTachDioChannel));
+		counter.setUpSource(new DigitalInput(RobotMap.rearLegsWinchMotorTachDioChannel));
 		counter.setDownSource(direction);
 		counter.setExternalDirectionMode();
 		counter.setDistancePerPulse(1.0 / RobotMap.rearLegsMotorTachPulsesPerRevolution);
@@ -51,9 +51,9 @@ public class RearLegsInternalEncoder extends Subsystem
 	
 	public void report()
 	{
-		SmartDashboard.putBoolean(OI.dashboardRearLegsLiftMotorDirection, counter.getDirection());
-		SmartDashboard.putNumber(OI.dashboardRearLegsLiftMotorRpm, counter.getRate() * 60.0 * (direction.get() ? 1 : -1));
-		SmartDashboard.putNumber(OI.dashboardRearLegsLiftMotorCount, counter.get());
-		SmartDashboard.putNumber(OI.dashboardRearLegsLiftMotorDistance, counter.getDistance());
+		SmartDashboard.putBoolean(OI.dashboardRearLegsWinchMotorDirection, counter.getDirection());
+		SmartDashboard.putNumber(OI.dashboardRearLegsWinchMotorRpm, counter.getRate() * 60.0 * (direction.get() ? 1 : -1));
+		SmartDashboard.putNumber(OI.dashboardRearLegsWinchMotorCount, counter.get());
+		SmartDashboard.putNumber(OI.dashboardRearLegsWinchMotorDistance, counter.getDistance());
 	}
 }

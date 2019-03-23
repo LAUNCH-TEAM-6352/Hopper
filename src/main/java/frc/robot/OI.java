@@ -108,11 +108,11 @@ public class OI
 	public static final String dashboardRearLegsExtCount = "Rear Legs Ext cnt";
 	public static final String dashboardRearLegsExtDistance = "Rear Legs Ext dst";
 
-	public static final String dashboardRearLegsLiftMotorDirection = "Rear Legs Int dir";
-	public static final String dashboardRearLegsLiftMotorRpm = "Rear Legs Int rpm";
-	public static final String dashboardRearLegsLiftMotorCount = "Rear Legs Int cnt";
-	public static final String dashboardRearLegsLiftMotorDistance = "Rear Legs Int dst";
-	public static final String dashbaordRearLegsLiftMotorSpeed = "Rear Legs Lift Speed";
+	public static final String dashboardRearLegsWinchMotorDirection = "Rear Legs Winch dir";
+	public static final String dashboardRearLegsWinchMotorRpm = "Rear Legs Winch rpm";
+	public static final String dashboardRearLegsWinchMotorCount = "Rear Legs Winch cnt";
+	public static final String dashboardRearLegsWinchMotorDistance = "Rear Legs Winch dst";
+	public static final String dashbaordRearLegsWinchMotorSpeed = "Rear Legs Winch Speed";
 
 	// Constructor:
 	public OI()

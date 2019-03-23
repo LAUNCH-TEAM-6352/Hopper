@@ -57,9 +57,9 @@ public class RobotMap
 	public static final int rearLegsEncoderPulsesPerRev = 512;
 	public static final boolean rearLegsEncoderIsReversed = true;
 
-	public static final int rearLegsMotorDioChannel = 3;
-	public static final int rearLegsMotorTachDioChannel = 4;
-	public static final int rearLegsMotorDirDioChannel = 5;
+	public static final int rearLegsWinchMotorDioChannel = 3;
+	public static final int rearLegsWinchMotorTachDioChannel = 4;
+	public static final int rearLegsWinchMotorDirDioChannel = 5;
 
 	// The following are PWM channels:
 	public static final int calibrationPwmChannel = 0;
@@ -67,7 +67,7 @@ public class RobotMap
 	public static final int rightDriveMotorPwmChannel = 3;
 	public static final int frontLegLeftMotorPwmChannel = 6;
 	public static final int frontLegRightMotorPwmChannel = 9;
-	public static final int rearLegsLiftMotorPwmChannel = 8;
+	public static final int rearLegsWinchMotorPwmChannel = 8;
 	public static final int liftMotorPwmChannel = 7;
 	public static final int cargoMotorPwmChannel = 5;
 	public static final int rearLegsDriveMotorPwmChannel = 4;
@@ -76,7 +76,7 @@ public class RobotMap
 	public static final int leftDriveMotorCanDeviceId = 1;
 	public static final int rightDriveMotorCanDeviceId = 2;
 	public static final int frontLegMotorCanDeviceId = 4;
-	public static final int rearLegsLiftMotorCanDeviceId = 3;
+	public static final int rearLegsWinchMotorCanDeviceId = 3;
 	public static final int liftMotorCanDeviceId = 5;
 	public static final int cargoMotorCanDeviceId = 6;
 
