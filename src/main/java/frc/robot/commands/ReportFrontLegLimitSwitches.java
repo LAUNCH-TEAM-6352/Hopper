@@ -8,67 +8,42 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class MoveCenterLeg extends Command
+/**
+ * Reports the status of the front (peg) leg limit switches.
+ */
+public class ReportFrontLegLimitSwitches extends Command
 {
-	private String speedKeyLeft;
-	private String speedKeyRight;
-	private double speedLeft;
-	private double speedRight;
-
-	public MoveCenterLeg()
+	public ReportFrontLegLimitSwitches()
 	{
-		requires(Robot.centerLeg);
-	}
-
-	public MoveCenterLeg(String speedKeyLeft, String speedKeyRight)
-	{
-		this();
-		this.speedKeyLeft = speedKeyLeft;
-		this.speedKeyRight = speedKeyRight;
-	}
-
-	public MoveCenterLeg(double speedLeft, double speedRight)
-	{
-		this.speedLeft = speedLeft;
-		this.speedRight = speedRight;
+		requires(Robot.frontLegLimitSwitches);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize()
 	{
-		if (speedKeyLeft != null)
-		{
-			speedLeft = SmartDashboard.getNumber(speedKeyLeft, 0.0);
-		}
-		if (speedKeyRight != null)
-		{
-			speedRight = SmartDashboard.getNumber(speedKeyRight, 0.0);
-		}
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute()
 	{
-		Robot.centerLeg.setSpeed(speedLeft, speedRight);
+		Robot.frontLegLimitSwitches.report();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished()
 	{
-		return isCanceled();
+		return false;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end()
 	{
-		Robot.centerLeg.stop();
 	}
 
 	// Called when another command which requires one or more of the same

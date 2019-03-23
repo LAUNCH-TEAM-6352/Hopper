@@ -30,7 +30,6 @@ public class RearLegs extends Subsystem
 		winchMotor = RobotMap.isCompetitionRobot
 			? new WPI_TalonSRX(RobotMap.rearLegsMotorCanDeviceId)
 			: new NidecBrushless(RobotMap.rearLegsMotorPwmChannel, RobotMap.rearLegsMotorDioChannel);
-			//: new Spark(RobotMap.outerLegsMotorPwmChannel);
 
 		driveMotor = RobotMap.isCompetitionRobot
 			? new Spark(RobotMap.rearLegsDriveMotorPwmChannel)

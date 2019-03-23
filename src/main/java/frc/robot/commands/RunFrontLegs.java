@@ -7,17 +7,17 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/**
- * Reports the status of the power cube lift encoder.
- */
-public class ReportRearLegsEncoder extends Command
+public class RunFrontLegs extends Command
 {
-	public ReportRearLegsEncoder()
+	public RunFrontLegs()
 	{
-		requires(Robot.rearLegsEncoder);
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+		requires(Robot.frontLegs);
 	}
 
 	// Called just before this Command runs the first time
@@ -30,7 +30,7 @@ public class ReportRearLegsEncoder extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.rearLegsEncoder.report();
+		//Robot.fropntLegs.setSpeed(Robot.oi.gameController.getTriggerAxis(Hand.kLeft) - Robot.oi.gameController.getTriggerAxis(Hand.kRight));
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -44,6 +44,7 @@ public class ReportRearLegsEncoder extends Command
 	@Override
 	protected void end()
 	{
+		Robot.frontLegs.stop();
 	}
 
 	// Called when another command which requires one or more of the same

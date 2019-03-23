@@ -44,7 +44,7 @@ public class RunLift extends Command
 	@Override
 	protected void end()
 	{
-		Robot.centerLeg.stop();
+		Robot.frontLegs.stop();
 	}
 
 	// Called when another command which requires one or more of the same

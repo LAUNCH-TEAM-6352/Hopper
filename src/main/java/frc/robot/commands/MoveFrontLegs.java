@@ -11,34 +11,42 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class MoveOuterLegs extends Command
+public class MoveFrontLegs extends Command
 {
-	private String speedKey;
-	private double speed;
+	private String speedKeyLeft;
+	private String speedKeyRight;
+	private double speedLeft;
+	private double speedRight;
 
-	public MoveOuterLegs()
+	public MoveFrontLegs()
 	{
-		requires(Robot.rearLegs);
+		requires(Robot.frontLegs);
 	}
 
-	public MoveOuterLegs(String speedKey)
+	public MoveFrontLegs(String speedKeyLeft, String speedKeyRight)
 	{
 		this();
-		this.speedKey = speedKey;
+		this.speedKeyLeft = speedKeyLeft;
+		this.speedKeyRight = speedKeyRight;
 	}
 
-	public MoveOuterLegs(double speed)
+	public MoveFrontLegs(double speedLeft, double speedRight)
 	{
-		this.speed = speed;
+		this.speedLeft = speedLeft;
+		this.speedRight = speedRight;
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize()
 	{
-		if (speedKey != null)
+		if (speedKeyLeft != null)
 		{
-			speed = SmartDashboard.getNumber(speedKey, .75);
+			speedLeft = SmartDashboard.getNumber(speedKeyLeft, 0.0);
+		}
+		if (speedKeyRight != null)
+		{
+			speedRight = SmartDashboard.getNumber(speedKeyRight, 0.0);
 		}
 	}
 
@@ -46,7 +54,7 @@ public class MoveOuterLegs extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.rearLegs.setWinchSpeed(speed);
+		Robot.frontLegs.setSpeed(speedLeft, speedRight);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -60,7 +68,7 @@ public class MoveOuterLegs extends Command
 	@Override
 	protected void end()
 	{
-		Robot.rearLegs.stopWinch();
+		Robot.frontLegs.stop();
 	}
 
 	// Called when another command which requires one or more of the same

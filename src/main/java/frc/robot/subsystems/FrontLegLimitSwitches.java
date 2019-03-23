@@ -12,25 +12,25 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
 import frc.robot.RobotMap;
-import frc.robot.commands.ReportCenterLegLimitSwitches;
+import frc.robot.commands.ReportFrontLegLimitSwitches;
 
 /**
- * Wraps up the center leg limit seitches as a subsystem.
+ * Wraps up the front leg limit switches as a subsystem.
  */
-public class CenterLegLimitSwitches extends Subsystem
+public class FrontLegLimitSwitches extends Subsystem
 {
-	private DigitalInput extendLimitLeft = new DigitalInput(RobotMap.centerLeg1ExtendLimitSwitchChannel);
-	private DigitalInput retractLimitLeft = new DigitalInput(RobotMap.centerLeg1RetractLimitSwitchChannel);
-	private DigitalInput extendLimitRight = new DigitalInput(RobotMap.centerLeg2ExtendLimitSwitchChannel);
-	private DigitalInput retractLimitRight = new DigitalInput(RobotMap.centerLeg2RetractLimitSwitchChannel);
+	private DigitalInput extendLimitLeft = new DigitalInput(RobotMap.frontLeg1ExtendLimitSwitchChannel);
+	private DigitalInput retractLimitLeft = new DigitalInput(RobotMap.frontLeg1RetractLimitSwitchChannel);
+	private DigitalInput extendLimitRight = new DigitalInput(RobotMap.frontLeg2ExtendLimitSwitchChannel);
+	private DigitalInput retractLimitRight = new DigitalInput(RobotMap.frontLeg2RetractLimitSwitchChannel);
 
-	public CenterLegLimitSwitches()
+	public FrontLegLimitSwitches()
 	{
 	}
 	
 	public void initDefaultCommand()
 	{
-		setDefaultCommand(new ReportCenterLegLimitSwitches());
+		setDefaultCommand(new ReportFrontLegLimitSwitches());
 	}
 	
 	/**

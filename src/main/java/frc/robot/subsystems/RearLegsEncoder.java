@@ -14,13 +14,13 @@ import frc.robot.RobotMap;
 import frc.robot.commands.ReportRearLegsEncoder;
 
 /**
- * Wraps up the power cube lift encoder as a subsystem.
+ * Wraps up the rear legs lift encoders as a subsystem.
  */
-public class OuterLegsEncoder extends Subsystem
+public class RearLegsEncoder extends Subsystem
 {
 	private Encoder encoder;
 
-	public OuterLegsEncoder()
+	public RearLegsEncoder()
 	{
 		// Create the encoder:
 		encoder = new Encoder(

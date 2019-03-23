@@ -10,13 +10,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ReportOuterLegsMotor extends Command
+public class ReportRearLegsMotor extends Command
 {
-	public ReportOuterLegsMotor()
+	public ReportRearLegsMotor()
 	{
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(Robot.outerLegsMotorReporter);
+		requires(Robot.rearLegsMotorReporter);
 	}
 
 	// Called just before this Command runs the first time
@@ -29,7 +29,7 @@ public class ReportOuterLegsMotor extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.outerLegsMotorReporter.report();
+		Robot.rearLegsMotorReporter.report();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

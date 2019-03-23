@@ -17,7 +17,7 @@ import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class CenterLeg extends Subsystem
+public class FrontLegs extends Subsystem
 {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -28,12 +28,12 @@ public class CenterLeg extends Subsystem
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	public CenterLeg()
+	public FrontLegs()
 	{
 		if (!RobotMap.isCompetitionRobot)
 		{
-			motorLeft = new Spark(RobotMap.centerLeg1MotorPwmChannel);
-			motorRight = new Spark(RobotMap.centerLeg2MotorPwmChannel);
+			motorLeft = new Spark(RobotMap.frontLeg1MotorPwmChannel);
+			motorRight = new Spark(RobotMap.frontLeg2MotorPwmChannel);
 		}
 	}
 
@@ -41,23 +41,22 @@ public class CenterLeg extends Subsystem
 	public void initDefaultCommand()
 	{
 		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
-		//setDefaultCommand(new RunCenterLeg());
+		//setDefaultCommand(new RunFrontLegs());
 	}
 
 	public void setSpeed(double speedLeft, double speedRight)
 	{
 		// Check for being at limit:
-		if ((Robot.centerLegLimitSwitches.isAtExtendLimitLeft() && speedLeft > 0) ||
-			(Robot.centerLegLimitSwitches.isAtRetractLimitLeft() && speedLeft < 0))
+		if ((Robot.frontLegLimitSwitches.isAtExtendLimitLeft() && speedLeft > 0) ||
+			(Robot.frontLegLimitSwitches.isAtRetractLimitLeft() && speedLeft < 0))
 		{
 			speedLeft = 0;
 		}
 		motorLeft.set(speedLeft);
 
 		// Check for being at limit:
-		if ((Robot.centerLegLimitSwitches.isAtExtendLimitRight() && speedRight > 0) ||
-			(Robot.centerLegLimitSwitches.isAtRetractLimitRight() && speedRight < 0))
+		if ((Robot.frontLegLimitSwitches.isAtExtendLimitRight() && speedRight > 0) ||
+			(Robot.frontLegLimitSwitches.isAtRetractLimitRight() && speedRight < 0))
 		{
 			speedRight = 0;
 		}

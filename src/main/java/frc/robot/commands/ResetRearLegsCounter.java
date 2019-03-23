@@ -28,7 +28,7 @@ public class ResetRearLegsCounter extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.outerLegsMotorReporter.reset();
+		Robot.rearLegsMotorReporter.reset();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

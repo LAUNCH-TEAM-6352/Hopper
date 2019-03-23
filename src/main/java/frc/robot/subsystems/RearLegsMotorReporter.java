@@ -13,17 +13,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
 import frc.robot.RobotMap;
-import frc.robot.commands.ReportOuterLegsMotor;
+import frc.robot.commands.ReportRearLegsMotor;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
-public class OuterLegsMotorReporter extends Subsystem
+public class RearLegsMotorReporter extends Subsystem
 {
 	DigitalInput direction = new DigitalInput(RobotMap.rearLegsMotorDirDioChannel);
 	Counter counter = null;
 			
-	public OuterLegsMotorReporter()
+	public RearLegsMotorReporter()
 	{
 		counter = new Counter();
 		counter.setUpSource(new DigitalInput(RobotMap.rearLegsMotorTachDioChannel));
@@ -38,7 +38,7 @@ public class OuterLegsMotorReporter extends Subsystem
 	public void initDefaultCommand()
 	{
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new ReportOuterLegsMotor());
+		setDefaultCommand(new ReportRearLegsMotor());
 	}
 
 	/**

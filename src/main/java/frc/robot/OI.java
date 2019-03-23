@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.MoveCargo;
-import frc.robot.commands.MoveCenterLeg;
+import frc.robot.commands.MoveFrontLegs;
 import frc.robot.commands.MoveLift;
-import frc.robot.commands.ResetOuterLegsEncoder;
+import frc.robot.commands.ResetRearLegsEncoder;
 import frc.robot.commands.ResetRearLegsCounter;
 import frc.robot.commands.ToggleLimelight;
 
@@ -54,6 +54,7 @@ public class OI
 	// button.whenReleased(new ExampleCommand());
 
 	public final XboxController gameController = new XboxController(0);
+	public final XboxController gameController1 = new XboxController(1);
 
 	public final Joystick joystickLeft = new Joystick(2);
 	public final Joystick joystickRight = new Joystick(3);
@@ -76,8 +77,8 @@ public class OI
 	private Button liftUpButton = new JoystickButton(gameController, gameControllerButtonBumperLeft);
 	private Button liftDownButton = new JoystickButton(gameController, gameControllerButtonBumperRight);
 
-	private Button centerLegExtendButton = new JoystickButton(gameController, gameControllerButtonBack);
-	private Button centerLegRetractButton = new JoystickButton(gameController, gameControllerButtonStart);
+	private Button frontLegExtendButton = new JoystickButton(gameController, gameControllerButtonBack);
+	private Button frontLegRetractButton = new JoystickButton(gameController, gameControllerButtonStart);
 
 	private Button rearLegsCounterResetButton = new JoystickButton(gameController, gameControllerButtonStickRight);
 
@@ -89,8 +90,8 @@ public class OI
 	public final static String dashboardLiftUpSpeed = "Lift Up Speed";
 	public final static String dasboardLiftDownSpeed = "Lift Down Speed";
 
-	public final static String dashboardCenterLegRetractSpeed = "Center Leg Retract Speed";
-	public final static String dashboardCenterLegExtendSpeed = "Center Leg Extend Speed";
+	public final static String dashboardFrontLegRetractSpeed = "Peg Leg Retract Speed";
+	public final static String dashboardFrontLegExtendSpeed = "Peg Leg Extend Speed";
 
 	public final static String dashboardLeftLegRetractSpeed = "Left Leg Retract Speed";
 	public final static String dashboardLeftLegExtendSpeed = "Left Leg Extend Speed";
@@ -121,8 +122,8 @@ public class OI
 		liftUpButton.whileHeld(new MoveLift(dashboardLiftUpSpeed));
 		liftDownButton.whileHeld(new MoveLift(dasboardLiftDownSpeed));
 
-		centerLegExtendButton.whileHeld(new MoveCenterLeg(dashboardLeftLegExtendSpeed, dashboardRightLegExtendSpeed));
-		centerLegRetractButton.whileHeld(new MoveCenterLeg(dashboardRightLegRetractSpeed, dashboardRightLegRetractSpeed));
+		frontLegExtendButton.whileHeld(new MoveFrontLegs(dashboardLeftLegExtendSpeed, dashboardRightLegExtendSpeed));
+		frontLegRetractButton.whileHeld(new MoveFrontLegs(dashboardRightLegRetractSpeed, dashboardRightLegRetractSpeed));
 
 		rearLegsCounterResetButton.whenPressed(new ResetRearLegsCounter());
 
@@ -133,8 +134,8 @@ public class OI
 		SmartDashboard.putNumber(dashboardLiftUpSpeed, 0.5);
 		SmartDashboard.putNumber(dasboardLiftDownSpeed, -0.5);
 
-		SmartDashboard.putNumber(dashboardCenterLegExtendSpeed, 0.5);
-		SmartDashboard.putNumber(dashboardCenterLegRetractSpeed, -0.5);
+		SmartDashboard.putNumber(dashboardFrontLegExtendSpeed, 0.5);
+		SmartDashboard.putNumber(dashboardFrontLegRetractSpeed, -0.5);
 
 		SmartDashboard.putNumber(dashboardLeftLegExtendSpeed, 0.5);
 		SmartDashboard.putNumber(dashboardLeftLegRetractSpeed, -0.5);
@@ -142,7 +143,7 @@ public class OI
 		SmartDashboard.putNumber(dashboardRightLegExtendSpeed, 0.5);
 		SmartDashboard.putNumber(dashboardRightLegRetractSpeed, -0.5);
 
-		SmartDashboard.putData(new ResetOuterLegsEncoder());
+		SmartDashboard.putData(new ResetRearLegsEncoder());
 		SmartDashboard.putData("Toggle Limelight", new ToggleLimelight());
 
 		SmartDashboard.putNumber(dashboardUsbCameraFps, RobotMap.usbCameraFrameRate);

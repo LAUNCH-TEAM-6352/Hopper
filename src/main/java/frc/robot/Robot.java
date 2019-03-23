@@ -18,12 +18,13 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.CargoMover;
-import frc.robot.subsystems.CenterLeg;
-import frc.robot.subsystems.CenterLegLimitSwitches;
+import frc.robot.subsystems.FrontLegs;
+import frc.robot.subsystems.FrontLegLimitSwitches;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Lift;
-import frc.robot.subsystems.OuterLegsEncoder;
-import frc.robot.subsystems.OuterLegsMotorReporter;
+import frc.robot.subsystems.MotorControllerCalibrator;
+import frc.robot.subsystems.RearLegsEncoder;
+import frc.robot.subsystems.RearLegsMotorReporter;
 import frc.robot.subsystems.RearLegs;
 
 /**
@@ -54,12 +55,13 @@ public class Robot extends TimedRobot
 	// Define some subsystems:
 	public static DriveTrain driveTrain = null;
 	public static Lift lift = null;
-	public static CenterLeg centerLeg = null;
-	public static CenterLegLimitSwitches centerLegLimitSwitches = null;
+	public static FrontLegs frontLegs = null;
+	public static FrontLegLimitSwitches frontLegLimitSwitches = null;
 	public static RearLegs rearLegs = null;
-	public static OuterLegsEncoder outerLegsEncoder = null;
-	public static OuterLegsMotorReporter outerLegsMotorReporter = null;
+	public static RearLegsEncoder rearLegsEncoder = null;
+	public static RearLegsMotorReporter rearLegsMotorReporter = null;
 	public static CargoMover cargoMover = null;
+	public static MotorControllerCalibrator motorControllerCalibrator = null;
 
 	// Static initialization
 	static
@@ -68,20 +70,21 @@ public class Robot extends TimedRobot
 		{
 			lift = new Lift();
 			cargoMover = new CargoMover();
-			//centerLeg = new CenterLeg();
-			//outerLegs = new OuterLegs();
+			//frontLegs = new FrontLegs();
+			//rearLegs = new RearLegs();
 			driveTrain = new DriveTrain();
 		}
 		else
 		{
 			lift = new Lift();
 			driveTrain = new DriveTrain();
-			centerLeg = new CenterLeg();
-			centerLegLimitSwitches = new CenterLegLimitSwitches();
+			frontLegs = new FrontLegs();
+			frontLegLimitSwitches = new FrontLegLimitSwitches();
 			cargoMover = new CargoMover();
 			rearLegs = new RearLegs();
-			outerLegsEncoder = new OuterLegsEncoder();
-			outerLegsMotorReporter = new OuterLegsMotorReporter();
+			rearLegsEncoder = new RearLegsEncoder();
+			rearLegsMotorReporter = new RearLegsMotorReporter();
+			motorControllerCalibrator = new MotorControllerCalibrator();
 		}
 	}
 
