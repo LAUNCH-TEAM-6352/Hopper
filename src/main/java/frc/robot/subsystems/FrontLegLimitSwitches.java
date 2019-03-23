@@ -19,10 +19,10 @@ import frc.robot.commands.ReportFrontLegLimitSwitches;
  */
 public class FrontLegLimitSwitches extends Subsystem
 {
-	private DigitalInput extendLimitLeft = new DigitalInput(RobotMap.frontLeg1ExtendLimitSwitchChannel);
-	private DigitalInput retractLimitLeft = new DigitalInput(RobotMap.frontLeg1RetractLimitSwitchChannel);
-	private DigitalInput extendLimitRight = new DigitalInput(RobotMap.frontLeg2ExtendLimitSwitchChannel);
-	private DigitalInput retractLimitRight = new DigitalInput(RobotMap.frontLeg2RetractLimitSwitchChannel);
+	private DigitalInput extendLimitLeft = new DigitalInput(RobotMap.frontLegLeftExtendLimitSwitchChannel);
+	private DigitalInput retractLimitLeft = new DigitalInput(RobotMap.frontLegLeftRetractLimitSwitchChannel);
+	private DigitalInput extendLimitRight = new DigitalInput(RobotMap.frontLegRightExtendLimitSwitchChannel);
+	private DigitalInput retractLimitRight = new DigitalInput(RobotMap.frontLegRightRetractLimitSwitchChannel);
 
 	public FrontLegLimitSwitches()
 	{

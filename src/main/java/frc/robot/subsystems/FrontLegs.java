@@ -32,8 +32,8 @@ public class FrontLegs extends Subsystem
 	{
 		if (!RobotMap.isCompetitionRobot)
 		{
-			motorLeft = new Spark(RobotMap.frontLeg1MotorPwmChannel);
-			motorRight = new Spark(RobotMap.frontLeg2MotorPwmChannel);
+			motorLeft = new Spark(RobotMap.frontLegLeftMotorPwmChannel);
+			motorRight = new Spark(RobotMap.frontLegRightMotorPwmChannel);
 		}
 	}
 

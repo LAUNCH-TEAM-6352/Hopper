@@ -108,10 +108,11 @@ public class OI
 	public static final String dashboardRearLegsExtCount = "Rear Legs Ext cnt";
 	public static final String dashboardRearLegsExtDistance = "Rear Legs Ext dst";
 
-	public static final String dashboardRearLegsMotorDirection = "Rear Legs Int dir";
-	public static final String dashboardRearLegsMotorRpm = "Rear Legs Int rpm";
-	public static final String dashboardRearLegsMotorCount = "Rear Legs Int cnt";
-	public static final String dashboardRearLegsMotorDistance = "Rear Legs Int dst";
+	public static final String dashboardRearLegsLiftMotorDirection = "Rear Legs Int dir";
+	public static final String dashboardRearLegsLiftMotorRpm = "Rear Legs Int rpm";
+	public static final String dashboardRearLegsLiftMotorCount = "Rear Legs Int cnt";
+	public static final String dashboardRearLegsLiftMotorDistance = "Rear Legs Int dst";
+	public static final String dashbaordRearLegsLiftMotorSpeed = "Rear Legs Lift Speed";
 
 	// Constructor:
 	public OI()
@@ -135,11 +136,11 @@ public class OI
 		SmartDashboard.putNumber(dashboardLiftUpSpeed, 0.5);
 		SmartDashboard.putNumber(dasboardLiftDownSpeed, -0.5);
 
-		SmartDashboard.putNumber(dashboardLeftLegExtendSpeed, 0.5);
-		SmartDashboard.putNumber(dashboardLeftLegRetractSpeed, -0.5);
+		SmartDashboard.putNumber(dashboardLeftLegExtendSpeed, 1.0);
+		SmartDashboard.putNumber(dashboardLeftLegRetractSpeed, -1.0);
 
-		SmartDashboard.putNumber(dashboardRightLegExtendSpeed, 0.5);
-		SmartDashboard.putNumber(dashboardRightLegRetractSpeed, -0.5);
+		SmartDashboard.putNumber(dashboardRightLegExtendSpeed, 0.9);
+		SmartDashboard.putNumber(dashboardRightLegRetractSpeed, -0.9);
 
 		SmartDashboard.putData(new ResetRearLegsInternalEncoder());
 		SmartDashboard.putData(new ResetRearLegsExternalEncoder());

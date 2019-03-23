@@ -51,9 +51,9 @@ public class RearLegsInternalEncoder extends Subsystem
 	
 	public void report()
 	{
-		SmartDashboard.putBoolean(OI.dashboardRearLegsMotorDirection, counter.getDirection());
-		SmartDashboard.putNumber(OI.dashboardRearLegsMotorRpm, counter.getRate() * 60.0 * (direction.get() ? 1 : -1));
-		SmartDashboard.putNumber(OI.dashboardRearLegsMotorCount, counter.get());
-		SmartDashboard.putNumber(OI.dashboardRearLegsMotorDistance, counter.getDistance());
+		SmartDashboard.putBoolean(OI.dashboardRearLegsLiftMotorDirection, counter.getDirection());
+		SmartDashboard.putNumber(OI.dashboardRearLegsLiftMotorRpm, counter.getRate() * 60.0 * (direction.get() ? 1 : -1));
+		SmartDashboard.putNumber(OI.dashboardRearLegsLiftMotorCount, counter.get());
+		SmartDashboard.putNumber(OI.dashboardRearLegsLiftMotorDistance, counter.getDistance());
 	}
 }

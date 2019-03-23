@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.OI;
 import frc.robot.RobotMap;
 import frc.robot.commands.RunRearLegs;
 
@@ -28,8 +30,8 @@ public class RearLegs extends Subsystem
 	public RearLegs()
 	{
 		winchMotor = RobotMap.isCompetitionRobot
-			? new WPI_TalonSRX(RobotMap.rearLegsMotorCanDeviceId)
-			: new NidecBrushless(RobotMap.rearLegsMotorPwmChannel, RobotMap.rearLegsMotorDioChannel);
+			? new WPI_TalonSRX(RobotMap.rearLegsLiftMotorCanDeviceId)
+			: new NidecBrushless(RobotMap.rearLegsLiftMotorPwmChannel, RobotMap.rearLegsMotorDioChannel);
 
 		driveMotor = RobotMap.isCompetitionRobot
 			? new Spark(RobotMap.rearLegsDriveMotorPwmChannel)
@@ -54,6 +56,7 @@ public class RearLegs extends Subsystem
 	public void setWinchSpeed(double speed)
 	{
 		winchMotor.set(speed);
+		SmartDashboard.putNumber(OI.dashbaordRearLegsLiftMotorSpeed, speed);
 	}
 
 	public void stopDrive()
