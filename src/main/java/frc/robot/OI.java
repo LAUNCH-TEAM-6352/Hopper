@@ -102,6 +102,9 @@ public class OI
 	public final static String dashboardExtendLimitRight = "Extend Limit Right";
 	public final static String dashboardRetractLimitRight = "Retract Limit Right";
 
+	public final static String dashboardExtendLimitRear = "Extend Limit Rear";
+	public final static String dashboardRetractLimitRear = "Retract Limit Rear";
+
 	public final static String dashboardUsbCameraFps = "USB Camera FPS";
 
 	public static final String dashboardRearLegsExtScale = "Rear Legs Ext scale";
@@ -113,6 +116,10 @@ public class OI
 	public static final String dashboardRearLegsWinchMotorCount = "Rear Legs Winch cnt";
 	public static final String dashboardRearLegsWinchMotorDistance = "Rear Legs Winch dst";
 	public static final String dashbaordRearLegsWinchMotorSpeed = "Rear Legs Winch Speed";
+
+	public static final String dashboardAccelerometerX = "Accel X";
+	public static final String dashboardAccelerometerY = "Accel Y";
+	public static final String dashboardAccelerometerZ = "Accel Z";
 
 	// Constructor:
 	public OI()
@@ -130,16 +137,16 @@ public class OI
 		rearLegsCounterResetButton.whenPressed(new ResetRearLegsInternalEncoder());
 
 		// Put default values on SmartDashboard:
-		SmartDashboard.putNumber(dashboardCargoMoverInSpeed, 0.5);
+		SmartDashboard.putNumber(dashboardCargoMoverInSpeed, 1.0);
 		SmartDashboard.putNumber(dashboardCargoMoverOutSpeed, -0.5);
 
 		SmartDashboard.putNumber(dashboardLiftUpSpeed, 0.5);
 		SmartDashboard.putNumber(dasboardLiftDownSpeed, -0.5);
 
-		SmartDashboard.putNumber(dashboardLeftLegExtendSpeed, 1.0);
+		SmartDashboard.putNumber(dashboardLeftLegExtendSpeed, 0.5);
 		SmartDashboard.putNumber(dashboardLeftLegRetractSpeed, -1.0);
 
-		SmartDashboard.putNumber(dashboardRightLegExtendSpeed, 0.9);
+		SmartDashboard.putNumber(dashboardRightLegExtendSpeed, 0.45);
 		SmartDashboard.putNumber(dashboardRightLegRetractSpeed, -0.9);
 
 		SmartDashboard.putData(new ResetRearLegsInternalEncoder());

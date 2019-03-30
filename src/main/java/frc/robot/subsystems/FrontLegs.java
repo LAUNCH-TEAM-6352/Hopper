@@ -34,6 +34,7 @@ public class FrontLegs extends Subsystem
 		{
 			motorLeft = new Spark(RobotMap.frontLegLeftMotorPwmChannel);
 			motorRight = new Spark(RobotMap.frontLegRightMotorPwmChannel);
+			motorRight.setInverted(false);
 		}
 	}
 
@@ -47,16 +48,16 @@ public class FrontLegs extends Subsystem
 	public void setSpeed(double speedLeft, double speedRight)
 	{
 		// Check for being at limit:
-		if ((Robot.frontLegLimitSwitches.isAtExtendLimitLeft() && speedLeft > 0) ||
-			(Robot.frontLegLimitSwitches.isAtRetractLimitLeft() && speedLeft < 0))
+		if ((Robot.legLimitSwitches.isAtExtendLimitLeft() && speedLeft > 0) ||
+			(Robot.legLimitSwitches.isAtRetractLimitLeft() && speedLeft < 0))
 		{
 			speedLeft = 0;
 		}
 		motorLeft.set(speedLeft);
 
 		// Check for being at limit:
-		if ((Robot.frontLegLimitSwitches.isAtExtendLimitRight() && speedRight > 0) ||
-			(Robot.frontLegLimitSwitches.isAtRetractLimitRight() && speedRight < 0))
+		if ((Robot.legLimitSwitches.isAtExtendLimitRight() && speedRight > 0) ||
+			(Robot.legLimitSwitches.isAtRetractLimitRight() && speedRight < 0))
 		{
 			speedRight = 0;
 		}

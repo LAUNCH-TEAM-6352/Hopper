@@ -12,25 +12,27 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
 import frc.robot.RobotMap;
-import frc.robot.commands.ReportFrontLegLimitSwitches;
+import frc.robot.commands.ReportLegLimitSwitches;
 
 /**
  * Wraps up the front leg limit switches as a subsystem.
  */
-public class FrontLegLimitSwitches extends Subsystem
+public class LegLimitSwitches extends Subsystem
 {
 	private DigitalInput extendLimitLeft = new DigitalInput(RobotMap.frontLegLeftExtendLimitSwitchChannel);
 	private DigitalInput retractLimitLeft = new DigitalInput(RobotMap.frontLegLeftRetractLimitSwitchChannel);
 	private DigitalInput extendLimitRight = new DigitalInput(RobotMap.frontLegRightExtendLimitSwitchChannel);
 	private DigitalInput retractLimitRight = new DigitalInput(RobotMap.frontLegRightRetractLimitSwitchChannel);
+	private DigitalInput extendLimitRear = new DigitalInput(RobotMap.rearLegExtendLimitSwitchChannel);
+	private DigitalInput retractLimitRear = new DigitalInput(RobotMap.rearLegRetractLimitSwitchChannel);
 
-	public FrontLegLimitSwitches()
+	public LegLimitSwitches()
 	{
 	}
 	
 	public void initDefaultCommand()
 	{
-		setDefaultCommand(new ReportFrontLegLimitSwitches());
+		setDefaultCommand(new ReportLegLimitSwitches());
 	}
 	
 	/**
@@ -42,6 +44,8 @@ public class FrontLegLimitSwitches extends Subsystem
 		SmartDashboard.putBoolean(OI.dashboardRetractLimitLeft, !isAtRetractLimitLeft());
 		SmartDashboard.putBoolean(OI.dashboardExtendLimitRight, !isAtExtendLimitRight());
 		SmartDashboard.putBoolean(OI.dashboardRetractLimitRight, !isAtRetractLimitRight());
+		SmartDashboard.putBoolean(OI.dashboardExtendLimitRear, !isAtExtendLimitRear());
+		SmartDashboard.putBoolean(OI.dashboardRetractLimitRear, !isAtRetractLimitRear());
 	}
 	
 	/**
@@ -59,6 +63,7 @@ public class FrontLegLimitSwitches extends Subsystem
 	{
 		return !retractLimitLeft.get();
 	}
+	
 	/**
 	 * Returns an indication of if we are at the extend limit.
 	 */
@@ -73,5 +78,21 @@ public class FrontLegLimitSwitches extends Subsystem
 	public boolean isAtRetractLimitRight()
 	{
 		return !retractLimitRight.get();
+	}
+	
+	/**
+	 * Returns an indication of if we are at the extend limit.
+	 */
+	public boolean isAtExtendLimitRear()
+	{
+		return !extendLimitRear.get();
+	}
+	
+	/**
+	 * Returns an indication of if we are at the retract limit.
+	 */
+	public boolean isAtRetractLimitRear()
+	{
+		return !retractLimitRear.get();
 	}
 }

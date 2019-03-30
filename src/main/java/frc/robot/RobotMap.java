@@ -32,7 +32,7 @@ public class RobotMap
 	public static final boolean isUseUsbCameras = true;
 
 	// Indicatres if driving in Michael mode:
-	public static final boolean isMichaelMode = true;
+	public static final boolean isMichaelMode = false;
 
 	// Miscellaneous constants:
 	public static final int rearLegsMotorTachPulsesPerRevolution = 15;
@@ -51,15 +51,19 @@ public class RobotMap
 	public static final int frontLegRightExtendLimitSwitchChannel = 7;
 	public static final int frontLegRightRetractLimitSwitchChannel = 6;
 
-	public static final int rearLegsEncoderChannelA = 0; 
-	public static final int rearLegsEncoderChannelB = 1;
-	public static final int rearLegsEncoderChannelX = 2;
+	public static final int rearLegExtendLimitSwitchChannel = 0;
+	public static final int rearLegRetractLimitSwitchChannel = 1;
+
+	// The following are NOT used:
+	public static final int rearLegsEncoderChannelA = 90; 
+	public static final int rearLegsEncoderChannelB = 91;
+	public static final int rearLegsEncoderChannelX = 92;
 	public static final int rearLegsEncoderPulsesPerRev = 512;
 	public static final boolean rearLegsEncoderIsReversed = true;
 
-	public static final int rearLegsWinchMotorDioChannel = 3;
-	public static final int rearLegsWinchMotorTachDioChannel = 4;
-	public static final int rearLegsWinchMotorDirDioChannel = 5;
+	public static final int rearLegsWinchMotorDioChannel = 93;
+	public static final int rearLegsWinchMotorTachDioChannel = 94;
+	public static final int rearLegsWinchMotorDirDioChannel = 95;
 
 	// The following are PWM channels:
 	public static final int calibrationPwmChannel = 0;

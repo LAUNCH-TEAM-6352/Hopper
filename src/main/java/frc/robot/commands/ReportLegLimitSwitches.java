@@ -13,11 +13,11 @@ import frc.robot.Robot;
 /**
  * Reports the status of the front (peg) leg limit switches.
  */
-public class ReportFrontLegLimitSwitches extends Command
+public class ReportLegLimitSwitches extends Command
 {
-	public ReportFrontLegLimitSwitches()
+	public ReportLegLimitSwitches()
 	{
-		requires(Robot.frontLegLimitSwitches);
+		requires(Robot.legLimitSwitches);
 	}
 
 	// Called just before this Command runs the first time
@@ -30,7 +30,7 @@ public class ReportFrontLegLimitSwitches extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.frontLegLimitSwitches.report();
+		Robot.legLimitSwitches.report();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -17,9 +17,10 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.Accelerometer;
 import frc.robot.subsystems.CargoMover;
 import frc.robot.subsystems.FrontLegs;
-import frc.robot.subsystems.FrontLegLimitSwitches;
+import frc.robot.subsystems.LegLimitSwitches;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.MotorControllerCalibrator;
@@ -56,12 +57,13 @@ public class Robot extends TimedRobot
 	public static DriveTrain driveTrain = null;
 	public static Lift lift = null;
 	public static FrontLegs frontLegs = null;
-	public static FrontLegLimitSwitches frontLegLimitSwitches = null;
+	public static LegLimitSwitches legLimitSwitches = null;
 	public static RearLegs rearLegs = null;
 	public static RearLegsExternalEncoder rearLegsExternalEncoder = null;
 	public static RearLegsInternalEncoder rearLegsInternalEncoder = null;
 	public static CargoMover cargoMover = null;
 	public static MotorControllerCalibrator motorControllerCalibrator = null;
+	public static Accelerometer accelerometer = null;
 
 	// Static initialization
 	static
@@ -79,12 +81,13 @@ public class Robot extends TimedRobot
 			lift = new Lift();
 			driveTrain = new DriveTrain();
 			frontLegs = new FrontLegs();
-			frontLegLimitSwitches = new FrontLegLimitSwitches();
+			legLimitSwitches = new LegLimitSwitches();
 			cargoMover = new CargoMover();
 			rearLegs = new RearLegs();
-			rearLegsExternalEncoder = new RearLegsExternalEncoder();
-			rearLegsInternalEncoder = new RearLegsInternalEncoder();
+			//rearLegsExternalEncoder = new RearLegsExternalEncoder();
+			//rearLegsInternalEncoder = new RearLegsInternalEncoder();
 			motorControllerCalibrator = new MotorControllerCalibrator();
+			accelerometer = new Accelerometer();
 		}
 	}
 
