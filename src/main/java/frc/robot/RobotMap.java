@@ -31,9 +31,6 @@ public class RobotMap
 	// Indicates if we should support USB  cameras:
 	public static final boolean isUseUsbCameras = true;
 
-	// Indicatres if driving in Michael mode:
-	public static final boolean isMichaelMode = false;
-
 	// Miscellaneous constants:
 	public static final int rearLegsMotorTachPulsesPerRevolution = 15;
 

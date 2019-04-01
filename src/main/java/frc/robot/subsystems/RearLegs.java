@@ -9,8 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.NidecBrushless;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -48,7 +46,6 @@ public class RearLegs extends Subsystem
 	@Override
 	public void initDefaultCommand()
 	{
-		// Set the default command for a subsystem here.
 		setDefaultCommand(new RunRearLegs());
 	}
 
@@ -59,12 +56,22 @@ public class RearLegs extends Subsystem
 
 	public void setWinchSpeed(double speed)
 	{
+		// Assume we will be turning on rumble:
+		double rumblePower = 0;
+
 		// Check for being at limit:
-		if ((Robot.legLimitSwitches.isAtExtendLimitRear() && speed > 0) ||
-			(Robot.legLimitSwitches.isAtRetractLimitRear() && speed < 0))
+		if (speed > 0 && Robot.legLimitSwitches.isAtExtendLimitRear())
 		{
 			speed = 0;
+			rumblePower = SmartDashboard.getNumber(OI.dashboardRearLegsRumblePower, 0.0);
 		}
+		else if (speed < 0 && Robot.legLimitSwitches.isAtRetractLimitRear())
+		{
+			speed = 0;
+			rumblePower = SmartDashboard.getNumber(OI.dashboardRearLegsRumblePower, 0.0);
+		}
+
+		Robot.oi.gameController.setRumble(OI.rearLegsRumbleType, rumblePower);
 		winchMotor.set(speed);
 		SmartDashboard.putNumber(OI.dashbaordRearLegsWinchMotorSpeed, speed);
 	}

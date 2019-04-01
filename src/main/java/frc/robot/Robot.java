@@ -86,8 +86,8 @@ public class Robot extends TimedRobot
 			rearLegs = new RearLegs();
 			//rearLegsExternalEncoder = new RearLegsExternalEncoder();
 			//rearLegsInternalEncoder = new RearLegsInternalEncoder();
-			motorControllerCalibrator = new MotorControllerCalibrator();
-			accelerometer = new Accelerometer();
+			//motorControllerCalibrator = new MotorControllerCalibrator();
+			//accelerometer = new Accelerometer();
 		}
 	}
 
@@ -159,7 +159,7 @@ public class Robot extends TimedRobot
 	public void robotPeriodic()
 	{
 		pollDigitBoard();
-		pollLimelight();
+		//pollLimelight();
 	}
 
 	/**

@@ -9,14 +9,14 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.MoveCargo;
 import frc.robot.commands.MoveFrontLegs;
 import frc.robot.commands.MoveLift;
-import frc.robot.commands.ResetRearLegsExternalEncoder;
-import frc.robot.commands.ResetRearLegsInternalEncoder;
+import frc.robot.commands.MoveRearLegs;
 import frc.robot.commands.ToggleLimelight;
 
 /**
@@ -71,17 +71,19 @@ public class OI
 	public final static int gameControllerButtonStickLeft = 9;
 	public final static int gameControllerButtonStickRight = 10;
 
+	public static final RumbleType frontLegsRumbleType = RumbleType.kLeftRumble;
+	public static final RumbleType rearLegsRumbleType = RumbleType.kRightRumble;
+
 	private Button cargoInButton = new JoystickButton(gameController, gameControllerButtonX);
 	private Button cargoOutButton = new JoystickButton(gameController, gameControllerButtonB);
+
+	private Button toggleLimelightButton = new JoystickButton(gameController, gameControllerButtonA);
 
 	private Button liftUpButton = new JoystickButton(gameController, gameControllerButtonBumperLeft);
 	private Button liftDownButton = new JoystickButton(gameController, gameControllerButtonBumperRight);
 
 	private Button frontLegExtendButton = new JoystickButton(gameController, gameControllerButtonBack);
-	private Button frontLegRetractButton = new JoystickButton(gameController, gameControllerButtonStart);
-
-	private Button rearLegsCounterResetButton = new JoystickButton(gameController, gameControllerButtonStickRight);
-
+	private Button rearLegsExtendButton = new JoystickButton(gameController, gameControllerButtonStart);
 
 	// SmartDashboard keys:
 	public final static String dashboardCargoMoverInSpeed = "Cargo In Speed";
@@ -95,6 +97,9 @@ public class OI
 
 	public final static String dashboardRightLegRetractSpeed = "Right Leg Retract Speed";
 	public final static String dashboardRightLegExtendSpeed = "Right Leg Extend Speed";
+
+	public final static String dashboardRearLegsExtendSpeed = "Rear Legs Extend Speed";
+	public final static String dashboardRearLegsRetractSpeed = "Rear Legs Retract Speed";
 
 	public final static String dashboardExtendLimitLeft = "Extend Limit Left";
 	public final static String dashboardRetractLimitLeft = "Retract Limit Left";
@@ -121,6 +126,9 @@ public class OI
 	public static final String dashboardAccelerometerY = "Accel Y";
 	public static final String dashboardAccelerometerZ = "Accel Z";
 
+	public final static String dashboardFrontLegsRumblePower = "Front Legs Rumble Power";
+	public final static String dashboardRearLegsRumblePower = "Rear Legs Rumble Power";
+
 	// Constructor:
 	public OI()
 	{
@@ -132,9 +140,9 @@ public class OI
 		liftDownButton.whileHeld(new MoveLift(dasboardLiftDownSpeed));
 
 		frontLegExtendButton.whileHeld(new MoveFrontLegs(dashboardLeftLegExtendSpeed, dashboardRightLegExtendSpeed));
-		frontLegRetractButton.whileHeld(new MoveFrontLegs(dashboardRightLegRetractSpeed, dashboardRightLegRetractSpeed));
+		rearLegsExtendButton.whileHeld(new MoveRearLegs(dashboardRearLegsExtendSpeed));
 
-		rearLegsCounterResetButton.whenPressed(new ResetRearLegsInternalEncoder());
+		toggleLimelightButton.whenPressed(new ToggleLimelight());
 
 		// Put default values on SmartDashboard:
 		SmartDashboard.putNumber(dashboardCargoMoverInSpeed, 1.0);
@@ -143,16 +151,20 @@ public class OI
 		SmartDashboard.putNumber(dashboardLiftUpSpeed, 0.5);
 		SmartDashboard.putNumber(dasboardLiftDownSpeed, -0.5);
 
-		SmartDashboard.putNumber(dashboardLeftLegExtendSpeed, 0.5);
+		SmartDashboard.putNumber(dashboardLeftLegExtendSpeed, 0.6);
 		SmartDashboard.putNumber(dashboardLeftLegRetractSpeed, -1.0);
 
-		SmartDashboard.putNumber(dashboardRightLegExtendSpeed, 0.45);
+		SmartDashboard.putNumber(dashboardRightLegExtendSpeed, 0.54);
 		SmartDashboard.putNumber(dashboardRightLegRetractSpeed, -0.9);
 
-		SmartDashboard.putData(new ResetRearLegsInternalEncoder());
-		SmartDashboard.putData(new ResetRearLegsExternalEncoder());
+		SmartDashboard.putNumber(dashboardRearLegsExtendSpeed, 1.0);
+		SmartDashboard.putNumber(dashboardRearLegsRetractSpeed, -1.0);
+
 		SmartDashboard.putData("Toggle Limelight", new ToggleLimelight());
 
 		SmartDashboard.putNumber(dashboardUsbCameraFps, RobotMap.usbCameraFrameRate);
+
+		SmartDashboard.putNumber(dashboardFrontLegsRumblePower, 1.0);
+		SmartDashboard.putNumber(dashboardRearLegsRumblePower, 1.0);
 	}
 }

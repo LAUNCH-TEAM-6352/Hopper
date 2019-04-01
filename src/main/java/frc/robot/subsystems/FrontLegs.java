@@ -11,8 +11,10 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.commands.RetractFrontLegs;
 
 /**
  * Add your docs here.
@@ -41,27 +43,45 @@ public class FrontLegs extends Subsystem
 	@Override
 	public void initDefaultCommand()
 	{
-		// Set the default command for a subsystem here.
-		//setDefaultCommand(new RunFrontLegs());
+		setDefaultCommand(new RetractFrontLegs(OI.dashboardLeftLegRetractSpeed, OI.dashboardRightLegRetractSpeed));
 	}
 
 	public void setSpeed(double speedLeft, double speedRight)
 	{
-		// Check for being at limit:
-		if ((Robot.legLimitSwitches.isAtExtendLimitLeft() && speedLeft > 0) ||
-			(Robot.legLimitSwitches.isAtRetractLimitLeft() && speedLeft < 0))
+		// Assume we are going to rumble:
+		boolean isLeftAtLimit = false;
+		boolean isRightAtLimit = false;
+
+		// Handle left leg:
+		if (speedLeft > 0 && Robot.legLimitSwitches.isAtExtendLimitLeft())
 		{
 			speedLeft = 0;
+			isLeftAtLimit = true;
+		}
+		else if (speedLeft < 0 && Robot.legLimitSwitches.isAtRetractLimitLeft())
+		{
+			speedLeft = 0;
+			isLeftAtLimit = true;
 		}
 		motorLeft.set(speedLeft);
 
-		// Check for being at limit:
-		if ((Robot.legLimitSwitches.isAtExtendLimitRight() && speedRight > 0) ||
-			(Robot.legLimitSwitches.isAtRetractLimitRight() && speedRight < 0))
+		// Handle right leg:
+		if (speedRight > 0 && Robot.legLimitSwitches.isAtExtendLimitRight())
 		{
 			speedRight = 0;
+			isRightAtLimit = true;
+		}
+		else if (speedRight < 0 && Robot.legLimitSwitches.isAtRetractLimitRight())
+		{
+			speedRight = 0;
+			isRightAtLimit = true;
 		}
 		motorRight.set(speedRight);
+
+		double rumblePower = isLeftAtLimit && isRightAtLimit
+			? SmartDashboard.getNumber(OI.dashboardFrontLegsRumblePower, 0.0)
+			: 0;
+		Robot.oi.gameController.setRumble(OI.frontLegsRumbleType, rumblePower);
 
 		SmartDashboard.putNumber(" Left Leg Speed", speedLeft);
 		SmartDashboard.putNumber("Right Leg Speed", speedRight);

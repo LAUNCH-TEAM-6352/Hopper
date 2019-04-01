@@ -9,28 +9,42 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class RunLift extends Command
+public class RetractFrontLegs extends Command
 {
-	public RunLift()
+	private String speedKeyLeft;
+	private String speedKeyRight;
+
+	private double speedLeft;
+	private double speedRight;
+
+	public RetractFrontLegs(String speedKeyLeft, String speedKeyRight)
 	{
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(Robot.lift);
+		requires(Robot.frontLegs);
+		this.speedKeyLeft = speedKeyLeft;
+		this.speedKeyRight = speedKeyRight;
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize()
 	{
+		speedLeft = SmartDashboard.getNumber(speedKeyLeft, -1.0);
+		speedRight = SmartDashboard.getNumber(speedKeyRight, -1.0);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute()
 	{
-		Robot.lift.setSpeed(Robot.oi.gameController.getTriggerAxis(Hand.kLeft) - Robot.oi.gameController.getTriggerAxis(Hand.kRight));
+		double power = Robot.oi.gameController.getTriggerAxis(Hand.kLeft) > 0.2
+			? 1.0
+			: 0.0;
+		Robot.frontLegs.setSpeed(power * speedLeft, power * speedRight);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
