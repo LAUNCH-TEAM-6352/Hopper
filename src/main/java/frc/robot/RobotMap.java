@@ -48,8 +48,11 @@ public class RobotMap
 	public static final int frontLegRightExtendLimitSwitchChannel = 7;
 	public static final int frontLegRightRetractLimitSwitchChannel = 6;
 
-	public static final int rearLegExtendLimitSwitchChannel = 0;
-	public static final int rearLegRetractLimitSwitchChannel = 1;
+	public static final int rearLegsExtendLimitSwitchChannel = 0;
+	public static final int rearLegsRetractLimitSwitchChannel = 1;
+
+	public static final int liftExtendLimitSwitchChannel = 2;
+	public static final int liftRetractLimitSwitchChannel = 3;
 
 	// The following are NOT used:
 	public static final int rearLegsEncoderChannelA = 90; 

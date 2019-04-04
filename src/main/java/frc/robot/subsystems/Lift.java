@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.OI;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
@@ -45,6 +47,23 @@ public class Lift extends Subsystem
 
 	public void setSpeed(double speed)
 	{
+		// Assume we will be turning off rumble:
+		double rumblePower = 0;
+
+		// Check for being at limit:
+		if (speed > 0 && Robot.limitSwitches.isAtExtendLimitLift())
+		{
+			speed = 0;
+			rumblePower = SmartDashboard.getNumber(OI.dashboardLiftRumblePower, 0.0);
+		}
+		else if (speed < 0 && Robot.limitSwitches.isAtRetractLimitLift())
+		{
+			speed = 0;
+			rumblePower = SmartDashboard.getNumber(OI.dashboardLiftRumblePower, 0.0);
+		}
+
+		Robot.oi.gameController.setRumble(OI.liftRumbleType, rumblePower);
+	
 		motor.set(speed);
 		SmartDashboard.putNumber("Lift Speed", speed);
 	}

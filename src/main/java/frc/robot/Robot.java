@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Accelerometer;
 import frc.robot.subsystems.CargoMover;
 import frc.robot.subsystems.FrontLegs;
-import frc.robot.subsystems.LegLimitSwitches;
+import frc.robot.subsystems.LimitSwitches;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.MotorControllerCalibrator;
@@ -57,7 +57,7 @@ public class Robot extends TimedRobot
 	public static DriveTrain driveTrain = null;
 	public static Lift lift = null;
 	public static FrontLegs frontLegs = null;
-	public static LegLimitSwitches legLimitSwitches = null;
+	public static LimitSwitches limitSwitches = null;
 	public static RearLegs rearLegs = null;
 	public static RearLegsExternalEncoder rearLegsExternalEncoder = null;
 	public static RearLegsInternalEncoder rearLegsInternalEncoder = null;
@@ -81,7 +81,7 @@ public class Robot extends TimedRobot
 			lift = new Lift();
 			driveTrain = new DriveTrain();
 			frontLegs = new FrontLegs();
-			legLimitSwitches = new LegLimitSwitches();
+			limitSwitches = new LimitSwitches();
 			cargoMover = new CargoMover();
 			rearLegs = new RearLegs();
 			//rearLegsExternalEncoder = new RearLegsExternalEncoder();

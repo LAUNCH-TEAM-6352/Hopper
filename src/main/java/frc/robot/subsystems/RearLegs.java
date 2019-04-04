@@ -56,16 +56,16 @@ public class RearLegs extends Subsystem
 
 	public void setWinchSpeed(double speed)
 	{
-		// Assume we will be turning on rumble:
+		// Assume we will be turning off rumble:
 		double rumblePower = 0;
 
 		// Check for being at limit:
-		if (speed > 0 && Robot.legLimitSwitches.isAtExtendLimitRear())
+		if (speed > 0 && Robot.limitSwitches.isAtExtendLimitRearLegs())
 		{
 			speed = 0;
 			rumblePower = SmartDashboard.getNumber(OI.dashboardRearLegsRumblePower, 0.0);
 		}
-		else if (speed < 0 && Robot.legLimitSwitches.isAtRetractLimitRear())
+		else if (speed < 0 && Robot.limitSwitches.isAtRetractLimitRearLegs())
 		{
 			speed = 0;
 			rumblePower = SmartDashboard.getNumber(OI.dashboardRearLegsRumblePower, 0.0);

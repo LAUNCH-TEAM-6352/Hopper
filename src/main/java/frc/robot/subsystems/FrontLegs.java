@@ -53,12 +53,12 @@ public class FrontLegs extends Subsystem
 		boolean isRightAtLimit = false;
 
 		// Handle left leg:
-		if (speedLeft > 0 && Robot.legLimitSwitches.isAtExtendLimitLeft())
+		if (speedLeft > 0 && Robot.limitSwitches.isAtExtendLimitLeftLeg())
 		{
 			speedLeft = 0;
 			isLeftAtLimit = true;
 		}
-		else if (speedLeft < 0 && Robot.legLimitSwitches.isAtRetractLimitLeft())
+		else if (speedLeft < 0 && Robot.limitSwitches.isAtRetractLimitLeftLeg())
 		{
 			speedLeft = 0;
 			isLeftAtLimit = true;
@@ -66,12 +66,12 @@ public class FrontLegs extends Subsystem
 		motorLeft.set(speedLeft);
 
 		// Handle right leg:
-		if (speedRight > 0 && Robot.legLimitSwitches.isAtExtendLimitRight())
+		if (speedRight > 0 && Robot.limitSwitches.isAtExtendLimitRightLeg())
 		{
 			speedRight = 0;
 			isRightAtLimit = true;
 		}
-		else if (speedRight < 0 && Robot.legLimitSwitches.isAtRetractLimitRight())
+		else if (speedRight < 0 && Robot.limitSwitches.isAtRetractLimitRightLeg())
 		{
 			speedRight = 0;
 			isRightAtLimit = true;

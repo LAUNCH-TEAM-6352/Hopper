@@ -73,6 +73,7 @@ public class OI
 
 	public static final RumbleType frontLegsRumbleType = RumbleType.kLeftRumble;
 	public static final RumbleType rearLegsRumbleType = RumbleType.kRightRumble;
+	public static final RumbleType liftRumbleType = RumbleType.kLeftRumble;
 
 	private Button cargoInButton = new JoystickButton(gameController, gameControllerButtonX);
 	private Button cargoOutButton = new JoystickButton(gameController, gameControllerButtonB);
@@ -101,14 +102,17 @@ public class OI
 	public final static String dashboardRearLegsExtendSpeed = "Rear Legs Extend Speed";
 	public final static String dashboardRearLegsRetractSpeed = "Rear Legs Retract Speed";
 
-	public final static String dashboardExtendLimitLeft = "Extend Limit Left";
-	public final static String dashboardRetractLimitLeft = "Retract Limit Left";
+	public final static String dashboardExtendLimitLeftLeg = "Ext Limit L Leg";
+	public final static String dashboardRetractLimitLeftLeg = "Ret Limit L Leg"; 
 
-	public final static String dashboardExtendLimitRight = "Extend Limit Right";
-	public final static String dashboardRetractLimitRight = "Retract Limit Right";
+	public final static String dashboardExtendLimitRightLeg = "Ext Limit R Leg";
+	public final static String dashboardRetractLimitRightLeg = "Ret Limit R Leg";
 
-	public final static String dashboardExtendLimitRear = "Extend Limit Rear";
-	public final static String dashboardRetractLimitRear = "Retract Limit Rear";
+	public final static String dashboardExtendLimitRearLegs = "Ext Limit Rear Legs";
+	public final static String dashboardRetractLimitRearLegs = "Ret Limit Rear Legs";
+
+	public final static String dashboardExtendLimitLift = "Ext Limit Lift";
+	public final static String dashboardRetractLimitLift = "Ret Limit Lift";
 
 	public final static String dashboardUsbCameraFps = "USB Camera FPS";
 
@@ -128,6 +132,7 @@ public class OI
 
 	public final static String dashboardFrontLegsRumblePower = "Front Legs Rumble Power";
 	public final static String dashboardRearLegsRumblePower = "Rear Legs Rumble Power";
+	public final static String dashboardLiftRumblePower = "Lift Rumble Power";
 
 	// Constructor:
 	public OI()
@@ -166,5 +171,6 @@ public class OI
 
 		SmartDashboard.putNumber(dashboardFrontLegsRumblePower, 1.0);
 		SmartDashboard.putNumber(dashboardRearLegsRumblePower, 1.0);
+		SmartDashboard.putNumber(dashboardLiftRumblePower, 1.0);
 	}
 }
