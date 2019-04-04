@@ -15,7 +15,7 @@ import frc.robot.RobotMap;
 import frc.robot.commands.ReportLimitSwitches;
 
 /**
- * Wraps up the front leg limit switches as a subsystem.
+ * Wraps up all limit switches as a subsystem.
  */
 public class LimitSwitches extends Subsystem
 {
