@@ -153,8 +153,8 @@ public class OI
 		SmartDashboard.putNumber(dashboardCargoMoverInSpeed, 1.0);
 		SmartDashboard.putNumber(dashboardCargoMoverOutSpeed, -0.5);
 
-		SmartDashboard.putNumber(dashboardLiftUpSpeed, 0.5);
-		SmartDashboard.putNumber(dasboardLiftDownSpeed, -0.5);
+		SmartDashboard.putNumber(dashboardLiftUpSpeed, 1.0);
+		SmartDashboard.putNumber(dasboardLiftDownSpeed, -1.0);
 
 		SmartDashboard.putNumber(dashboardLeftLegExtendSpeed, 1.0);
 		SmartDashboard.putNumber(dashboardLeftLegRetractSpeed, -1.0);
