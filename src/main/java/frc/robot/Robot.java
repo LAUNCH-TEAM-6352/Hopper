@@ -72,9 +72,10 @@ public class Robot extends TimedRobot
 		{
 			lift = new Lift();
 			cargoMover = new CargoMover();
-			//frontLegs = new FrontLegs();
-			//rearLegs = new RearLegs();
 			driveTrain = new DriveTrain();
+			frontLegs = new FrontLegs();
+			rearLegs = new RearLegs();
+			limitSwitches = new LimitSwitches();
 		}
 		else
 		{

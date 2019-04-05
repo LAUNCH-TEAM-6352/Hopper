@@ -29,7 +29,7 @@ public class RobotMap
 	public static final boolean isCompetitionRobot = true;
 
 	// Indicates if we should support USB  cameras:
-	public static final boolean isUseUsbCameras = true;
+	public static final boolean isUseUsbCameras = false;
 
 	// Miscellaneous constants:
 	public static final int rearLegsMotorTachPulsesPerRevolution = 15;
