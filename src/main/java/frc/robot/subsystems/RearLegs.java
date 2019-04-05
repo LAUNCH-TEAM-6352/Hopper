@@ -38,7 +38,7 @@ public class RearLegs extends Subsystem
 			: new Victor(RobotMap.rearLegsDriveMotorPwmChannel);
 
 		winchMotor.setInverted(true);
-		driveMotor.setInverted(true);
+		driveMotor.setInverted(!RobotMap.isCompetitionRobot);
 	}
 
 	// Put methods for controlling this subsystem

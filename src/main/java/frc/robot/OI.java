@@ -156,13 +156,13 @@ public class OI
 		SmartDashboard.putNumber(dashboardLiftUpSpeed, 0.5);
 		SmartDashboard.putNumber(dasboardLiftDownSpeed, -0.5);
 
-		SmartDashboard.putNumber(dashboardLeftLegExtendSpeed, 0.6);
+		SmartDashboard.putNumber(dashboardLeftLegExtendSpeed, 1.0);
 		SmartDashboard.putNumber(dashboardLeftLegRetractSpeed, -1.0);
 
-		SmartDashboard.putNumber(dashboardRightLegExtendSpeed, 0.54);
+		SmartDashboard.putNumber(dashboardRightLegExtendSpeed, 0.9);
 		SmartDashboard.putNumber(dashboardRightLegRetractSpeed, -0.9);
 
-		SmartDashboard.putNumber(dashboardRearLegsExtendSpeed, 1.0);
+		SmartDashboard.putNumber(dashboardRearLegsExtendSpeed, 0.55);
 		SmartDashboard.putNumber(dashboardRearLegsRetractSpeed, -1.0);
 
 		SmartDashboard.putData("Toggle Limelight", new ToggleLimelight());
