@@ -7,6 +7,9 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.WPI_MotorSafetyImplem;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -33,6 +36,10 @@ public class FrontLegs extends Subsystem
 	public FrontLegs()
 	{
 		if (!RobotMap.isCompetitionRobot)
+		{
+			motorLeft = new WPI_TalonSRX(RobotMap.leftLegMotorCanDeviceId);
+			motorRight = new WPI_TalonSRX(RobotMap.rightLegMotorCanDeviceId);
+		}
 		{
 			motorLeft = new Spark(RobotMap.frontLegLeftMotorPwmChannel);
 			motorRight = new Spark(RobotMap.frontLegRightMotorPwmChannel);

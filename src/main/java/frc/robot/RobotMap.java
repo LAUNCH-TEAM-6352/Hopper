@@ -26,7 +26,7 @@ public class RobotMap
 	// public static int rangefinderModule = 1;
 
 	// The following indicates if we are running the competition robot:
-	public static final boolean isCompetitionRobot = false;
+	public static final boolean isCompetitionRobot = true;
 
 	// Indicates if we should support USB  cameras:
 	public static final boolean isUseUsbCameras = true;
@@ -48,8 +48,8 @@ public class RobotMap
 	public static final int frontLegRightExtendLimitSwitchChannel = 7;
 	public static final int frontLegRightRetractLimitSwitchChannel = 6;
 
-	public static final int rearLegsExtendLimitSwitchChannel = 0;
-	public static final int rearLegsRetractLimitSwitchChannel = 1;
+	public static final int rearLegsExtendLimitSwitchChannel = 4;
+	public static final int rearLegsRetractLimitSwitchChannel = 5;
 
 	public static final int liftExtendLimitSwitchChannel = 2;
 	public static final int liftRetractLimitSwitchChannel = 3;
@@ -79,8 +79,10 @@ public class RobotMap
 	// The following are CAN channels:
 	public static final int leftDriveMotorCanDeviceId = 1;
 	public static final int rightDriveMotorCanDeviceId = 2;
-	public static final int frontLegMotorCanDeviceId = 4;
-	public static final int rearLegsWinchMotorCanDeviceId = 3;
+	public static final int leftLegMotorCanDeviceId = 4;
+	public static final int rightLegMotorCanDeviceId = 3;
+	public static final int rearLegsLiftMotorCanDeviceId = 7;
+	public static final int rearLegsDriveMotorCanDeviceId = 8;
 	public static final int liftMotorCanDeviceId = 5;
 	public static final int cargoMotorCanDeviceId = 6;
 
