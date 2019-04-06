@@ -135,6 +135,10 @@ public class Robot extends TimedRobot
 		limelightCamModeEntry = limelightTable.getEntry(RobotMap.limelightCamModeKey);
 		limelightLedModeEntry = limelightTable.getEntry(RobotMap.limelightLedModeKey);
 
+		Robot.limelightCamModeEntry.setNumber(1);
+		Robot.limelightLedModeEntry.setNumber(1);
+
+
 		if (RobotMap.isUseUsbCameras)
 		{
 			// Set up USB cameras.

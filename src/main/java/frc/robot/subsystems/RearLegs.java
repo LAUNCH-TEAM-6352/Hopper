@@ -37,7 +37,7 @@ public class RearLegs extends Subsystem
 			? new WPI_VictorSPX(RobotMap.rearLegsDriveMotorCanDeviceId)
 			: new Victor(RobotMap.rearLegsDriveMotorPwmChannel);
 
-		winchMotor.setInverted(true);
+		winchMotor.setInverted(false);
 		driveMotor.setInverted(!RobotMap.isCompetitionRobot);
 	}
 
