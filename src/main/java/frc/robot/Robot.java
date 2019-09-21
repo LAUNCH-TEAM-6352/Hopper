@@ -48,6 +48,7 @@ public class Robot extends TimedRobot
 	public static NetworkTableEntry limelightAreaEntry;
 	public static NetworkTableEntry limelightCamModeEntry;
 	public static NetworkTableEntry limelightLedModeEntry;
+	public static NetworkTableEntry limelightTargetAcquired;
 
 	public static double limelightXPosition;
 	public static double limelightYPosition;
@@ -68,6 +69,7 @@ public class Robot extends TimedRobot
 	// Static initialization
 	static
 	{
+		/***
 		if (RobotMap.isCompetitionRobot)
 		{
 			lift = new Lift();
@@ -90,6 +92,7 @@ public class Robot extends TimedRobot
 			//motorControllerCalibrator = new MotorControllerCalibrator();
 			//accelerometer = new Accelerometer();
 		}
+		***/
 	}
 
 
@@ -129,6 +132,7 @@ public class Robot extends TimedRobot
 
 		// Set up Limelight network table access:
 		limelightTable = NetworkTableInstance.getDefault().getTable(RobotMap.limelightTableKey);
+		limelightTargetAcquired = limelightTable.getEntry(RobotMap.limelightTargetAcquiredKey);
 		limelightXPositionEntry = limelightTable.getEntry(RobotMap.limelightXPositionKey);
 		limelightYPositionEntry = limelightTable.getEntry(RobotMap.limelightYPositionKey);
 		limelightAreaEntry = limelightTable.getEntry(RobotMap.limelightAreaKey);

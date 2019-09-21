@@ -138,6 +138,7 @@ public class OI
 	public OI()
 	{
 		// Bind buttons to commands:
+		/***
 		cargoInButton.whileHeld(new MoveCargo(dashboardCargoMoverInSpeed));
 		cargoOutButton.whileHeld(new MoveCargo(dashboardCargoMoverOutSpeed));
 
@@ -146,6 +147,7 @@ public class OI
 
 		frontLegExtendButton.whileHeld(new MoveFrontLegs(dashboardLeftLegExtendSpeed, dashboardRightLegExtendSpeed));
 		rearLegsExtendButton.whileHeld(new MoveRearLegs(dashboardRearLegsExtendSpeed));
+		***/
 
 		toggleLimelightButton.whenPressed(new ToggleLimelight());
 

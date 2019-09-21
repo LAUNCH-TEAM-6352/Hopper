@@ -35,7 +35,8 @@ public class RobotMap
 	public static final int rearLegsMotorTachPulsesPerRevolution = 15;
 
 	// The following deal with the Limelight vision processing camera:
-	public static final String limelightTableKey = "limelight";
+	public static final String limelightTableKey = "limelight-jrk";
+	public static final String limelightTargetAcquiredKey = "tv";
 	public static final String limelightXPositionKey = "tx";
 	public static final String limelightYPositionKey = "ty";
 	public static final String limelightAreaKey = "ta";
