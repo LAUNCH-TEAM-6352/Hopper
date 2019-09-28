@@ -22,9 +22,9 @@ public class ToggleLimelight extends Command
 	@Override
 	protected void initialize()
 	{
-		double newValue = 1.0 - Robot.limelightCamModeEntry.getDouble(0.0);
-		Robot.limelightCamModeEntry.setNumber(newValue);
-		Robot.limelightLedModeEntry.setNumber(newValue);
+		double newValue = 1.0 - Robot.limelightRawCamModeEntry.getDouble(0.0);
+		Robot.limelightRawCamModeEntry.setNumber(newValue);
+		Robot.limelightRawLedModeEntry.setNumber(newValue);
 	}
 
 	// Called repeatedly when this Command is scheduled to run

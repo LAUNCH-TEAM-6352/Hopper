@@ -35,13 +35,20 @@ public class RobotMap
 	public static final int rearLegsMotorTachPulsesPerRevolution = 15;
 
 	// The following deal with the Limelight vision processing camera:
-	public static final String limelightTableKey = "limelight-jrk";
+	public static final String limelightRawTableKey = "limelight-raw";
+	public static final String limelightCookedTableKey = "limelight-cooked";
 	public static final String limelightTargetAcquiredKey = "tv";
 	public static final String limelightXPositionKey = "tx";
 	public static final String limelightYPositionKey = "ty";
 	public static final String limelightAreaKey = "ta";
 	public static final String limelightCamModeKey = "camMode";
 	public static final String limelightLedModeKey = "ledMode";
+
+	public static final int limelightSampleCount = 100;
+
+	// The following deal with the Diagnostics network table:
+	public static final String diagnosticsTableKey = "diagnostics";
+	public static final String diagnosticsPeriodKey = "period";
 
 	// The following define Digital IO channels:
 	public static final int frontLegLeftExtendLimitSwitchChannel = 9;

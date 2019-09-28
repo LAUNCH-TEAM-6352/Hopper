@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.UsbCameraInfo;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -26,6 +29,7 @@ import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.MotorControllerCalibrator;
 import frc.robot.subsystems.RearLegsExternalEncoder;
 import frc.robot.subsystems.RearLegsInternalEncoder;
+import frc.robot.util.Rolling;
 import frc.robot.subsystems.RearLegs;
 
 /**
@@ -42,17 +46,28 @@ public class Robot extends TimedRobot
 	private UsbCamera usbCameras[];
 
 	// The following deal with the Limelight vision processing camera:
-	public static NetworkTable limelightTable;
-	public static NetworkTableEntry limelightXPositionEntry;
-	public static NetworkTableEntry limelightYPositionEntry;
-	public static NetworkTableEntry limelightAreaEntry;
-	public static NetworkTableEntry limelightCamModeEntry;
-	public static NetworkTableEntry limelightLedModeEntry;
-	public static NetworkTableEntry limelightTargetAcquired;
+	private static NetworkTable limelightRawTable;
+	private static NetworkTableEntry limelightRawXPositionEntry;
+	private static NetworkTableEntry limelightRawYPositionEntry;
+	private static NetworkTableEntry limelightRawAreaEntry;
+	public static NetworkTableEntry limelightRawCamModeEntry;
+	public static NetworkTableEntry limelightRawLedModeEntry;
+	private static NetworkTableEntry limelightRawTargetAcquiredEntry;
 
-	public static double limelightXPosition;
-	public static double limelightYPosition;
-	public static double limelightArea;
+	public static NetworkTable limelightCookedTable;
+	public static NetworkTableEntry limelightCookedXPositionEntry;
+	public static NetworkTableEntry limelightCookedYPositionEntry;
+	public static NetworkTableEntry limelightCookedAreaEntry;
+	public static NetworkTableEntry limelightCookedTargetAcquiredEntry;
+
+	private static Rolling limelightXPositions = new Rolling(RobotMap.limelightSampleCount);
+	private static Rolling limelightYPositions = new Rolling(RobotMap.limelightSampleCount);
+	private static Rolling limelightAreas = new Rolling(RobotMap.limelightSampleCount);
+	private static Rolling limelightTargetAcquireds = new Rolling(RobotMap.limelightSampleCount);
+
+	// Some generic diagnostic informartion:
+	public static NetworkTable diagnosticsTable;
+	public static NetworkTableEntry diagnosticsPeriodEntry;
 
 	// Define some subsystems:
 	public static DriveTrain driveTrain = null;
@@ -131,16 +146,27 @@ public class Robot extends TimedRobot
 		digitBoard = new REVDigitBoard();
 
 		// Set up Limelight network table access:
-		limelightTable = NetworkTableInstance.getDefault().getTable(RobotMap.limelightTableKey);
-		limelightTargetAcquired = limelightTable.getEntry(RobotMap.limelightTargetAcquiredKey);
-		limelightXPositionEntry = limelightTable.getEntry(RobotMap.limelightXPositionKey);
-		limelightYPositionEntry = limelightTable.getEntry(RobotMap.limelightYPositionKey);
-		limelightAreaEntry = limelightTable.getEntry(RobotMap.limelightAreaKey);
-		limelightCamModeEntry = limelightTable.getEntry(RobotMap.limelightCamModeKey);
-		limelightLedModeEntry = limelightTable.getEntry(RobotMap.limelightLedModeKey);
+		limelightRawTable = NetworkTableInstance.getDefault().getTable(RobotMap.limelightRawTableKey);
+		limelightRawTargetAcquiredEntry = limelightRawTable.getEntry(RobotMap.limelightTargetAcquiredKey);
+		limelightRawXPositionEntry = limelightRawTable.getEntry(RobotMap.limelightXPositionKey);
+		limelightRawYPositionEntry = limelightRawTable.getEntry(RobotMap.limelightYPositionKey);
+		limelightRawAreaEntry = limelightRawTable.getEntry(RobotMap.limelightAreaKey);
+		limelightRawCamModeEntry = limelightRawTable.getEntry(RobotMap.limelightCamModeKey);
+		limelightRawLedModeEntry = limelightRawTable.getEntry(RobotMap.limelightLedModeKey);
 
-		Robot.limelightCamModeEntry.setNumber(1);
-		Robot.limelightLedModeEntry.setNumber(1);
+		limelightCookedTable = NetworkTableInstance.getDefault().getTable(RobotMap.limelightCookedTableKey);
+		limelightCookedTargetAcquiredEntry = limelightCookedTable.getEntry(RobotMap.limelightTargetAcquiredKey);
+		limelightCookedXPositionEntry = limelightCookedTable.getEntry(RobotMap.limelightXPositionKey);
+		limelightCookedYPositionEntry = limelightCookedTable.getEntry(RobotMap.limelightYPositionKey);
+		limelightCookedAreaEntry = limelightCookedTable.getEntry(RobotMap.limelightAreaKey);
+
+		// Set up Diagnostic network table:
+		diagnosticsTable = NetworkTableInstance.getDefault().getTable(RobotMap.diagnosticsTableKey);
+		diagnosticsPeriodEntry = diagnosticsTable.getEntry(RobotMap.diagnosticsPeriodKey);
+		diagnosticsPeriodEntry.setDouble(getPeriod());
+
+		Robot.limelightRawCamModeEntry.setNumber(1);
+		Robot.limelightRawLedModeEntry.setNumber(1);
 
 
 		if (RobotMap.isUseUsbCameras)
@@ -168,7 +194,7 @@ public class Robot extends TimedRobot
 	public void robotPeriodic()
 	{
 		pollDigitBoard();
-		//pollLimelight();
+		pollLimelight();
 	}
 
 	/**
@@ -316,15 +342,17 @@ public class Robot extends TimedRobot
 	 */
 	private void pollLimelight()
 	{
-		// read values periodically
-		limelightXPosition = limelightXPositionEntry.getDouble(0.0);
-		limelightYPosition = limelightYPositionEntry.getDouble(0.0);
-		limelightArea = limelightAreaEntry.getDouble(0.0);
+		// Get latest raw samples from the limelight camera:
+		limelightTargetAcquireds.add(limelightRawTargetAcquiredEntry.getDouble(0.0));
+		limelightAreas.add(limelightRawAreaEntry.getDouble(0.0));
+		limelightXPositions.add(limelightRawXPositionEntry.getDouble(0.0));
+		limelightYPositions.add(limelightRawYPositionEntry.getDouble(0.0));
 
-		// post to smart dashboard periodically
-		SmartDashboard.putNumber("LimelightX", limelightXPosition);
-		SmartDashboard.putNumber("LimelightY", limelightYPosition);
-		SmartDashboard.putNumber("LimelightArea", limelightArea);
+		// Set latest cooked values:
+		limelightCookedTargetAcquiredEntry.setDouble(limelightTargetAcquireds.getAverage());
+		limelightCookedAreaEntry.setDouble(limelightAreas.getAverage());
+		limelightCookedXPositionEntry.setDouble(limelightXPositions.getAverage());
+		limelightCookedYPositionEntry.setDouble(limelightYPositions.getAverage());
 	}
 	
 	/**
