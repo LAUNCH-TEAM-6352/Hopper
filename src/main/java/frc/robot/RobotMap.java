@@ -92,7 +92,7 @@ public class RobotMap
 	public static final int rearLegsLiftMotorCanDeviceId = 7;
 	public static final int rearLegsDriveMotorCanDeviceId = 8;
 	public static final int liftMotorCanDeviceId = 5;
-	public static final int cargoMotorCanDeviceId = 6;
+	public static final int cargoMotorCanDeviceId = 0;
 
 	// The following are for configuring the USB cameras.
 	// Network bandwidth from the robot to the driver station is limited by the FMS.

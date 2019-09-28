@@ -17,6 +17,7 @@ import frc.robot.commands.MoveCargo;
 import frc.robot.commands.MoveFrontLegs;
 import frc.robot.commands.MoveLift;
 import frc.robot.commands.MoveRearLegs;
+import frc.robot.commands.ResetSeatMotorCounter;
 import frc.robot.commands.ToggleLimelight;
 
 /**
@@ -174,5 +175,7 @@ public class OI
 		SmartDashboard.putNumber(dashboardFrontLegsRumblePower, 1.0);
 		SmartDashboard.putNumber(dashboardRearLegsRumblePower, 1.0);
 		SmartDashboard.putNumber(dashboardLiftRumblePower, 1.0);
+
+		SmartDashboard.putData("Reset Seat Motor", new ResetSeatMotorCounter());
 	}
 }

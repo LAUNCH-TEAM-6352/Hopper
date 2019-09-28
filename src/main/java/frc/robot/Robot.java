@@ -16,6 +16,9 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogTrigger;
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -81,14 +84,20 @@ public class Robot extends TimedRobot
 	public static MotorControllerCalibrator motorControllerCalibrator = null;
 	public static Accelerometer accelerometer = null;
 
+	private static AnalogInput seatMotorEncoder = null;
+	private static AnalogTrigger seatMotorTrigger = null;
+	public static Counter seatMotorCounter = null;
+
 	// Static initialization
 	static
 	{
+		cargoMover = new CargoMover();
+
+
 		/***
 		if (RobotMap.isCompetitionRobot)
 		{
 			lift = new Lift();
-			cargoMover = new CargoMover();
 			driveTrain = new DriveTrain();
 			frontLegs = new FrontLegs();
 			rearLegs = new RearLegs();
@@ -177,6 +186,11 @@ public class Robot extends TimedRobot
 			initializeUsbCameras();
 		}
 
+		seatMotorEncoder = new AnalogInput(3);
+		seatMotorTrigger = new AnalogTrigger(seatMotorEncoder);
+		seatMotorTrigger.setLimitsVoltage(3.0, 3.8);
+		seatMotorCounter = new Counter(seatMotorTrigger);
+
 		// chooser.addOption("My Auto", new MyAutoCommand());
 		// SmartDashboard.putData("Auto mode", m_chooser);
 	}
@@ -195,6 +209,8 @@ public class Robot extends TimedRobot
 	{
 		pollDigitBoard();
 		pollLimelight();
+		SmartDashboard.putNumber("Seat Motor", seatMotorEncoder.getVoltage());
+		SmartDashboard.putNumber("Seat Motor Counter", seatMotorCounter.get());
 	}
 
 	/**
