@@ -27,6 +27,7 @@ public class LimitSwitches extends Subsystem
 	private DigitalInput retractLimitRearLegs = new DigitalInput(RobotMap.rearLegsRetractLimitSwitchChannel);
 	private DigitalInput extendLimitLift = new DigitalInput(RobotMap.liftExtendLimitSwitchChannel);
 	private DigitalInput retractLimitLift = new DigitalInput(RobotMap.liftRetractLimitSwitchChannel);
+	private DigitalInput downLimit4BarLinkage = new DigitalInput(RobotMap.fourBarLinkageDownLimitSwitchChannel);
 
 	public LimitSwitches()
 	{
@@ -50,6 +51,7 @@ public class LimitSwitches extends Subsystem
 		SmartDashboard.putBoolean(OI.dashboardRetractLimitRearLegs, !isAtRetractLimitRearLegs());
 		SmartDashboard.putBoolean(OI.dashboardExtendLimitLift, !isAtExtendLimitLift());
 		SmartDashboard.putBoolean(OI.dashboardRetractLimitLift, !isAtRetractLimitLift());
+		SmartDashboard.putBoolean(OI.dashboardDownLimit4BarLinkage, !isAtDownLimit4BarLinkage());
 	}
 	
 	/**
@@ -114,5 +116,13 @@ public class LimitSwitches extends Subsystem
 	public boolean isAtRetractLimitLift()
 	{
 		return !retractLimitLift.get();
+	}
+	
+	/**
+	 * Returns an indication of if we are at the down limit.
+	 */
+	public boolean isAtDownLimit4BarLinkage()
+	{
+		return !downLimit4BarLinkage.get();
 	}
 }

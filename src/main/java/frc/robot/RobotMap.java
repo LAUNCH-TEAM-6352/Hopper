@@ -62,6 +62,8 @@ public class RobotMap
 	public static final int liftExtendLimitSwitchChannel = 2;
 	public static final int liftRetractLimitSwitchChannel = 3;
 
+	public static final int fourBarLinkageDownLimitSwitchChannel = 1;
+
 	// The following are for quadrature encoders:
 	public static final int liftEncoderChannelA = 21; 
 	public static final int liftEncoderChannelB = 22;
@@ -73,17 +75,6 @@ public class RobotMap
 	public static final int fourBarLinkageEncoderPulsesPerRev = 1024;
 	public static final boolean fourBarLinkageEncoderIsReversed = true;
 
-	// The following are PWM channels:
-	public static final int calibrationPwmChannel = 0;
-	public static final int leftDriveMotorPwmChannel = 2;
-	public static final int rightDriveMotorPwmChannel = 3;
-	public static final int frontLegLeftMotorPwmChannel = 6;
-	public static final int frontLegRightMotorPwmChannel = 9;
-	public static final int rearLegsWinchMotorPwmChannel = 8;
-	public static final int liftMotorPwmChannel = 7;
-	public static final int cargoMotorPwmChannel = 5;
-	public static final int rearLegsDriveMotorPwmChannel = 4;
-	
 	// The following are CAN channels:
 	public static final int leftDriveMotor1CanDeviceId = 1;
 	public static final int rightDriveMotor1CanDeviceId = 2;
