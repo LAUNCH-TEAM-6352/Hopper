@@ -48,7 +48,8 @@ public class Lift extends Subsystem
 		double rumblePower = 0;
 
 		// Check for being at limit:
-		if (speed > 0 && Robot.limitSwitches.isAtExtendLimitLift())
+		if (speed > 0 &&
+			(Robot.limitSwitches.isAtExtendLimitLift() || Robot.liftEncoder.getDistance() > RobotMap.liftExtendLimitDistance))
 		{
 			speed = 0;
 			rumblePower = SmartDashboard.getNumber(OI.dashboardLiftRumblePower, 0.0);
@@ -56,6 +57,7 @@ public class Lift extends Subsystem
 		else if (speed < 0 && Robot.limitSwitches.isAtRetractLimitLift())
 		{
 			speed = 0;
+			Robot.liftEncoder.reset();
 			rumblePower = SmartDashboard.getNumber(OI.dashboardLiftRumblePower, 0.0);
 		}
 
