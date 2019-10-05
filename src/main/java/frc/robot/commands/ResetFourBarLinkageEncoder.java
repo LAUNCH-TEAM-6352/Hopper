@@ -10,8 +10,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ResetRearLegsExternalEncoder extends Command
+public class ResetFourBarLinkageEncoder extends Command
 {
+	public ResetFourBarLinkageEncoder()
+	{
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+	}
+
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize()
@@ -22,7 +28,7 @@ public class ResetRearLegsExternalEncoder extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.rearLegsExternalEncoder.reset();
+		Robot.fourBarLinkageEncoder.reset();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -43,7 +49,5 @@ public class ResetRearLegsExternalEncoder extends Command
 	@Override
 	protected void interrupted()
 	{
-		end();
 	}
-
 }

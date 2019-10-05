@@ -7,31 +7,47 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.OI;
-import frc.robot.commands.AccelerometerReporter;
+
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
-public class Accelerometer extends Subsystem
+public class FourBarLinkage extends Subsystem
 {
-	private BuiltInAccelerometer accelerometer = new BuiltInAccelerometer();
+	private SpeedController motor;
 
+	public FourBarLinkage()
+	{
+		motor = new WPI_VictorSPX(RobotMap.fourBarLinkageMotorCanDeviceId);
+	}
+
+	// Put methods for controlling this subsystem
+	// here. Call these from Commands.
 
 	@Override
 	public void initDefaultCommand()
 	{
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new AccelerometerReporter());
+		//setDefaultCommand(new MySpecialCommand());
 	}
 
-	public void report()
+	public void stop()
 	{
-		SmartDashboard.putNumber(OI.dashboardAccelerometerX, accelerometer.getX());
-		SmartDashboard.putNumber(OI.dashboardAccelerometerY, accelerometer.getY());
-		SmartDashboard.putNumber(OI.dashboardAccelerometerZ, accelerometer.getZ());
+		setSpeed(0);
+	}
+
+	public void move(double speed)
+	{
+		setSpeed(speed);
+	}
+
+	public void setSpeed(double speed)
+	{
+		motor.set(speed);
 	}
 }

@@ -10,28 +10,26 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.OI;
 import frc.robot.RobotMap;
-import frc.robot.commands.ReportRearLegsExternalEncoder;
+import frc.robot.commands.ReportFourBarLinkageEncoder;
 
 /**
- * Wraps up the rear legs lift encoders as a subsystem.
- * This talks to an external encoder.
+ * An encoder for the lift.
  */
-public class RearLegsExternalEncoder extends Subsystem
+public class FourBarLinkageEncoder extends Subsystem
 {
 	private Encoder encoder;
 
-	public RearLegsExternalEncoder()
+	public FourBarLinkageEncoder()
 	{
 		// Create the encoder:
 		encoder = new Encoder(
-				RobotMap.rearLegsEncoderChannelA,
-				RobotMap.rearLegsEncoderChannelB,
-				RobotMap.rearLegsEncoderIsReversed);
+				RobotMap.fourBarLinkageEncoderChannelA,
+				RobotMap.fourBarLinkageEncoderChannelB,
+				RobotMap.fourBarLinkageEncoderIsReversed);
 		
 		// This sets each unit of distance to one revolution:
-		encoder.setDistancePerPulse(1.0 / RobotMap.rearLegsEncoderPulsesPerRev);
+		encoder.setDistancePerPulse(1.0 / RobotMap.fourBarLinkageEncoderPulsesPerRev);
 		
 		// Reset the encoder:
 		reset();
@@ -39,7 +37,7 @@ public class RearLegsExternalEncoder extends Subsystem
 	
 	public void initDefaultCommand()
 	{
-		setDefaultCommand(new ReportRearLegsExternalEncoder());
+		setDefaultCommand(new ReportFourBarLinkageEncoder());
 	}
 	
 	/**
@@ -47,9 +45,10 @@ public class RearLegsExternalEncoder extends Subsystem
 	 */
 	public void report()
 	{
-		SmartDashboard.putNumber(OI.dashboardRearLegsExtScale, encoder.getEncodingScale());
-		SmartDashboard.putNumber(OI.dashboardRearLegsExtCount, get());
-		SmartDashboard.putNumber(OI.dashboardRearLegsExtDistance, getDistance());
+		SmartDashboard.putNumber("4-bar scale:", encoder.getEncodingScale());
+		SmartDashboard.putNumber("4-bar count:", get());
+		SmartDashboard.putNumber(" 4-bar dist:", getDistance());
+
 	}
 	
 	/**
@@ -76,5 +75,4 @@ public class RearLegsExternalEncoder extends Subsystem
 		encoder.reset();
 		report();
 	}
-	
 }

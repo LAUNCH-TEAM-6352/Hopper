@@ -8,39 +8,59 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class AccelerometerReporter extends Command
+public class MoveFourBarLinkage extends Command
 {
-	public AccelerometerReporter()
+	private String speedKey;
+	private double speed;
+
+	public MoveFourBarLinkage()
 	{
-		requires(Robot.accelerometer);
+		requires(Robot.cargoMover);
+	}
+
+	public MoveFourBarLinkage(String speedKey)
+	{
+		this();
+		this.speedKey = speedKey;
+	}
+
+	public MoveFourBarLinkage(double speed)
+	{
+		this.speed = speed;
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize()
 	{
+		if (speedKey != null)
+		{
+			speed = SmartDashboard.getNumber(speedKey, 0.0);
+		}
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute()
 	{
-		Robot.accelerometer.report();
+		Robot.cargoMover.move(speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished()
 	{
-		return false;
+		return isCanceled();
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end()
 	{
+		Robot.cargoMover.stop();
 	}
 
 	// Called when another command which requires one or more of the same
@@ -48,5 +68,6 @@ public class AccelerometerReporter extends Command
 	@Override
 	protected void interrupted()
 	{
+		end();
 	}
 }

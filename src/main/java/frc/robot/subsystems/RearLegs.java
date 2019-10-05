@@ -7,11 +7,9 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
@@ -29,16 +27,12 @@ public class RearLegs extends Subsystem
 
 	public RearLegs()
 	{
-		winchMotor = RobotMap.isCompetitionRobot
-			? new WPI_VictorSPX(RobotMap.rearLegsLiftMotorCanDeviceId)
-			: new Victor(RobotMap.rearLegsWinchMotorPwmChannel);
+		winchMotor = new WPI_VictorSPX(RobotMap.rearLegsLiftMotorCanDeviceId);
 
-		driveMotor = RobotMap.isCompetitionRobot
-			? new WPI_VictorSPX(RobotMap.rearLegsDriveMotorCanDeviceId)
-			: new Victor(RobotMap.rearLegsDriveMotorPwmChannel);
+		driveMotor = new WPI_VictorSPX(RobotMap.rearLegsDriveMotorCanDeviceId);
 
 		winchMotor.setInverted(false);
-		driveMotor.setInverted(!RobotMap.isCompetitionRobot);
+		driveMotor.setInverted(false);
 	}
 
 	// Put methods for controlling this subsystem

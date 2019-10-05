@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveWithJoysticks;
 
@@ -15,8 +14,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -26,8 +25,10 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  */
 public class DriveTrain extends Subsystem
 {
-	SpeedController leftMotor;
-	SpeedController rightMotor;
+	SpeedController leftMotor1;
+	SpeedController leftMotor2;
+	SpeedController rightMotor1;
+	SpeedController rightMotor2;
 	
 	DifferentialDrive drive;
 	
@@ -37,22 +38,15 @@ public class DriveTrain extends Subsystem
 	
 	public DriveTrain()
 	{
-		if (RobotMap.isCompetitionRobot)
-		{
-			leftMotor = new WPI_TalonSRX(RobotMap.leftDriveMotorCanDeviceId);
-			rightMotor = new WPI_TalonSRX(RobotMap.rightDriveMotorCanDeviceId);
-		}
-		else
-		{
-			leftMotor = new Spark(RobotMap.leftDriveMotorPwmChannel);
-			rightMotor = new Spark(RobotMap.rightDriveMotorPwmChannel);
-		}
-		
-		// Determine if any motors need to be set inverted:
-		rightMotor.setInverted(true);
-		leftMotor.setInverted(true);
-		
-		drive = new DifferentialDrive(leftMotor, rightMotor);
+		leftMotor1 = new WPI_TalonSRX(RobotMap.leftDriveMotor1CanDeviceId);
+		leftMotor2 = new WPI_TalonSRX(RobotMap.leftDriveMotor2CanDeviceId);
+		rightMotor1 = new WPI_TalonSRX(RobotMap.rightDriveMotor1CanDeviceId);
+		rightMotor2 = new WPI_TalonSRX(RobotMap.rightDriveMotor2CanDeviceId);
+		SpeedControllerGroup leftGroup = new SpeedControllerGroup(leftMotor1, leftMotor2);
+		SpeedControllerGroup rightGroup = new SpeedControllerGroup(rightMotor1, rightMotor2);
+		leftGroup.setInverted(true);
+		rightGroup.setInverted(true);
+		drive = new DifferentialDrive(leftGroup, rightGroup);
 	}
 
 	public void stop()
@@ -111,7 +105,7 @@ public class DriveTrain extends Subsystem
 	
 	public void setLeftRightMotorOutputs(double left, double right)
 	{
-		if (!RobotMap.isCompetitionRobot)
+		if (RobotMap.isDemoMode)
 		{
 			// This code limits drive speed:
 			double s = Math.signum(left);

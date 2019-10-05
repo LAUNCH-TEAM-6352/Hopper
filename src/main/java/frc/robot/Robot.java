@@ -17,16 +17,15 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.Accelerometer;
 import frc.robot.subsystems.CargoMover;
 import frc.robot.subsystems.FrontLegs;
 import frc.robot.subsystems.LimitSwitches;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.FourBarLinkageEncoder;
 import frc.robot.subsystems.Lift;
-import frc.robot.subsystems.MotorControllerCalibrator;
-import frc.robot.subsystems.RearLegsExternalEncoder;
-import frc.robot.subsystems.RearLegsInternalEncoder;
+import frc.robot.subsystems.LiftEncoder;
 import frc.robot.subsystems.RearLegs;
+import frc.robot.util.Rolling;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -42,16 +41,28 @@ public class Robot extends TimedRobot
 	private UsbCamera usbCameras[];
 
 	// The following deal with the Limelight vision processing camera:
-	public static NetworkTable limelightTable;
-	public static NetworkTableEntry limelightXPositionEntry;
-	public static NetworkTableEntry limelightYPositionEntry;
-	public static NetworkTableEntry limelightAreaEntry;
-	public static NetworkTableEntry limelightCamModeEntry;
-	public static NetworkTableEntry limelightLedModeEntry;
+	private static NetworkTable limelightRawTable;
+	private static NetworkTableEntry limelightRawXPositionEntry;
+	private static NetworkTableEntry limelightRawYPositionEntry;
+	private static NetworkTableEntry limelightRawAreaEntry;
+	public static NetworkTableEntry limelightRawCamModeEntry;
+	public static NetworkTableEntry limelightRawLedModeEntry;
+	private static NetworkTableEntry limelightRawTargetAcquiredEntry;
 
-	public static double limelightXPosition;
-	public static double limelightYPosition;
-	public static double limelightArea;
+	public static NetworkTable limelightCookedTable;
+	public static NetworkTableEntry limelightCookedXPositionEntry;
+	public static NetworkTableEntry limelightCookedYPositionEntry;
+	public static NetworkTableEntry limelightCookedAreaEntry;
+	public static NetworkTableEntry limelightCookedTargetAcquiredEntry;
+
+	private static Rolling limelightXPositions = new Rolling(RobotMap.limelightSampleCount);
+	private static Rolling limelightYPositions = new Rolling(RobotMap.limelightSampleCount);
+	private static Rolling limelightAreas = new Rolling(RobotMap.limelightSampleCount);
+	private static Rolling limelightTargetAcquireds = new Rolling(RobotMap.limelightSampleCount);
+
+	// Some generic diagnostic informartion:
+	public static NetworkTable diagnosticsTable;
+	public static NetworkTableEntry diagnosticsPeriodEntry;
 
 	// Define some subsystems:
 	public static DriveTrain driveTrain = null;
@@ -59,37 +70,20 @@ public class Robot extends TimedRobot
 	public static FrontLegs frontLegs = null;
 	public static LimitSwitches limitSwitches = null;
 	public static RearLegs rearLegs = null;
-	public static RearLegsExternalEncoder rearLegsExternalEncoder = null;
-	public static RearLegsInternalEncoder rearLegsInternalEncoder = null;
 	public static CargoMover cargoMover = null;
-	public static MotorControllerCalibrator motorControllerCalibrator = null;
-	public static Accelerometer accelerometer = null;
+	public static LiftEncoder liftEncoder = null;
+	public static FourBarLinkageEncoder fourBarLinkageEncoder = null;
 
 	// Static initialization
 	static
 	{
-		if (RobotMap.isCompetitionRobot)
-		{
-			lift = new Lift();
-			cargoMover = new CargoMover();
-			driveTrain = new DriveTrain();
-			frontLegs = new FrontLegs();
-			rearLegs = new RearLegs();
-			limitSwitches = new LimitSwitches();
-		}
-		else
-		{
-			lift = new Lift();
-			driveTrain = new DriveTrain();
-			frontLegs = new FrontLegs();
-			limitSwitches = new LimitSwitches();
-			cargoMover = new CargoMover();
-			rearLegs = new RearLegs();
-			//rearLegsExternalEncoder = new RearLegsExternalEncoder();
-			//rearLegsInternalEncoder = new RearLegsInternalEncoder();
-			//motorControllerCalibrator = new MotorControllerCalibrator();
-			//accelerometer = new Accelerometer();
-		}
+		lift = new Lift();
+		cargoMover = new CargoMover();
+		driveTrain = new DriveTrain();
+		frontLegs = new FrontLegs();
+		rearLegs = new RearLegs();
+		limitSwitches = new LimitSwitches();
+		liftEncoder = new LiftEncoder();
 	}
 
 
@@ -125,19 +119,30 @@ public class Robot extends TimedRobot
 		oi = new OI();
 
 		// Set up digit board:
-		digitBoard = new REVDigitBoard();
+		//digitBoard = new REVDigitBoard();
 
 		// Set up Limelight network table access:
-		limelightTable = NetworkTableInstance.getDefault().getTable(RobotMap.limelightTableKey);
-		limelightXPositionEntry = limelightTable.getEntry(RobotMap.limelightXPositionKey);
-		limelightYPositionEntry = limelightTable.getEntry(RobotMap.limelightYPositionKey);
-		limelightAreaEntry = limelightTable.getEntry(RobotMap.limelightAreaKey);
-		limelightCamModeEntry = limelightTable.getEntry(RobotMap.limelightCamModeKey);
-		limelightLedModeEntry = limelightTable.getEntry(RobotMap.limelightLedModeKey);
+		limelightRawTable = NetworkTableInstance.getDefault().getTable(RobotMap.limelightRawTableKey);
+		limelightRawTargetAcquiredEntry = limelightRawTable.getEntry(RobotMap.limelightTargetAcquiredKey);
+		limelightRawXPositionEntry = limelightRawTable.getEntry(RobotMap.limelightXPositionKey);
+		limelightRawYPositionEntry = limelightRawTable.getEntry(RobotMap.limelightYPositionKey);
+		limelightRawAreaEntry = limelightRawTable.getEntry(RobotMap.limelightAreaKey);
+		limelightRawCamModeEntry = limelightRawTable.getEntry(RobotMap.limelightCamModeKey);
+		limelightRawLedModeEntry = limelightRawTable.getEntry(RobotMap.limelightLedModeKey);
 
-		Robot.limelightCamModeEntry.setNumber(1);
-		Robot.limelightLedModeEntry.setNumber(1);
+		limelightCookedTable = NetworkTableInstance.getDefault().getTable(RobotMap.limelightCookedTableKey);
+		limelightCookedTargetAcquiredEntry = limelightCookedTable.getEntry(RobotMap.limelightTargetAcquiredKey);
+		limelightCookedXPositionEntry = limelightCookedTable.getEntry(RobotMap.limelightXPositionKey);
+		limelightCookedYPositionEntry = limelightCookedTable.getEntry(RobotMap.limelightYPositionKey);
+		limelightCookedAreaEntry = limelightCookedTable.getEntry(RobotMap.limelightAreaKey);
 
+		// Set up Diagnostic network table:
+		diagnosticsTable = NetworkTableInstance.getDefault().getTable(RobotMap.diagnosticsTableKey);
+		diagnosticsPeriodEntry = diagnosticsTable.getEntry(RobotMap.diagnosticsPeriodKey);
+		diagnosticsPeriodEntry.setDouble(getPeriod());
+
+		Robot.limelightRawCamModeEntry.setNumber(1);
+		Robot.limelightRawLedModeEntry.setNumber(1);
 
 		if (RobotMap.isUseUsbCameras)
 		{
@@ -163,8 +168,8 @@ public class Robot extends TimedRobot
 	@Override
 	public void robotPeriodic()
 	{
-		pollDigitBoard();
-		//pollLimelight();
+		//pollDigitBoard();
+		pollLimelight();
 	}
 
 	/**
@@ -312,15 +317,18 @@ public class Robot extends TimedRobot
 	 */
 	private void pollLimelight()
 	{
-		// read values periodically
-		limelightXPosition = limelightXPositionEntry.getDouble(0.0);
-		limelightYPosition = limelightYPositionEntry.getDouble(0.0);
-		limelightArea = limelightAreaEntry.getDouble(0.0);
+		// Get latest raw samples from the limelight camera:
+		limelightCookedTargetAcquiredEntry.setDouble(
+			limelightTargetAcquireds.add(limelightRawTargetAcquiredEntry.getDouble(0.0)));
 
-		// post to smart dashboard periodically
-		SmartDashboard.putNumber("LimelightX", limelightXPosition);
-		SmartDashboard.putNumber("LimelightY", limelightYPosition);
-		SmartDashboard.putNumber("LimelightArea", limelightArea);
+		limelightCookedAreaEntry.setDouble(
+			limelightAreas.add(limelightRawAreaEntry.getDouble(0.0)));
+
+		limelightCookedXPositionEntry.setDouble(
+			limelightXPositions.add(limelightRawXPositionEntry.getDouble(0.0)));
+
+		limelightCookedYPositionEntry.setDouble(
+			limelightYPositions.add(limelightRawYPositionEntry.getDouble(0.0));
 	}
 	
 	/**

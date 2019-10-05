@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.MoveCargo;
+import frc.robot.commands.MoveFourBarLinkage;
 import frc.robot.commands.MoveFrontLegs;
 import frc.robot.commands.MoveLift;
 import frc.robot.commands.MoveRearLegs;
@@ -78,13 +79,16 @@ public class OI
 	private Button cargoInButton = new JoystickButton(gameController, gameControllerButtonX);
 	private Button cargoOutButton = new JoystickButton(gameController, gameControllerButtonB);
 
-	private Button toggleLimelightButton = new JoystickButton(gameController, gameControllerButtonA);
+	private Button toggleLimelightButton = new JoystickButton(gameController, gameControllerButtonStickLeft);
 
 	private Button liftUpButton = new JoystickButton(gameController, gameControllerButtonBumperLeft);
 	private Button liftDownButton = new JoystickButton(gameController, gameControllerButtonBumperRight);
 
 	private Button frontLegExtendButton = new JoystickButton(gameController, gameControllerButtonBack);
 	private Button rearLegsExtendButton = new JoystickButton(gameController, gameControllerButtonStart);
+
+	private Button fourBarLinkageUpButton = new JoystickButton(gameController, gameControllerButtonY);
+	private Button fourBarLinkageDownButton = new JoystickButton(gameController, gameControllerButtonA);
 
 	// SmartDashboard keys:
 	public final static String dashboardCargoMoverInSpeed = "Cargo In Speed";
@@ -126,6 +130,9 @@ public class OI
 	public static final String dashboardRearLegsWinchMotorDistance = "Rear Legs Winch dst";
 	public static final String dashbaordRearLegsWinchMotorSpeed = "Rear Legs Winch Speed";
 
+	public static final String dashboardFourBarLinkageUpSpeed = "4-bar Up Speed";
+	public static final String dashboardFourBarLinkageDownSpeed = "4-bar Dn Speed";
+
 	public static final String dashboardAccelerometerX = "Accel X";
 	public static final String dashboardAccelerometerY = "Accel Y";
 	public static final String dashboardAccelerometerZ = "Accel Z";
@@ -143,6 +150,9 @@ public class OI
 
 		liftUpButton.whileHeld(new MoveLift(dashboardLiftUpSpeed));
 		liftDownButton.whileHeld(new MoveLift(dasboardLiftDownSpeed));
+
+		fourBarLinkageUpButton.whileHeld(new MoveFourBarLinkage(dashboardFourBarLinkageUpSpeed));
+		fourBarLinkageDownButton.whileHeld(new MoveFourBarLinkage(dashboardFourBarLinkageDownSpeed));
 
 		frontLegExtendButton.whileHeld(new MoveFrontLegs(dashboardLeftLegExtendSpeed, dashboardRightLegExtendSpeed));
 		rearLegsExtendButton.whileHeld(new MoveRearLegs(dashboardRearLegsExtendSpeed));
@@ -164,6 +174,9 @@ public class OI
 
 		SmartDashboard.putNumber(dashboardRearLegsExtendSpeed, 0.55);
 		SmartDashboard.putNumber(dashboardRearLegsRetractSpeed, -1.0);
+
+		SmartDashboard.putNumber(dashboardFourBarLinkageUpSpeed, 0.55);
+		SmartDashboard.putNumber(dashboardFourBarLinkageDownSpeed, -1.0);
 
 		SmartDashboard.putData("Toggle Limelight", new ToggleLimelight());
 

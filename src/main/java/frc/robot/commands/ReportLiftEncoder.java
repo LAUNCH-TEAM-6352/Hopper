@@ -10,13 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ReportRearLegsInternalEncoder extends Command
+public class ReportLiftEncoder extends Command
 {
-	public ReportRearLegsInternalEncoder()
+	public ReportLiftEncoder()
 	{
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
-		requires(Robot.rearLegsInternalEncoder);
+		requires(Robot.liftEncoder);
 	}
 
 	// Called just before this Command runs the first time
@@ -29,7 +27,7 @@ public class ReportRearLegsInternalEncoder extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.rearLegsInternalEncoder.report();
+		Robot.liftEncoder.report();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -50,5 +48,6 @@ public class ReportRearLegsInternalEncoder extends Command
 	@Override
 	protected void interrupted()
 	{
+		end();
 	}
 }

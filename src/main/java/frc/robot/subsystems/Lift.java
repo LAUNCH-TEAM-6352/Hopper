@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,9 +31,7 @@ public class Lift extends Subsystem
 
 	public Lift()
 	{
-		motor = RobotMap.isCompetitionRobot
-			? new WPI_TalonSRX(RobotMap.liftMotorCanDeviceId)
-			: new Spark(RobotMap.liftMotorPwmChannel);
+		motor = new WPI_TalonSRX(RobotMap.liftMotorCanDeviceId);
 	}
 
 	@Override
