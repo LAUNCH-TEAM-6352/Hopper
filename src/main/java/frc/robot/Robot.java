@@ -328,7 +328,7 @@ public class Robot extends TimedRobot
 			limelightXPositions.add(limelightRawXPositionEntry.getDouble(0.0)));
 
 		limelightCookedYPositionEntry.setDouble(
-			limelightYPositions.add(limelightRawYPositionEntry.getDouble(0.0));
+			limelightYPositions.add(limelightRawYPositionEntry.getDouble(0.0)));
 	}
 	
 	/**

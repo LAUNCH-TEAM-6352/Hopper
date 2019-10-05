@@ -118,6 +118,8 @@ public class OI
 	public final static String dashboardExtendLimitLift = "Ext Limit Lift";
 	public final static String dashboardRetractLimitLift = "Ret Limit Lift";
 
+	public final static String dashboardDownLimit4BarLinkage = "Dwn Limit 4-bar";
+
 	public final static String dashboardUsbCameraFps = "USB Camera FPS";
 
 	public static final String dashboardRearLegsExtScale = "Rear Legs Ext scale";
