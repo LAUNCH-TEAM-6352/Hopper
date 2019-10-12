@@ -23,7 +23,9 @@ public class FourBarLinkage extends Subsystem
 {
 	private SpeedController motor;
 
-	private double lastDistance = 0.0;
+	// The following are used to detect when the 4-bar linkage hits its hard stop goind down:
+	private double lastCount = 0.0;
+	private boolean hasRunNegativeOnce = false;
 
 	public FourBarLinkage()
 	{
@@ -50,31 +52,47 @@ public class FourBarLinkage extends Subsystem
 		// Assume we will be turning off rumble:
 		double rumblePower = 0;
 
+		boolean resetEncoder = false;
+		double currentCount = Robot.fourBarLinkageEncoder.get();
+
+		if (speed > 0 || speed == 0)
+		{
+			hasRunNegativeOnce = false;
+		}
+
 		if (speed > 0 &&
 			(Robot.fourBarLinkageEncoder.getDistance() > RobotMap.fourBarLinkageUpLimitDistance))
 		{
 			speed = 0;
 			rumblePower = SmartDashboard.getNumber(OI.dashboardFourBarLinkageRumblePower, 0.0);
+			hasRunNegativeOnce = false;
 		}
-		else if (speed < 0 &&
-			(Math.abs(Robot.fourBarLinkageEncoder.getDistance() - lastDistance) < RobotMap.fourBarLinkageStoppedDeltaDistance))
+		else if (speed < 0)
 		{
-			speed = 0;
-			Robot.fourBarLinkageEncoder.reset();
-			rumblePower = SmartDashboard.getNumber(OI.dashboardFourBarLinkageRumblePower, 0.0);
+			if (hasRunNegativeOnce && Math.abs(currentCount - lastCount) < RobotMap.fourBarLinkageStoppedDeltaCount)
+			{
+				resetEncoder = true;
+				rumblePower = SmartDashboard.getNumber(OI.dashboardFourBarLinkageRumblePower, 0.0);
+				speed = 0;
+			}
+			hasRunNegativeOnce = true;
 		}
 
 		Robot.oi.gameController.setRumble(OI.fourBarLinkageRumbleType, rumblePower);
 
 		setSpeed(speed);
+
+		if (resetEncoder)
+		{
+			Robot.fourBarLinkageEncoder.reset();
+			currentCount = 0;
+		}
+
+		lastCount = currentCount;
 	}
 
 	public void setSpeed(double speed)
 	{
-		if (speed == 0.0)
-		{
-			lastDistance = 0.0;
-		}
 		motor.set(speed);
 	}
 }

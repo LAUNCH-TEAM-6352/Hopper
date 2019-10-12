@@ -78,7 +78,7 @@ public class RobotMap
 	public static final boolean fourBarLinkageEncoderIsReversed = true;
 	public static final double fourBarLinkageUpLimitDistance = 1000;
 	public static final double fourBarLinkageDownLimitDistance = 10;
-	public static final double fourBarLinkageStoppedDeltaDistance = 10;
+	public static final double fourBarLinkageStoppedDeltaCount = 50;
 
 	// The following define encoder limits
 
