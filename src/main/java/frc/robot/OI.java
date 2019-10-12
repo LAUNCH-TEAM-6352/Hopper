@@ -17,6 +17,7 @@ import frc.robot.commands.MoveCargo;
 import frc.robot.commands.MoveFrontLegs;
 import frc.robot.commands.MoveLift;
 import frc.robot.commands.MoveRearLegs;
+import frc.robot.commands.ResetRearLegsExternalEncoder;
 import frc.robot.commands.ResetSeatMotorCounter;
 import frc.robot.commands.ToggleLimelight;
 
@@ -85,7 +86,9 @@ public class OI
 	private Button liftDownButton = new JoystickButton(gameController, gameControllerButtonBumperRight);
 
 	private Button frontLegExtendButton = new JoystickButton(gameController, gameControllerButtonBack);
+
 	private Button rearLegsExtendButton = new JoystickButton(gameController, gameControllerButtonStart);
+	private Button rearLegsRetractButton = new JoystickButton(gameController, gameControllerButtonStart);
 
 	// SmartDashboard keys:
 	public final static String dashboardCargoMoverInSpeed = "Cargo In Speed";
@@ -139,10 +142,10 @@ public class OI
 	public OI()
 	{
 		// Bind buttons to commands:
-		/***
 		cargoInButton.whileHeld(new MoveCargo(dashboardCargoMoverInSpeed));
 		cargoOutButton.whileHeld(new MoveCargo(dashboardCargoMoverOutSpeed));
 
+		/***
 		liftUpButton.whileHeld(new MoveLift(dashboardLiftUpSpeed));
 		liftDownButton.whileHeld(new MoveLift(dasboardLiftDownSpeed));
 
@@ -153,8 +156,8 @@ public class OI
 		toggleLimelightButton.whenPressed(new ToggleLimelight());
 
 		// Put default values on SmartDashboard:
-		SmartDashboard.putNumber(dashboardCargoMoverInSpeed, 1.0);
-		SmartDashboard.putNumber(dashboardCargoMoverOutSpeed, -0.5);
+		SmartDashboard.putNumber(dashboardCargoMoverInSpeed, 0.05);
+		SmartDashboard.putNumber(dashboardCargoMoverOutSpeed, -0.05);
 
 		SmartDashboard.putNumber(dashboardLiftUpSpeed, 0.73);
 		SmartDashboard.putNumber(dasboardLiftDownSpeed, -0.75);
@@ -177,5 +180,6 @@ public class OI
 		SmartDashboard.putNumber(dashboardLiftRumblePower, 1.0);
 
 		SmartDashboard.putData("Reset Seat Motor", new ResetSeatMotorCounter());
+		SmartDashboard.putData("Reset Rear Legs External Encoder", new ResetRearLegsExternalEncoder());
 	}
 }

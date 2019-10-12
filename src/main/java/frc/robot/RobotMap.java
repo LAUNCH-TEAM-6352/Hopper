@@ -62,11 +62,10 @@ public class RobotMap
 	public static final int liftExtendLimitSwitchChannel = 2;
 	public static final int liftRetractLimitSwitchChannel = 3;
 
-	// The following are NOT used:
-	public static final int rearLegsEncoderChannelA = 90; 
-	public static final int rearLegsEncoderChannelB = 91;
+	public static final int rearLegsEncoderChannelA = 0; 
+	public static final int rearLegsEncoderChannelB = 1;
 	public static final int rearLegsEncoderChannelX = 92;
-	public static final int rearLegsEncoderPulsesPerRev = 512;
+	public static final int rearLegsEncoderPulsesPerRev = 1024;
 	public static final boolean rearLegsEncoderIsReversed = true;
 
 	public static final int rearLegsWinchMotorDioChannel = 93;

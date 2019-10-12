@@ -92,6 +92,7 @@ public class Robot extends TimedRobot
 	static
 	{
 		cargoMover = new CargoMover();
+		rearLegsExternalEncoder = new RearLegsExternalEncoder();
 
 
 		/***
