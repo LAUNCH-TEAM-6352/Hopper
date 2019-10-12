@@ -7,7 +7,8 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,8 +33,8 @@ public class FrontLegs extends Subsystem
 
 	public FrontLegs()
 	{
-		motorLeft = new WPI_TalonSRX(RobotMap.leftLegMotorCanDeviceId);
-		motorRight = new WPI_TalonSRX(RobotMap.rightLegMotorCanDeviceId);
+		motorLeft = new WPI_VictorSPX(RobotMap.leftLegMotorCanDeviceId);
+		motorRight = new WPI_VictorSPX(RobotMap.rightLegMotorCanDeviceId);
 		//motorLeft.setInverted(true);
 		//motorRight.setInverted(true);
 	}

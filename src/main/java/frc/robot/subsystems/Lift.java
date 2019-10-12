@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -31,7 +31,7 @@ public class Lift extends Subsystem
 
 	public Lift()
 	{
-		motor = new WPI_TalonSRX(RobotMap.liftMotorCanDeviceId);
+		motor = new WPI_VictorSPX(RobotMap.liftMotorCanDeviceId);
 	}
 
 	@Override
@@ -48,8 +48,7 @@ public class Lift extends Subsystem
 		double rumblePower = 0;
 
 		// Check for being at limit:
-		if (speed > 0 &&
-			(Robot.limitSwitches.isAtExtendLimitLift() || Robot.liftEncoder.getDistance() > RobotMap.liftExtendLimitDistance))
+		if (speed > 0 && Robot.limitSwitches.isAtExtendLimitLift())
 		{
 			speed = 0;
 			rumblePower = SmartDashboard.getNumber(OI.dashboardLiftRumblePower, 0.0);

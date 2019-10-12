@@ -165,8 +165,8 @@ public class OI
 		toggleLimelightButton.whenPressed(new ToggleLimelight());
 
 		// Put default values on SmartDashboard:
-		SmartDashboard.putNumber(dashboardCargoMoverInSpeed, 1.0);
-		SmartDashboard.putNumber(dashboardCargoMoverOutSpeed, -0.5);
+		SmartDashboard.putNumber(dashboardCargoMoverInSpeed, 0.5);
+		SmartDashboard.putNumber(dashboardCargoMoverOutSpeed, -1.0);
 
 		SmartDashboard.putNumber(dashboardLiftUpSpeed, 0.73);
 		SmartDashboard.putNumber(dasboardLiftDownSpeed, -0.75);
@@ -174,10 +174,10 @@ public class OI
 		SmartDashboard.putNumber(dashboardLeftLegExtendSpeed, 1.0);
 		SmartDashboard.putNumber(dashboardLeftLegRetractSpeed, -1.0);
 
-		SmartDashboard.putNumber(dashboardRightLegExtendSpeed, 0.9);
-		SmartDashboard.putNumber(dashboardRightLegRetractSpeed, -0.9);
+		SmartDashboard.putNumber(dashboardRightLegExtendSpeed, 1.0);
+		SmartDashboard.putNumber(dashboardRightLegRetractSpeed, -1.0);
 
-		SmartDashboard.putNumber(dashboardRearLegsExtendSpeed, 0.55);
+		SmartDashboard.putNumber(dashboardRearLegsExtendSpeed, 0.525);
 		SmartDashboard.putNumber(dashboardRearLegsRetractSpeed, -1.0);
 
 		SmartDashboard.putNumber(dashboardFourBarLinkageUpSpeed, 0.55);

@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.SpeedController;
@@ -27,11 +28,11 @@ public class RearLegs extends Subsystem
 
 	public RearLegs()
 	{
-		winchMotor = new WPI_VictorSPX(RobotMap.rearLegsLiftMotorCanDeviceId);
+		winchMotor = new WPI_TalonSRX(RobotMap.rearLegsLiftMotorCanDeviceId);
 
 		driveMotor = new WPI_VictorSPX(RobotMap.rearLegsDriveMotorCanDeviceId);
 
-		winchMotor.setInverted(false);
+		winchMotor.setInverted(true);
 		driveMotor.setInverted(false);
 	}
 
