@@ -75,6 +75,7 @@ public class OI
 	public static final RumbleType frontLegsRumbleType = RumbleType.kLeftRumble;
 	public static final RumbleType rearLegsRumbleType = RumbleType.kRightRumble;
 	public static final RumbleType liftRumbleType = RumbleType.kLeftRumble;
+	public static final RumbleType fourBarLinkageRumbleType = RumbleType.kLeftRumble;
 
 	private Button cargoInButton = new JoystickButton(gameController, gameControllerButtonX);
 	private Button cargoOutButton = new JoystickButton(gameController, gameControllerButtonB);
@@ -142,6 +143,8 @@ public class OI
 	public final static String dashboardFrontLegsRumblePower = "Front Legs Rumble Power";
 	public final static String dashboardRearLegsRumblePower = "Rear Legs Rumble Power";
 	public final static String dashboardLiftRumblePower = "Lift Rumble Power";
+	public final static String dashboardFourBarLinkageRumblePower = "4-bar Rumble Power";
+
 
 	// Constructor:
 	public OI()
@@ -187,5 +190,6 @@ public class OI
 		SmartDashboard.putNumber(dashboardFrontLegsRumblePower, 1.0);
 		SmartDashboard.putNumber(dashboardRearLegsRumblePower, 1.0);
 		SmartDashboard.putNumber(dashboardLiftRumblePower, 1.0);
+		SmartDashboard.putNumber(dashboardFourBarLinkageRumblePower, 1.0);
 	}
 }

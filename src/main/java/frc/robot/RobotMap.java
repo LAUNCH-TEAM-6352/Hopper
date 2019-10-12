@@ -61,20 +61,26 @@ public class RobotMap
 
 	public static final int liftExtendLimitSwitchChannel = 2;
 	public static final int liftRetractLimitSwitchChannel = 3;
-	public static final double liftExtendLimitDistance = 1050.0;
 
-	public static final int fourBarLinkageDownLimitSwitchChannel = 1;
+	//public static final int fourBarLinkageDownLimitSwitchChannel = 1;
 
 	// The following are for quadrature encoders:
 	public static final int liftEncoderChannelA = 11; 
 	public static final int liftEncoderChannelB = 12;
 	public static final int liftEncoderPulsesPerRev = 1024;
 	public static final boolean liftEncoderIsReversed = true;
+	public static final double liftExtendLimitDistance = 1050.0;
+
 
 	public static final int fourBarLinkageEncoderChannelA = 23; 
 	public static final int fourBarLinkageEncoderChannelB = 24;
 	public static final int fourBarLinkageEncoderPulsesPerRev = 1024;
 	public static final boolean fourBarLinkageEncoderIsReversed = true;
+	public static final double fourBarLinkageUpLimitDistance = 1000;
+	public static final double fourBarLinkageDownLimitDistance = 10;
+	public static final double fourBarLinkageStoppedDeltaDistance = 10;
+
+	// The following define encoder limits
 
 	// The following are CAN channels:
 	public static final int leftDriveMotor1CanDeviceId = 1;

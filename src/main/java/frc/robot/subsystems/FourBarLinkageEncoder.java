@@ -30,6 +30,8 @@ public class FourBarLinkageEncoder extends Subsystem
 		
 		// This sets each unit of distance to one revolution:
 		encoder.setDistancePerPulse(1.0 / RobotMap.fourBarLinkageEncoderPulsesPerRev);
+
+		encoder.setReverseDirection(RobotMap.fourBarLinkageEncoderIsReversed);
 		
 		// Reset the encoder:
 		reset();
@@ -48,7 +50,6 @@ public class FourBarLinkageEncoder extends Subsystem
 		SmartDashboard.putNumber("4-bar scale:", encoder.getEncodingScale());
 		SmartDashboard.putNumber("4-bar count:", get());
 		SmartDashboard.putNumber(" 4-bar dist:", getDistance());
-
 	}
 	
 	/**
