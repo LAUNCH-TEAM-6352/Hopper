@@ -87,6 +87,7 @@ public class Robot extends TimedRobot
 		limitSwitches = new LimitSwitches();
 		liftEncoder = new LiftEncoder();
 		fourBarLinkage = new FourBarLinkage();
+		fourBarLinkageEncoder = new FourBarLinkageEncoder();
 	}
 
 	/**

@@ -47,9 +47,8 @@ public class FourBarLinkageEncoder extends Subsystem
 	 */
 	public void report()
 	{
-		SmartDashboard.putNumber("4-bar scale:", encoder.getEncodingScale());
-		SmartDashboard.putNumber("4-bar count:", get());
-		SmartDashboard.putNumber(" 4-bar dist:", getDistance());
+		SmartDashboard.putNumber("4-bar count", get());
+		SmartDashboard.putNumber(" 4-bar dist", getDistance());
 	}
 	
 	/**

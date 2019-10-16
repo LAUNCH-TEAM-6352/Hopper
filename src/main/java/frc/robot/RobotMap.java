@@ -69,17 +69,17 @@ public class RobotMap
 	public static final int liftEncoderChannelB = 12;
 	public static final int liftEncoderPulsesPerRev = 1024;
 	public static final boolean liftEncoderIsReversed = true;
-	public static final double liftExtendLimitDistance = 1050.0;
+	public static final double liftExtendLimitDistance = 953.0;
 	public static final double liftRetractLimitDistance = 10.0;
 
 
 	public static final int fourBarLinkageEncoderChannelA = 23; 
 	public static final int fourBarLinkageEncoderChannelB = 24;
 	public static final int fourBarLinkageEncoderPulsesPerRev = 1024;
-	public static final boolean fourBarLinkageEncoderIsReversed = true;
-	public static final double fourBarLinkageUpLimitDistance = 1000;
-	public static final double fourBarLinkageDownLimitDistance = 10;
-	public static final double fourBarLinkageStoppedDeltaCount = 50;
+	public static final boolean fourBarLinkageEncoderIsReversed = false;
+	public static final double fourBarLinkageUpLimitDistance = 19;
+	public static final double fourBarLinkageDownLimitDistance = 0;
+	public static final double fourBarLinkageStoppedDeltaCount = 3;
 
 	// The following define encoder limits
 

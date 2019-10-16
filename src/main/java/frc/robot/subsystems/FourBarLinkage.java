@@ -26,6 +26,7 @@ public class FourBarLinkage extends Subsystem
 	// The following are used to detect when the 4-bar linkage hits its hard stop goind down:
 	private double lastCount = 0.0;
 	private boolean hasRunNegativeOnce = false;
+	private boolean isAtDownLimit = false;
 
 	public FourBarLinkage()
 	{
@@ -58,6 +59,7 @@ public class FourBarLinkage extends Subsystem
 		if (speed > 0 || speed == 0)
 		{
 			hasRunNegativeOnce = false;
+			isAtDownLimit = false;
 		}
 
 		if (speed > 0 &&
@@ -69,10 +71,12 @@ public class FourBarLinkage extends Subsystem
 		}
 		else if (speed < 0)
 		{
-			if (hasRunNegativeOnce && Math.abs(currentCount - lastCount) < RobotMap.fourBarLinkageStoppedDeltaCount)
+			if (isAtDownLimit ||
+				(hasRunNegativeOnce && Math.abs(currentCount - lastCount) < RobotMap.fourBarLinkageStoppedDeltaCount))
 			{
 				resetEncoder = true;
 				rumblePower = SmartDashboard.getNumber(OI.dashboardFourBarLinkageRumblePower, 0.0);
+				isAtDownLimit = true;
 				speed = 0;
 			}
 			hasRunNegativeOnce = true;

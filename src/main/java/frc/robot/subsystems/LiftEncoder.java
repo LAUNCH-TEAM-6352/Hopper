@@ -45,9 +45,8 @@ public class LiftEncoder extends Subsystem
 	 */
 	public void report()
 	{
-		SmartDashboard.putNumber("Lift scale:", encoder.getEncodingScale());
-		SmartDashboard.putNumber("Lift count:", get());
-		SmartDashboard.putNumber( "Lift dist:", getDistance());
+		SmartDashboard.putNumber("Lift count", get());
+		SmartDashboard.putNumber( "Lift dist", getDistance());
 	}
 	
 	/**

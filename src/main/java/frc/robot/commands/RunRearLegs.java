@@ -32,7 +32,8 @@ public class RunRearLegs extends Command
 	{
 		Robot.rearLegs.setWinchSpeed(-Robot.oi.gameController.getTriggerAxis(Hand.kRight));
 
-		Robot.rearLegs.setDriveSpeed(Robot.oi.gameController.getY(Hand.kRight));
+		//Robot.rearLegs.setDriveSpeed(Robot.oi.gameController.getY(Hand.kRight));
+		Robot.rearLegs.setDriveSpeed((Robot.oi.joystickLeft.getTrigger() ? 1 : 0) - (Robot.oi.joystickRight.getTrigger() ? 1: 0));
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

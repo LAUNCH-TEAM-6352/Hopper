@@ -46,7 +46,7 @@ public class MoveFourBarLinkage extends Command
 	@Override
 	protected void execute()
 	{
-		Robot.cargoMover.move(speed);
+		Robot.fourBarLinkage.move(speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -60,7 +60,7 @@ public class MoveFourBarLinkage extends Command
 	@Override
 	protected void end()
 	{
-		Robot.cargoMover.stop();
+		Robot.fourBarLinkage.stop();
 	}
 
 	// Called when another command which requires one or more of the same
