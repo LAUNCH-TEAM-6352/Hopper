@@ -70,6 +70,7 @@ public class RobotMap
 	public static final int liftEncoderPulsesPerRev = 1024;
 	public static final boolean liftEncoderIsReversed = true;
 	public static final double liftExtendLimitDistance = 1050.0;
+	public static final double liftRetractLimitDistance = 10.0;
 
 
 	public static final int fourBarLinkageEncoderChannelA = 23; 

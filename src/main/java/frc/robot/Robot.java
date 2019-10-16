@@ -25,6 +25,7 @@ import frc.robot.subsystems.FourBarLinkageEncoder;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.LiftEncoder;
 import frc.robot.subsystems.RearLegs;
+import frc.robot.subsystems.FourBarLinkage;
 import frc.robot.util.Rolling;
 
 /**
@@ -72,6 +73,7 @@ public class Robot extends TimedRobot
 	public static RearLegs rearLegs = null;
 	public static CargoMover cargoMover = null;
 	public static LiftEncoder liftEncoder = null;
+	public static FourBarLinkage fourBarLinkage = null;
 	public static FourBarLinkageEncoder fourBarLinkageEncoder = null;
 
 	// Static initialization
@@ -84,8 +86,8 @@ public class Robot extends TimedRobot
 		rearLegs = new RearLegs();
 		limitSwitches = new LimitSwitches();
 		liftEncoder = new LiftEncoder();
+		fourBarLinkage = new FourBarLinkage();
 	}
-
 
 	/**
 	 * The following deal with the REV Digit Board:

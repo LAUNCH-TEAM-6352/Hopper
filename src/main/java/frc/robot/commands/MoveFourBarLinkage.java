@@ -18,7 +18,7 @@ public class MoveFourBarLinkage extends Command
 
 	public MoveFourBarLinkage()
 	{
-		requires(Robot.cargoMover);
+		requires(Robot.fourBarLinkage);
 	}
 
 	public MoveFourBarLinkage(String speedKey)
